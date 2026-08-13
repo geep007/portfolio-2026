@@ -124,6 +124,20 @@ const links = [
 
     .nav {
       padding-block: 14px;
+      gap: 12px;
+    }
+  }
+
+  /* At the narrow end the wordmark and the pill are fighting for the same
+     row. The pill gives up its padding first, the wordmark its size. */
+  @media (max-width: 420px) {
+    .nav__name {
+      font-size: 17px;
+    }
+
+    .nav__links :global(.btn--sm) {
+      padding-inline: 20px;
+      font-size: 16px;
     }
   }
 

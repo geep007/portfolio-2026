@@ -311,6 +311,17 @@ const projects = [
     .work__row--flip .work__meta {
       order: 0;
     }
+
+    .work__title,
+    .work__note,
+    .work__blurb {
+      max-width: 100%;
+    }
+
+    /* Stacked, the meta column no longer has a plate to match height with. */
+    .work__meta {
+      min-height: 0;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

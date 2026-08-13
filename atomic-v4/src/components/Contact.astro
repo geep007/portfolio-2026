@@ -157,6 +157,24 @@
     .contact__lattice {
       align-self: center;
     }
+
+    .contact__copy,
+    .contact__title {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    /* The mail link is the widest thing in the section; let it sit under the
+       button rather than force a horizontal scroll. */
+    .contact__actions {
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .contact__mail {
+      word-break: break-word;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

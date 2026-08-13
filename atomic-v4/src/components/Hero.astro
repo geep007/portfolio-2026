@@ -101,10 +101,20 @@ const lines = ["We solve the site at", "the smallest unit."];
     flex-shrink: 0;
   }
 
-  @media (max-width: 860px) {
+  @media (max-width: 900px) {
+    /* The artboard proportions go; the lane is the measure now. */
+    .hero__title,
+    .hero__lede {
+      max-width: 100%;
+    }
+
     .hero__foot {
       flex-direction: column;
       align-items: flex-start;
+    }
+
+    .hero {
+      padding-top: clamp(96px, 22vw, 120px);
     }
   }
 

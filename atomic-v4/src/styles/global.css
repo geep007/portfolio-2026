@@ -56,13 +56,17 @@
   --font-mono: "Tronica Mono", "Geist Mono", ui-monospace, SFMono-Regular,
     "SF Mono", Menlo, monospace;
 
-  --text-display: clamp(2.5rem, 6.4vw, 92px); /* hero            92/92  */
-  --text-display-sm: clamp(2.375rem, 6.1vw, 88px); /* contact    88/92  */
-  --text-thesis: clamp(2.125rem, 5vw, 72px); /* thesis           72/80  */
-  --text-h2: clamp(2rem, 4.45vw, 64px); /* section heads         64/70  */
-  --text-h2-sm: clamp(1.875rem, 3.9vw, 56px); /* services        56/62  */
-  --text-quote: clamp(1.75rem, 3.2vw, 46px); /* testimonial      46/60  */
-  --text-h3: clamp(1.625rem, 3vw, 44px); /* trusted             44/54  */
+  /* The vw slope is steep enough that the phone end of each clamp is set by
+     the minimum, not the viewport — a 92px hero would be six words a line on
+     a 390px screen. Minimums are sized to the narrow lane, caps to the
+     artboard. */
+  --text-display: clamp(2.125rem, 6.4vw, 92px); /* hero          92/92  */
+  --text-display-sm: clamp(2rem, 6.1vw, 88px); /* contact        88/92  */
+  --text-thesis: clamp(1.875rem, 5vw, 72px); /* thesis           72/80  */
+  --text-h2: clamp(1.75rem, 4.45vw, 64px); /* section heads      64/70  */
+  --text-h2-sm: clamp(1.6875rem, 3.9vw, 56px); /* services       56/62  */
+  --text-quote: clamp(1.5rem, 3.2vw, 46px); /* testimonial       46/60  */
+  --text-h3: clamp(1.5rem, 3vw, 44px); /* trusted                44/54  */
   --text-h4: clamp(1.5rem, 2.1vw, 30px); /* service card        30/38  */
   --text-h5: clamp(1.375rem, 1.8vw, 26px); /* faq question      26/34  */
   --text-lede: clamp(1.125rem, 1.4vw, 20px); /* hero sub        20/34  */
@@ -238,6 +242,17 @@ h6 {
   width: 100%;
 }
 
+/* Breakpoints -------------------------------------------------------------- */
+/* Three, used everywhere, so a section never releases at a width its
+   neighbour doesn't:
+     900px — the artboard proportions let go and every lane goes full width;
+             side-by-side grids and rows stack.
+     720px — nav links fold away, split rows become one column.
+     520px — the last multi-column grids drop to a single column.
+   Below 900 nothing may keep a percentage width: at a 350px lane, "55.6%"
+   is a four-word column. Those percentages describe the 1440 artboard, and
+   the artboard has no phone. */
+
 /* Type primitives ---------------------------------------------------------- */
 
 .label {
@@ -288,9 +303,32 @@ h6 {
 .eyebrow {
   display: flex;
   align-items: baseline;
-  gap: clamp(20px, 3.9vw, 56px);
+  flex-wrap: wrap;
+  gap: 8px clamp(20px, 3.9vw, 56px);
   color: var(--brand);
   font-size: var(--text-label-lg);
+}
+
+/* On a phone the index and its note can't share a line — the note ends up a
+   two-word column hard against the right edge. Stack them and let the note
+   read left like everything else. */
+@media (max-width: 720px) {
+  .rule-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding-bottom: 16px;
+  }
+
+  .rule-head__note {
+    text-align: left;
+  }
+
+  .rule-head__index,
+  .eyebrow {
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
 }
 
 .on-brand .rule-head,

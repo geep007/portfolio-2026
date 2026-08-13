@@ -124,6 +124,21 @@ const logos = [
     .trusted__div {
       display: none;
     }
+
+    .trusted__title {
+      max-width: 100%;
+    }
+
+    /* Logos keep their aspect but shrink so five of them still wrap into
+       rows rather than one per line. */
+    .trusted__item {
+      height: 40px;
+    }
+
+    .trusted__item img {
+      height: 100%;
+      width: auto;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
