@@ -13,10 +13,7 @@ import { buildTimeline } from "./hero/timeline";
 import { TOTAL_FRAMES } from "./hero/shots";
 import { ShowreelShort } from "./ShowreelShort";
 import { SurrealVertical } from "./vertical/SurrealVertical";
-import {
-  verticalSchema,
-  verticalTimeline,
-} from "./vertical/verticalLayout";
+import { verticalSchema, verticalTimeline } from "./vertical/verticalLayout";
 import { FPS, TOTAL } from "./theme";
 
 export const RemotionRoot: React.FC = () => {
@@ -450,8 +447,8 @@ export const RemotionRoot: React.FC = () => {
           accent: "#1A2EF2",
           ink: "#333333",
           durationInFrames: 110,
-          fontPairing: "deck",
-          displayFontOverride: "",
+          fontPairing: "deck" as const,
+          displayFontOverride: "tronica mono",
           monoFontOverride: "",
         }}
         calculateMetadata={({ props }) => ({
