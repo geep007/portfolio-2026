@@ -1,0 +1,173 @@
+---
+---
+
+<section class="contact on-brand" id="contact">
+  <div class="contact__body section">
+    <div class="contact__copy">
+      <p class="eyebrow" data-reveal>
+        <span class="label label--lg">(07)</span>
+        <span class="label label--lg">Let's talk</span>
+      </p>
+
+      <h2 class="contact__title" data-reveal style="--reveal-delay:60ms">
+        Tell me the one thing that isn't working.
+      </h2>
+
+      <div class="contact__actions" data-reveal style="--reveal-delay:140ms">
+        <a class="btn btn--light" href="mailto:geet@atomicdesignz.com">
+          Book a call
+        </a>
+        <a
+          class="label label--tight link contact__mail"
+          href="mailto:geet@atomicdesignz.com"
+        >
+          geet@atomicdesignz.com ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- The lattice draws itself in: rings first, then the nodes pop on. -->
+    <div class="contact__lattice" data-reveal style="--reveal-delay:200ms">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path
+          class="edge"
+          d="M50 12L82 31V69L50 88L18 69V31L50 12Z"
+          fill="none"
+          stroke="#FFFFFF73"
+          stroke-width="0.7"
+        ></path>
+        <path
+          class="edge edge--spokes"
+          d="M50 12V50M50 50L82 31M50 50L82 69M50 50L18 69M50 50L18 31M50 50V88"
+          fill="none"
+          stroke="#FFFFFF4D"
+          stroke-width="0.6"
+        ></path>
+        <circle class="node" cx="50" cy="50" r="5" fill="#FFFFFF"></circle>
+        <circle class="node" cx="50" cy="12" r="3.4" fill="#FFFFFF"></circle>
+        <circle class="node" cx="82" cy="31" r="3.4" fill="#FFFFFF"></circle>
+        <circle class="node" cx="82" cy="69" r="3.4" fill="#FFFFFF"></circle>
+        <circle class="node" cx="50" cy="88" r="3.4" fill="#FFFFFF"></circle>
+        <circle class="node" cx="18" cy="69" r="3.4" fill="#FFFFFF"></circle>
+        <circle class="node" cx="18" cy="31" r="3.4" fill="#FFFFFF"></circle>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background: var(--brand);
+    color: var(--on-brand);
+  }
+
+  .contact__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(40px, 5vw, 72px);
+    padding-block: var(--section-y-sm);
+  }
+
+  .contact__copy {
+    display: flex;
+    flex-direction: column;
+    max-width: 69.8%;
+  }
+
+  .contact__title {
+    max-width: 97.7%;
+    padding-top: clamp(28px, 2.8vw, 40px);
+    font-size: var(--text-display-sm);
+    line-height: 1.045;
+    letter-spacing: var(--tracking-display);
+    color: var(--on-brand);
+    text-wrap: balance;
+  }
+
+  .contact__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 28px;
+    padding-top: clamp(32px, 3.3vw, 48px);
+  }
+
+  .contact__mail {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--on-brand);
+  }
+
+  .contact__lattice {
+    width: clamp(200px, 22vw, 320px);
+    flex-shrink: 0;
+  }
+
+  .contact__lattice svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  :global(.js) .edge {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    transition: stroke-dashoffset 1600ms var(--ease-out-quart) 120ms;
+  }
+
+  .edge--spokes {
+    transition-delay: 420ms;
+  }
+
+  .contact__lattice.is-in .edge {
+    stroke-dashoffset: 0;
+  }
+
+  .node {
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  :global(.js) .node {
+    transform: scale(0);
+    transition: transform 420ms var(--ease-out-quint);
+  }
+
+  .contact__lattice.is-in .node {
+    transform: scale(1);
+  }
+
+  /* Nodes land outward from the centre, once the spokes have reached them. */
+  .node:nth-of-type(1) { transition-delay: 900ms; }
+  .node:nth-of-type(2) { transition-delay: 1000ms; }
+  .node:nth-of-type(3) { transition-delay: 1060ms; }
+  .node:nth-of-type(4) { transition-delay: 1120ms; }
+  .node:nth-of-type(5) { transition-delay: 1180ms; }
+  .node:nth-of-type(6) { transition-delay: 1240ms; }
+  .node:nth-of-type(7) { transition-delay: 1300ms; }
+
+  @media (max-width: 900px) {
+    .contact__body {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .contact__lattice {
+      align-self: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js) .edge {
+      stroke-dashoffset: 0;
+      transition: none;
+    }
+
+    :global(.js) .node {
+      transform: scale(1);
+      transition: none;
+    }
+  }
+</style>

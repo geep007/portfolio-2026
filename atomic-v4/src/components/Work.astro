@@ -1,0 +1,323 @@
+---
+const projects = [
+  {
+    index: "01",
+    kicker: "01 / Experiential studio",
+    name: "Surreal",
+    logo: "/logos/surreal.png",
+    logoW: 124,
+    logoH: 45,
+    image: "/img/work-surreal.jpg",
+    plate: "#1a1a1a",
+    blurb:
+      "Scroll-driven reveals, a WebGL globe of every city they've lit, and a CMS their team runs alone.",
+    stack: "Webflow · GSAP · WebGL",
+    year: "2025",
+  },
+  {
+    index: "02",
+    kicker: "02 / Dev-tool platform",
+    name: "Athina.ai",
+    logo: "/logos/athina.png",
+    logoW: 150,
+    logoH: 51,
+    image: "/img/work-athina.jpg",
+    plate: "#efede9",
+    // Light wordmark — needs darkening to read on white.
+    lightMark: true,
+    blurb:
+      "A shader hero and orbiting spheres that still hit green Lighthouse on a marketing site.",
+    stack: "Webflow · GSAP · p5.js",
+    year: "2025",
+  },
+  {
+    index: "03",
+    kicker: "03 / Programme site",
+    name: "GROW+",
+    logo: "/logos/grow.png",
+    logoW: 150,
+    logoH: 41,
+    image: "/img/work-grow.jpg",
+    plate: "#eeede1",
+    blurb:
+      "A climate fund explained in scroll — anchors, clusters and landscapes, with a CMS the foundation runs in-house.",
+    stack: "Webflow · CMS architecture",
+    year: "2026",
+  },
+  {
+    index: "04",
+    kicker: "04 / Creative studio",
+    name: "Creo Agency",
+    logo: "/logos/creo.svg",
+    logoW: 150,
+    logoH: 37,
+    image: "/img/work-creo.jpg",
+    plate: "#efede9",
+    blurb:
+      "A studio site that had to feel handmade and still load fast — their art direction, my build.",
+    stack: "Webflow · GSAP · CMS",
+    year: "2025",
+  },
+];
+---
+
+<section class="work" id="work">
+  <div class="work__head section">
+    <div class="rule-head" data-reveal>
+      <p class="rule-head__index">
+        <span class="label label--lg">(01)</span>
+        <span class="label label--lg">Selected work</span>
+      </p>
+    </div>
+
+    <div class="work__intro">
+      <h2 class="work__title" data-reveal>
+        Selected work, at the scale it was made.
+      </h2>
+      <p class="work__note" data-reveal style="--reveal-delay:100ms">
+        Shown the way you'd hang prints — different sizes, one wall.
+      </p>
+    </div>
+  </div>
+
+  {
+    projects.map((project, i) => (
+      <article
+        class:list={["work__row", "section", { "work__row--flip": i % 2 === 1 }]}
+        data-reveal
+      >
+        <a
+          class="plate work__plate"
+          href="#contact"
+          style={`background:${project.plate}`}
+          aria-label={`${project.name} — read the case study`}
+        >
+          <img
+            class="plate__media"
+            src={project.image}
+            alt={`${project.name} — site build`}
+            width="800"
+            height="500"
+            loading={i === 0 ? "eager" : "lazy"}
+            decoding="async"
+          />
+        </a>
+
+        <div class="work__meta">
+          <div class="work__lead">
+            <p class="label work__kicker">{project.kicker}</p>
+            <img
+              class:list={["work__logo", { "is-light": project.lightMark }]}
+              src={project.logo}
+              alt={project.name}
+              width={project.logoW}
+              height={project.logoH}
+              style={`width:${project.logoW}px;height:${project.logoH}px`}
+              loading="lazy"
+              decoding="async"
+            />
+            <p class="work__blurb">{project.blurb}</p>
+          </div>
+
+          <div class="work__foot">
+            <div class="work__facts">
+              <span class="label">{project.stack}</span>
+              <span class="label">{project.year}</span>
+            </div>
+            <a class="label work__cta" href="#contact">
+              Read the case study <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </article>
+    ))
+  }
+
+  <div class="work__all section" data-reveal>
+    <a class="btn" href="#contact">View all projects →</a>
+  </div>
+</section>
+
+<style>
+  .work {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: clamp(80px, 10.4vw, 150px);
+    background: var(--bg);
+  }
+
+  .work__head {
+    display: flex;
+    flex-direction: column;
+    padding-top: clamp(64px, 6.25vw, 90px);
+  }
+
+  .work__intro {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: clamp(28px, 4vw, 60px);
+    width: 100%;
+    padding-top: clamp(40px, 4.9vw, 70px);
+  }
+
+  .work__title {
+    max-width: 55.6%;
+    font-size: var(--text-h2);
+    line-height: var(--leading-h2);
+    letter-spacing: var(--tracking-h2);
+    text-wrap: balance;
+  }
+
+  .work__note {
+    max-width: 23.8%;
+    flex-shrink: 0;
+    font-size: var(--text-caption);
+    line-height: var(--leading-caption);
+    color: var(--ink-muted);
+  }
+
+  /* Rows ------------------------------------------------------------------ */
+
+  .work__row {
+    display: grid;
+    grid-template-columns: minmax(0, 800fr) minmax(0, 400fr);
+    align-items: start;
+    gap: clamp(28px, 4.2vw, 60px);
+    padding-top: clamp(56px, 8.3vw, 120px);
+  }
+
+  .work__row--flip {
+    grid-template-columns: minmax(0, 400fr) minmax(0, 800fr);
+  }
+
+  .work__row--flip .work__plate {
+    order: 2;
+  }
+
+  .work__row--flip .work__meta {
+    order: 1;
+  }
+
+  .work__plate {
+    display: block;
+    aspect-ratio: 800 / 500;
+  }
+
+  .work__plate .plate__media {
+    height: 100%;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .work__plate:hover .plate__media {
+      transform: scale(1.03);
+      transition-duration: 700ms;
+    }
+  }
+
+  .work__meta {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: clamp(32px, 4vw, 56px);
+    min-height: 100%;
+    align-self: stretch;
+  }
+
+  .work__lead {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    align-items: flex-start;
+  }
+
+  .work__kicker {
+    color: var(--brand);
+  }
+
+  .work__logo {
+    max-width: 100%;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  .work__logo.is-light {
+    filter: brightness(0.35);
+  }
+
+  .work__blurb {
+    max-width: 95%;
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--ink-muted);
+  }
+
+  .work__foot {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .work__facts {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    color: var(--ink-faint);
+  }
+
+  .work__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    color: var(--brand);
+  }
+
+  .work__cta span {
+    display: inline-block;
+    transition: transform var(--dur-ui) var(--ease-out-quart);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .work__cta:hover span {
+      transform: translate3d(3px, -3px, 0);
+    }
+  }
+
+  .work__all {
+    display: flex;
+    justify-content: center;
+    padding-top: clamp(40px, 3vw, 44px);
+  }
+
+  @media (max-width: 900px) {
+    .work__intro {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .work__row,
+    .work__row--flip {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .work__row--flip .work__plate {
+      order: 0;
+    }
+
+    .work__row--flip .work__meta {
+      order: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .work__cta span,
+    .work__plate:hover .plate__media {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

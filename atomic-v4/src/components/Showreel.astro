@@ -1,0 +1,77 @@
+---
+// Header showreel. The plate widens and un-rounds as it scrolls into place,
+// and the frame inside drifts against the scroll — both transform-only.
+---
+
+<section class="reel section" aria-label="Showreel">
+  <div class="reel__plate" data-scrub>
+    <div class="reel__inner">
+      <video
+        class="reel__video"
+        data-autoplay
+        poster="/showreel/showreel-poster.jpg"
+        preload="metadata"
+        muted
+        loop
+        playsinline
+        autoplay
+        aria-label="Atomic Designz showreel — recent site builds"
+      >
+        <source src="/showreel/showreel.webm" type="video/webm" />
+        <source src="/showreel/showreel.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reel {
+    padding-bottom: clamp(64px, 7vw, 96px);
+  }
+
+  .reel__plate {
+    --p: 0;
+    position: relative;
+    width: 100%;
+    margin-inline: auto;
+    /* The clip is 16:9. Matching it exactly means nothing is cropped — the
+       old 1260/709 box plus a vertical parallax was shaving the frame. */
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #0e0e0e;
+    border-radius: var(--radius-card);
+  }
+
+  /* 0 → just landed, 1 → fully settled. Without the motion bundle the plate
+     is simply already settled. */
+  :global(.js) .reel__plate {
+    /* Only the corners settle. A scale scrub here left the reel sitting
+       visibly narrower than the nav lane while it was still the first thing
+       on screen — alignment beats the flourish. */
+    border-radius: calc(32px - 8px * var(--p));
+  }
+
+  .reel__inner {
+    position: absolute;
+    inset: 0;
+  }
+
+  .reel__video {
+    width: 100%;
+    height: 100%;
+    /* contain, not cover — the whole frame is the point. */
+    object-fit: contain;
+  }
+
+  /* Controls only appear for reduced motion, where the clip doesn't loop. */
+  .reel__video[controls] {
+    background: #0e0e0e;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js) .reel__plate {
+      border-radius: var(--radius-card);
+      transform: none;
+    }
+  }
+</style>

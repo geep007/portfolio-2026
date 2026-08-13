@@ -1,0 +1,36 @@
+{
+  "name": "showreel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Geet Parmar — Webflow & Creative Development Partner showreel",
+  "scripts": {
+    "dev": "remotion studio",
+    "edit": "remotion studio",
+    "render": "remotion render HeroReel out/hero-reel-30s.mp4",
+    "render:short": "remotion render ShowreelShort out/showreel-short.mp4",
+    "animatic": "remotion render HeroAnimatic out/hero-animatic.mp4",
+    "render:intro-a": "remotion render IntroA out/intro-a.mp4",
+    "render:intro-b": "remotion render IntroB out/intro-b.mp4",
+    "render:outro-a": "remotion render OutroA out/outro-a.mp4",
+    "render:outro-b": "remotion render OutroB out/outro-b.mp4",
+    "render:intros": "npm run render:intro-a && npm run render:intro-b",
+    "render:vertical": "remotion render SurrealVertical out/surreal-vertical.mp4",
+    "still": "remotion still HeroReel out/frame.png",
+    "upgrade": "remotion upgrade"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.418",
+    "@remotion/media": "4.0.418",
+    "@remotion/studio": "^4.0.418",
+    "@remotion/zod-types": "^4.0.418",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.418",
+    "zod": "^3.22.3"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "prettier": "^3.3.3",
+    "typescript": "5.9.3"
+  }
+}

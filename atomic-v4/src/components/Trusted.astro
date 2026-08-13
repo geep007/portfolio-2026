@@ -1,0 +1,134 @@
+---
+// Widths and heights are the artboard's — each logo is drawn to its own
+// optical size, not to a shared box.
+const logos = [
+  { src: "/logos/trust-1.png", alt: "Surreal Global", w: 124, h: 45 },
+  { src: "/logos/trust-2.png", alt: "EdelGive Foundation", w: 160, h: 32 },
+  // Athina ships a light wordmark — it needs darkening to hold contrast on
+  // the tinted band.
+  { src: "/logos/trust-3.png", alt: "Athina.ai", w: 150, h: 51, dark: true },
+  { src: "/logos/trust-4.svg", alt: "Last Bench", w: 120, h: 37 },
+  { src: "/logos/trust-5.png", alt: "GROW+", w: 150, h: 41 },
+];
+---
+
+<section class="trusted section">
+  <div class="rule-head" data-reveal>
+    <p class="rule-head__index">
+      <span class="label label--lg">(—)</span>
+      <span class="label label--lg">Trusted by studios and founders</span>
+    </p>
+    <p class="rule-head__note">Design studios, funds, and founders.</p>
+  </div>
+
+  <h2 class="trusted__title" data-reveal style="--reveal-delay:60ms">
+    Teams who handed over the build and got it back clean.
+  </h2>
+
+  <ul class="trusted__row" data-stagger="60">
+    {
+      logos.map((logo, i) => (
+        <>
+          {i > 0 && <li class="trusted__div" aria-hidden="true" />}
+          <li class="trusted__item" data-reveal>
+            <img
+              class:list={{ "is-light": logo.dark }}
+              src={logo.src}
+              alt={logo.alt}
+              width={logo.w}
+              height={logo.h}
+              style={`width:${logo.w}px;height:${logo.h}px`}
+              loading="lazy"
+              decoding="async"
+            />
+          </li>
+        </>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .trusted {
+    display: flex;
+    flex-direction: column;
+    padding-block: clamp(64px, 6.25vw, 90px);
+    background: var(--bg-tint);
+  }
+
+  .trusted__title {
+    max-width: 71.4%;
+    padding-top: clamp(32px, 3.9vw, 56px);
+    font-size: var(--text-h3);
+    line-height: 1.227;
+    letter-spacing: var(--tracking-h2);
+    text-wrap: balance;
+  }
+
+  .trusted__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(20px, 3vw, 40px);
+    width: 100%;
+    padding: clamp(44px, 4.9vw, 70px) 0 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .trusted__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 51px;
+    /* --reveal-y is smaller here — logos are small, so a long travel would
+       read as noise. */
+    --reveal-y: 12px;
+  }
+
+  .trusted__item img {
+    max-width: 100%;
+    object-fit: contain;
+    opacity: 0.85;
+    filter: grayscale(100%);
+    transition:
+      opacity var(--dur-ui) ease,
+      filter var(--dur-ui) ease;
+  }
+
+  .trusted__item img.is-light {
+    filter: grayscale(100%) brightness(0.45);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .trusted__item:hover img {
+      opacity: 1;
+      filter: grayscale(0%);
+    }
+  }
+
+  .trusted__div {
+    width: 1px;
+    height: 34px;
+    flex-shrink: 0;
+    background: rgb(26 46 242 / 20%);
+  }
+
+  @media (max-width: 900px) {
+    .trusted__row {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 28px 40px;
+    }
+
+    .trusted__div {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trusted__item img {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,82 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Atomic Designz — Design & Webflow, one pair of hands",
+  description =
+    "Design and Webflow development from one pair of hands. Sites built small unit by small unit — clean CMS, real motion, handed back properly.",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#1a2ef2" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <!-- The display face carries the hero; everything waits on it. -->
+    <link
+      rel="preload"
+      href="/fonts/nhd-roman.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/tronica-mono.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="preload" href="/showreel/showreel-poster.jpg" as="image" />
+
+    <!-- Every hidden-then-revealed style is gated on this class, so if the
+         motion bundle never runs the page is simply the finished page. -->
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <slot />
+    <script>
+      import "../scripts/motion.ts";
+    </script>
+    <style>
+      .skip {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        z-index: var(--z-overlay);
+        padding: 12px 20px;
+        background: var(--brand);
+        color: var(--on-brand);
+        font-size: var(--text-nav);
+      }
+
+      .skip:focus {
+        left: 12px;
+        top: 12px;
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+---
+const links = [
+  { label: "Work", href: "#work" },
+  { label: "Studio", href: "#studio" },
+  { label: "Process", href: "#process" },
+];
+---
+
+<header class="nav" data-nav>
+  <a class="nav__mark" href="/" aria-label="Atomic Designz — home">
+    <span class="nav__dot" aria-hidden="true"></span>
+    <span class="nav__name">Atomic Designz</span>
+  </a>
+
+  <nav class="nav__links" aria-label="Primary">
+    {
+      links.map((link) => (
+        <a class="nav__link label label--tight" href={link.href}>
+          {link.label}
+        </a>
+      ))
+    }
+    <a class="btn btn--sm" href="#contact">Start a project</a>
+  </nav>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: var(--z-nav);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 22px var(--lane);
+    border-bottom: 1px solid transparent;
+    /* Composite-only: the bar slides, it never re-lays-out. */
+    transform: translate3d(0, 0, 0);
+    transition:
+      transform var(--dur-panel) var(--ease-out-quart),
+      background-color var(--dur-panel) ease,
+      border-color var(--dur-panel) ease,
+      backdrop-filter var(--dur-panel) ease;
+    will-change: transform;
+  }
+
+  .nav.is-stuck {
+    background: rgb(255 255 255 / 78%);
+    border-bottom-color: var(--rule);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+  }
+
+  .nav.is-hidden {
+    transform: translate3d(0, -100%, 0);
+  }
+
+  .nav__mark {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+  }
+
+  .nav__dot {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    border-radius: var(--radius-pill);
+    background: var(--brand);
+  }
+
+  .nav__name {
+    font-size: 19px;
+    line-height: 24px;
+    letter-spacing: -0.02em;
+  }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 2.8vw, 40px);
+  }
+
+  .nav__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--ink);
+    transition: color var(--dur-ui) ease;
+  }
+
+  .nav__link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 12px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-ui) var(--ease-out-quart);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .nav__link:hover {
+      color: var(--brand);
+    }
+
+    .nav__link:hover::after {
+      transform: scaleX(1);
+    }
+  }
+
+  /* Below tablet the text links fold away; the CTA is the only thing that
+     has to survive. */
+  @media (max-width: 720px) {
+    .nav__link {
+      display: none;
+    }
+
+    .nav {
+      padding-block: 14px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav,
+    .nav__link,
+    .nav__link::after {
+      transition: none;
+    }
+  }
+</style>

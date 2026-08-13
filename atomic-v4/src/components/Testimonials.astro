@@ -1,0 +1,132 @@
+---
+---
+
+<section class="says section">
+  <div class="rule-head" data-reveal>
+    <p class="rule-head__index">
+      <span class="label label--lg">(05)</span>
+      <span class="label label--lg">What people say</span>
+    </p>
+    <p class="rule-head__note">One person you can text.</p>
+  </div>
+
+  <div class="says__body">
+    <div class="plate says__plate" data-reveal>
+      <img
+        class="plate__media"
+        src="/img/testimonial.jpg"
+        alt="Geet at the desk, mid-build"
+        width="400"
+        height="500"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <figure class="says__quote" data-reveal style="--reveal-delay:100ms">
+      <blockquote class="says__text">
+        “Geet was instrumental in bringing our website to life. On-time delivery
+        meant minimal back-and-forth for us.”
+      </blockquote>
+
+      <figcaption class="says__foot">
+        <div class="says__who">
+          <span class="label says__name">Natasha Bandodkar</span>
+          <span class="says__dot" aria-hidden="true"></span>
+          <span class="label says__role">
+            Founder · Independent Creators Co
+          </span>
+        </div>
+        <p class="says__second">
+          “Working with Geet has been truly smooth and reliable — incredibly
+          proactive, communicative, and solution-driven.” — Chimene Adeptie,
+          Founder, Creo Agency
+        </p>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .says {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: var(--section-y);
+  }
+
+  .says__body {
+    display: grid;
+    grid-template-columns: minmax(0, 400fr) minmax(0, 800fr);
+    align-items: stretch;
+    gap: clamp(28px, 4.2vw, 60px);
+    width: 100%;
+    padding-top: clamp(44px, 5.5vw, 80px);
+  }
+
+  .says__plate {
+    aspect-ratio: 400 / 500;
+  }
+
+  .says__plate .plate__media {
+    height: 100%;
+  }
+
+  .says__quote {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: clamp(32px, 4vw, 56px);
+    margin: 0;
+  }
+
+  .says__text {
+    margin: 0;
+    font-size: var(--text-quote);
+    line-height: var(--leading-quote);
+    letter-spacing: var(--tracking-h4);
+    text-wrap: balance;
+  }
+
+  .says__foot {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: clamp(24px, 2.5vw, 36px);
+    border-top: 1px solid var(--rule);
+  }
+
+  .says__who {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .says__name {
+    color: var(--ink);
+  }
+
+  .says__role {
+    color: var(--ink-faint);
+  }
+
+  .says__dot {
+    width: 5px;
+    height: 5px;
+    border-radius: var(--radius-pill);
+    background: rgb(26 46 242 / 40%);
+  }
+
+  .says__second {
+    max-width: 87.5%;
+    font-size: var(--text-caption);
+    line-height: var(--leading-caption);
+    color: var(--ink-muted);
+  }
+
+  @media (max-width: 900px) {
+    .says__body {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

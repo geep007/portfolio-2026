@@ -1,0 +1,16 @@
+# Track only the two shipped projects; everything else in this folder is scratch.
+/*
+!/.gitignore
+!/README.md
+!/atomic-v4/
+!/showreel/
+
+# Build + dependency output inside the tracked projects
+node_modules/
+dist/
+out/
+.astro/
+.DS_Store
+npm-debug.log*
+.env
+.env.production

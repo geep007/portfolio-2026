@@ -1,0 +1,131 @@
+---
+// The headline is split into fixed lines so each can ride its own mask.
+// Splitting in JS would reflow after the font loads; this doesn't.
+const lines = ["We solve the site at", "the smallest unit."];
+---
+
+<section class="hero section" data-hero>
+  <p class="eyebrow">
+    <span class="label label--lg">(00)</span>
+    <span class="label label--lg">Design &amp; Webflow, one pair of hands</span>
+  </p>
+
+  <h1 class="hero__title">
+    {
+      lines.map((line, i) => (
+        <span class="mask-line" style={`--reveal-delay:${90 + i * 90}ms`}>
+          <span>{line}</span>
+        </span>
+      ))
+    }
+  </h1>
+
+  <div class="hero__foot">
+    <p class="hero__lede">
+      Design and Webflow development from one pair of hands. Below is the work
+      — three sites, built small unit by small unit.
+    </p>
+
+    <div class="hero__actions">
+      <a class="btn" href="#contact">Start a project</a>
+      <a class="btn btn--ghost" href="#work">See the work</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: flex;
+    flex-direction: column;
+    padding-top: clamp(120px, 12vw, 168px);
+    padding-bottom: clamp(48px, 5vw, 72px);
+  }
+
+  /* The eyebrow and the footer fade up; the headline uses masks, so it is
+     driven separately by the .is-in on the section. */
+  :global(.js) .eyebrow,
+  :global(.js) .hero__foot {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+    transition:
+      opacity 700ms var(--ease-out-quart),
+      transform 700ms var(--ease-out-quart);
+  }
+
+  .eyebrow {
+    transition-delay: 40ms;
+  }
+
+  .hero__foot {
+    transition-delay: 420ms;
+  }
+
+  .hero.is-in .eyebrow,
+  .hero.is-in .hero__foot {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .hero__title {
+    /* Widths are the artboard's proportion of the lane (1000/1260), not its
+       pixel value — so they hold at any lane width. */
+    max-width: 79.4%;
+    padding-top: clamp(28px, 3vw, 44px);
+    font-size: var(--text-display);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    text-wrap: balance;
+  }
+
+  .hero__foot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: clamp(28px, 4vw, 60px);
+    width: 100%;
+    padding-top: clamp(32px, 3.6vw, 52px);
+  }
+
+  .hero__lede {
+    /* 520/1260 of the lane, but never past a comfortable reading measure. */
+    max-width: min(41.3%, 34em);
+    font-size: var(--text-lede);
+    line-height: var(--leading-lede);
+    color: var(--ink-muted);
+  }
+
+  .hero__actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 860px) {
+    .hero__foot {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero__actions {
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .hero__actions .btn {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js) .eyebrow,
+    :global(.js) .hero__foot {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>

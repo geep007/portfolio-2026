@@ -1,0 +1,57 @@
+---
+const social = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/" },
+  { label: "Instagram", href: "https://www.instagram.com/" },
+];
+---
+
+<footer class="footer section">
+  <p class="label label--tight footer__note">
+    Atomic Designz® — small units, built properly. Made in India.
+  </p>
+
+  <nav class="footer__links" aria-label="Social">
+    {
+      social.map((item) => (
+        <a
+          class="label label--tight link footer__link"
+          href={item.href}
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          {item.label}
+        </a>
+      ))
+    }
+    <span class="label label--tight footer__year">© 2026</span>
+  </nav>
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px 32px;
+    padding-block: clamp(32px, 3.5vw, 50px);
+  }
+
+  .footer__note,
+  .footer__year {
+    color: var(--ink-faint);
+  }
+
+  .footer__links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .footer__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--ink);
+  }
+</style>
