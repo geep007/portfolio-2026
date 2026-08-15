@@ -5,6 +5,7 @@ import { resolveFonts } from "../typography";
 import { loadFonts } from "../fonts";
 import { Clip } from "../hero/components/Clip";
 import { MaskText } from "../components/MaskText";
+import { SiteFrame } from "../components/SiteFrame";
 import { defaultIntroProps, type IntroProps } from "./introLayout";
 
 loadFonts();
@@ -23,7 +24,12 @@ loadFonts();
  * the arrival reads as typesetting rather than as a transition effect.
  */
 
-const PANEL = { x: 904, y: 96, w: 956, h: 888 };
+/**
+ * Geometry is measured inside the site frame's content area (1080 − the 59px
+ * URL bar), not against the raw canvas: 74px of air above and below the panel
+ * there reads as even, where the old 96/96 would sit 59px low.
+ */
+const PANEL = { x: 904, y: 74, w: 956, h: 873 };
 const MARGIN = 140;
 
 export const IntroA: React.FC<Partial<IntroProps>> = (input) => {
@@ -58,7 +64,8 @@ export const IntroA: React.FC<Partial<IntroProps>> = (input) => {
   });
 
   return (
-    <AbsoluteFill style={{ background: p.ground }}>
+    <SiteFrame url={p.siteUrl}>
+      <AbsoluteFill style={{ background: p.ground }}>
       {/* Accent bar behind the panel's outer edge: the only piece of brand
           colour in the frame, and it is what stops the right side reading as a
           floating screenshot. */}
@@ -110,7 +117,7 @@ export const IntroA: React.FC<Partial<IntroProps>> = (input) => {
         style={{
           position: "absolute",
           left: MARGIN,
-          top: 300,
+          top: 284,
           width: PANEL.x - MARGIN - 120,
           transform: `translateY(${drift}px)`,
         }}
@@ -159,7 +166,7 @@ export const IntroA: React.FC<Partial<IntroProps>> = (input) => {
         style={{
           position: "absolute",
           left: MARGIN,
-          top: 890,
+          top: 853,
           fontFamily: type.mono,
           fontSize: 22,
           letterSpacing: type.monoTracking,
@@ -171,7 +178,8 @@ export const IntroA: React.FC<Partial<IntroProps>> = (input) => {
         }}
       >
         {p.chip}
-      </div>
-    </AbsoluteFill>
+        </div>
+      </AbsoluteFill>
+    </SiteFrame>
   );
 };

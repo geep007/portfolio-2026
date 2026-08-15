@@ -11,9 +11,11 @@
     "animatic": "remotion render HeroAnimatic out/hero-animatic.mp4",
     "render:intro-a": "remotion render IntroA out/intro-a.mp4",
     "render:intro-b": "remotion render IntroB out/intro-b.mp4",
+    "render:intro-c": "remotion render IntroC out/intro-c.mp4",
+    "render:intro-d": "remotion render IntroD out/intro-d.mp4",
     "render:outro-a": "remotion render OutroA out/outro-a.mp4",
     "render:outro-b": "remotion render OutroB out/outro-b.mp4",
-    "render:intros": "npm run render:intro-a && npm run render:intro-b",
+    "render:intros": "npm run render:intro-a && npm run render:intro-b && npm run render:intro-c && npm run render:intro-d",
     "render:vertical": "remotion render SurrealVertical out/surreal-vertical.mp4",
     "still": "remotion still HeroReel out/frame.png",
     "upgrade": "remotion upgrade"

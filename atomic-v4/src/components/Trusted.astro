@@ -1,14 +1,22 @@
 ---
-// Widths and heights are the artboard's — each logo is drawn to its own
-// optical size, not to a shared box.
+// Logo wall cycle (Osmo). Five slots on screen, the rest wait in the pool —
+// one slot at a time swaps on a slide-and-fade.
+//
+// Every logo is drawn to its own optical size, not squeezed into a shared
+// box. `light` marks ship pale and need darkening to hold on the tinted band.
 const logos = [
   { src: "/logos/trust-1.png", alt: "Surreal Global", w: 124, h: 45 },
-  { src: "/logos/trust-2.png", alt: "EdelGive Foundation", w: 160, h: 32 },
-  // Athina ships a light wordmark — it needs darkening to hold contrast on
-  // the tinted band.
-  { src: "/logos/trust-3.png", alt: "Athina.ai", w: 150, h: 51, dark: true },
+  { src: "/logos/shadow.svg", alt: "Shadow Digital", w: 168, h: 22 },
+  { src: "/logos/trust-3.png", alt: "Athina.ai", w: 150, h: 51, light: true },
   { src: "/logos/trust-4.svg", alt: "Last Bench", w: 120, h: 37 },
   { src: "/logos/trust-5.png", alt: "GROW+", w: 150, h: 41 },
+  { src: "/logos/srdi.png", alt: "SRDI Group", w: 172, h: 29 },
+  { src: "/logos/creo.svg", alt: "Creo Agency", w: 150, h: 31 },
+  { src: "/logos/legendario.png", alt: "Legendarios Curaçao", w: 56, h: 44 },
+  { src: "/logos/avus.svg", alt: "AVUS IT", w: 150, h: 30 },
+  { src: "/logos/abra.png", alt: "Abra", w: 118, h: 44 },
+  { src: "/logos/bonbouw.png", alt: "Bon Bouw", w: 168, h: 30 },
+  { src: "/logos/juana.svg", alt: "Juana de Arco", w: 71, h: 44, inverted: true },
 ];
 ---
 
@@ -18,35 +26,191 @@ const logos = [
       <span class="label label--lg">(—)</span>
       <span class="label label--lg">Trusted by studios and founders</span>
     </p>
-    <p class="rule-head__note">Design studios, funds, and founders.</p>
+    <p class="rule-head__note">Founders, funds, and the studios behind them.</p>
   </div>
 
   <h2 class="trusted__title" data-reveal style="--reveal-delay:60ms">
-    Teams who handed over the build and got it back clean.
+    Good companies. Complicated stories. Clearer websites.
   </h2>
 
-  <ul class="trusted__row" data-stagger="60">
-    {
-      logos.map((logo, i) => (
-        <>
-          {i > 0 && <li class="trusted__div" aria-hidden="true" />}
-          <li class="trusted__item" data-reveal>
-            <img
-              class:list={{ "is-light": logo.dark }}
-              src={logo.src}
-              alt={logo.alt}
-              width={logo.w}
-              height={logo.h}
-              style={`width:${logo.w}px;height:${logo.h}px`}
-              loading="lazy"
-              decoding="async"
-            />
-          </li>
-        </>
-      ))
-    }
-  </ul>
+  <div data-logo-wall-shuffle="false" data-logo-wall-cycle-init class="logo-wall">
+    <div class="logo-wall__collection">
+      <div data-logo-wall-list class="logo-wall__list">
+        {
+          logos.map((logo) => (
+            <div data-logo-wall-item class="logo-wall__item" data-reveal>
+              <div data-logo-wall-target-parent class="logo-wall__logo">
+                <div data-logo-wall-target class="logo-wall__logo-target">
+                  <img
+                    class:list={[
+                      "logo-wall__logo-img",
+                      { "is-light": logo.light, "is-inverted": logo.inverted },
+                    ]}
+                    src={logo.src}
+                    alt={logo.alt}
+                    width={logo.w}
+                    height={logo.h}
+                    style={`--logo-h:${logo.h}px`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
 </section>
+
+<script>
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initLogoWallCycle() {
+    const loopDelay = 1.5; // Loop Duration
+    const duration = 0.9; // Animation Duration
+
+    document.querySelectorAll<HTMLElement>("[data-logo-wall-cycle-init]").forEach((root) => {
+      const list = root.querySelector<HTMLElement>("[data-logo-wall-list]");
+      if (!list) return;
+      const items = Array.from(list.querySelectorAll<HTMLElement>("[data-logo-wall-item]"));
+
+      const shuffleFront = root.getAttribute("data-logo-wall-shuffle") !== "false";
+      const originalTargets = items
+        .map((item) => item.querySelector<HTMLElement>("[data-logo-wall-target]"))
+        .filter(Boolean) as HTMLElement[];
+
+      let visibleItems: HTMLElement[] = [];
+      let visibleCount = 0;
+      let pool: HTMLElement[] = [];
+      let pattern: number[] = [];
+      let patternIndex = 0;
+      let tl: gsap.core.Timeline;
+
+      function isVisible(el: HTMLElement) {
+        return window.getComputedStyle(el).display !== "none";
+      }
+
+      function shuffleArray<T>(arr: T[]) {
+        const a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      function setup() {
+        if (tl) {
+          tl.kill();
+        }
+        visibleItems = items.filter(isVisible);
+        visibleCount = visibleItems.length;
+
+        pattern = shuffleArray(Array.from({ length: visibleCount }, (_, i) => i));
+        patternIndex = 0;
+
+        // remove all injected targets
+        items.forEach((item) => {
+          item.querySelectorAll("[data-logo-wall-target]").forEach((old) => old.remove());
+        });
+
+        pool = originalTargets.map((n) => n.cloneNode(true) as HTMLElement);
+
+        let front: HTMLElement[];
+        let rest: HTMLElement[];
+        if (shuffleFront) {
+          const shuffledAll = shuffleArray(pool);
+          front = shuffledAll.slice(0, visibleCount);
+          rest = shuffleArray(shuffledAll.slice(visibleCount));
+        } else {
+          front = pool.slice(0, visibleCount);
+          rest = shuffleArray(pool.slice(visibleCount));
+        }
+        pool = front.concat(rest);
+
+        for (let i = 0; i < visibleCount; i++) {
+          const parent =
+            visibleItems[i].querySelector<HTMLElement>("[data-logo-wall-target-parent]") ||
+            visibleItems[i];
+          parent.appendChild(pool.shift() as HTMLElement);
+        }
+
+        tl = gsap.timeline({ repeat: -1, repeatDelay: loopDelay });
+        tl.call(swapNext);
+        tl.play();
+      }
+
+      function swapNext() {
+        const nowCount = items.filter(isVisible).length;
+        if (nowCount !== visibleCount) {
+          setup();
+          return;
+        }
+        if (!pool.length) return;
+
+        const idx = pattern[patternIndex % visibleCount];
+        patternIndex++;
+
+        const container = visibleItems[idx];
+        const parent =
+          container.querySelector<HTMLElement>("[data-logo-wall-target-parent]") || container;
+        const existing = parent.querySelectorAll("[data-logo-wall-target]");
+        if (existing.length > 1) return;
+
+        const current = parent.querySelector<HTMLElement>("[data-logo-wall-target]");
+        const incoming = pool.shift() as HTMLElement;
+
+        gsap.set(incoming, { yPercent: 50, autoAlpha: 0 });
+        parent.appendChild(incoming);
+
+        if (current) {
+          gsap.to(current, {
+            yPercent: -50,
+            autoAlpha: 0,
+            duration,
+            ease: "expo.inOut",
+            onComplete: () => {
+              current.remove();
+              pool.push(current);
+            },
+          });
+        }
+
+        gsap.to(incoming, {
+          yPercent: 0,
+          autoAlpha: 1,
+          duration,
+          delay: 0.1,
+          ease: "expo.inOut",
+        });
+      }
+
+      setup();
+
+      ScrollTrigger.create({
+        trigger: root,
+        start: "top bottom",
+        end: "bottom top",
+        onEnter: () => tl.play(),
+        onLeave: () => tl.pause(),
+        onEnterBack: () => tl.play(),
+        onLeaveBack: () => tl.pause(),
+      });
+
+      document.addEventListener("visibilitychange", () =>
+        document.hidden ? tl.pause() : tl.play(),
+      );
+    });
+  }
+
+  // Initialize Logo Wall Cycle
+  initLogoWallCycle();
+</script>
 
 <style>
   .trusted {
@@ -65,29 +229,64 @@ const logos = [
     text-wrap: balance;
   }
 
-  .trusted__row {
+  /* Logo wall ------------------------------------------------------------- */
+
+  .logo-wall {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: clamp(20px, 3vw, 40px);
+    justify-content: center;
     width: 100%;
-    padding: clamp(44px, 4.9vw, 70px) 0 0;
-    margin: 0;
-    list-style: none;
+    padding-top: clamp(44px, 4.9vw, 70px);
   }
 
-  .trusted__item {
+  .logo-wall__collection {
+    width: 100%;
+  }
+
+  .logo-wall__list {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 51px;
-    /* --reveal-y is smaller here — logos are small, so a long travel would
-       read as noise. */
+    flex-flow: wrap;
+  }
+
+  .logo-wall__item {
+    /* Five across on the lane, one strip — not the 4-column wall. */
+    width: 20%;
+    position: relative;
     --reveal-y: 12px;
   }
 
-  .trusted__item img {
-    max-width: 100%;
+  /* Everything past the fifth waits in the pool. The script reads
+     display:none to decide what's on screen. */
+  [data-logo-wall-list] [data-logo-wall-item]:nth-child(n + 6) {
+    display: none;
+  }
+
+  .logo-wall__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 51px;
+    /* The swap slides through this box; nothing may spill into its neighbour. */
+    overflow: hidden;
+  }
+
+  .logo-wall__logo-target {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+  }
+
+  .logo-wall__logo-img {
+    /* Each mark keeps its own optical height but can never outgrow its
+       slot — the row has to hold at every width. */
+    width: auto;
+    height: var(--logo-h);
+    /* Leaves air between slots so two wordmarks can't run into each other. */
+    max-width: 84%;
+    max-height: 100%;
     object-fit: contain;
     opacity: 0.85;
     filter: grayscale(100%);
@@ -96,54 +295,65 @@ const logos = [
       filter var(--dur-ui) ease;
   }
 
-  .trusted__item img.is-light {
+  .logo-wall__logo-img.is-light {
     filter: grayscale(100%) brightness(0.45);
   }
 
+  /* Marks that ship white for a dark footer — flip them to read on the band. */
+  .logo-wall__logo-img.is-inverted {
+    filter: grayscale(100%) invert(1);
+  }
+
   @media (hover: hover) and (pointer: fine) {
-    .trusted__item:hover img {
+    .logo-wall__item:hover .logo-wall__logo-img {
       opacity: 1;
       filter: grayscale(0%);
     }
-  }
 
-  .trusted__div {
-    width: 1px;
-    height: 34px;
-    flex-shrink: 0;
-    background: rgb(26 46 242 / 20%);
+    .logo-wall__item:hover .logo-wall__logo-img.is-light {
+      filter: grayscale(0%) brightness(0.45);
+    }
+
+    .logo-wall__item:hover .logo-wall__logo-img.is-inverted {
+      filter: grayscale(100%) invert(1);
+    }
   }
 
   @media (max-width: 900px) {
-    .trusted__row {
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      gap: 28px 40px;
-    }
-
-    .trusted__div {
-      display: none;
-    }
-
     .trusted__title {
       max-width: 100%;
     }
 
-    /* Logos keep their aspect but shrink so five of them still wrap into
-       rows rather than one per line. */
-    .trusted__item {
-      height: 40px;
+    .logo-wall__item {
+      width: 33.333%;
     }
 
-    .trusted__item img {
-      height: 100%;
-      width: auto;
+    /* Three across, so the pool starts one earlier. */
+    [data-logo-wall-list] [data-logo-wall-item]:nth-child(n + 4) {
+      display: none;
+    }
+
+    .logo-wall__logo {
+      height: 40px;
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .trusted__item img {
-      transition: none;
+  /* On a phone three marks are too small to read. Two, larger. */
+  @media (max-width: 560px) {
+    .logo-wall__item {
+      width: 50%;
+    }
+
+    [data-logo-wall-list] [data-logo-wall-item]:nth-child(n + 3) {
+      display: none;
+    }
+
+    .logo-wall__logo {
+      height: 44px;
+    }
+
+    .logo-wall__logo-img {
+      max-width: 90%;
     }
   }
 </style>

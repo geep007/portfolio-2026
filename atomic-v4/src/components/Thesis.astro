@@ -1,17 +1,20 @@
 ---
 const scale = [
   {
-    copy: "The one sentence your visitor has to believe.",
+    title: "Find the story",
+    copy: "Strip the idea down until the thing worth saying becomes obvious.",
     svg: `<circle cx="40" cy="40" r="5" fill="#FFFFFF"/>`,
   },
   {
-    copy: "The component that carries it — one card, one form, one hero.",
+    title: "Give it a shape",
+    copy: "Turn that story into a visual system and an experience.",
     svg: `<circle cx="40" cy="40" r="5" fill="#FFFFFF"/>
       <circle cx="40" cy="40" r="22" fill="none" stroke="#FFFFFFA6" stroke-width="0.9"/>
       <g class="orbit"><circle cx="62" cy="40" r="3.4" fill="#FFFFFF"/></g>`,
   },
   {
-    copy: "How two of them meet — the flow between page and page.",
+    title: "Make it move",
+    copy: "Use interaction and motion where they add meaning, not decoration.",
     svg: `<circle cx="26" cy="40" r="5" fill="#FFFFFF"/>
       <circle cx="54" cy="40" r="5" fill="#FFFFFF"/>
       <path d="M26 40H54" fill="none" stroke="#FFFFFFA6" stroke-width="0.9"/>
@@ -19,7 +22,8 @@ const scale = [
       <circle cx="54" cy="40" r="16" fill="none" stroke="#FFFFFF66" stroke-width="0.8"/>`,
   },
   {
-    copy: "The site, which by then is just the small things holding hands.",
+    title: "Build it properly",
+    copy: "Fast, responsive and manageable long after we hand it over.",
     svg: `<path d="M40 24L24 40L40 56L56 40L40 24Z" fill="none" stroke="#FFFFFF80" stroke-width="0.8"/>
       <circle cx="40" cy="24" r="4" fill="#FFFFFF"/>
       <circle cx="24" cy="40" r="4" fill="#FFFFFF"/>
@@ -34,17 +38,17 @@ const scale = [
   <div class="thesis__body section">
     <p class="eyebrow" data-reveal>
       <span class="label label--lg">(02)</span>
-      <span class="label label--lg">The idea behind the name</span>
+      <span class="label label--lg">Why we do it this way</span>
     </p>
 
     <h2 class="thesis__title" data-reveal style="--reveal-delay:60ms">
-      An atom is the smallest thing that still behaves like the whole. Websites
-      work the same way.
+      Specs don't sell. Stories do.
     </h2>
 
     <p class="thesis__lede" data-reveal style="--reveal-delay:140ms">
-      A slow page is rarely a slow page. It's one sentence doing too much work,
-      one component fighting its own layout.
+      A website can be technically perfect and still say nothing. We start
+      with what someone needs to understand, feel and remember, then use
+      design, motion and code to make that happen.
     </p>
 
     <ul class="thesis__scale" data-stagger="90">
@@ -60,7 +64,10 @@ const scale = [
               aria-hidden="true"
               set:html={step.svg}
             />
-            <p>{step.copy}</p>
+            <div class="thesis__text">
+              <p class="thesis__step-title">{step.title}</p>
+              <p>{step.copy}</p>
+            </div>
           </li>
         ))
       }
@@ -113,6 +120,19 @@ const scale = [
     display: flex;
     flex-direction: column;
     gap: 22px;
+  }
+
+  .thesis__text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .thesis__step-title {
+    font-size: var(--text-nav);
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--on-brand);
   }
 
   .thesis__step p {

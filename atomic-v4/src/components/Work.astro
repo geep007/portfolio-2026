@@ -1,64 +1,68 @@
 ---
+// Magazine spread: plates run to the lane edge, captions sit in the gutter
+// beside them. Row 01 and 04 are wide with the caption in the margin; 02 and
+// 03 pair up in the middle at half scale with their captions underneath.
 const projects = [
   {
     index: "01",
-    kicker: "01 / Experiential studio",
     name: "Surreal",
-    logo: "/logos/surreal.png",
-    logoW: 124,
-    logoH: 45,
+    domain: "letsgetsurreal.com",
+    url: "https://letsgetsurreal.com/",
     image: "/img/work-surreal.jpg",
-    plate: "#1a1a1a",
-    blurb:
-      "Scroll-driven reveals, a WebGL globe of every city they've lit, and a CMS their team runs alone.",
+    plate: "#0e0e0e",
+    caption: "An immersive digital home for a company that builds immersive physical worlds.",
     stack: "Webflow · GSAP · WebGL",
     year: "2025",
   },
   {
     index: "02",
-    kicker: "02 / Dev-tool platform",
     name: "Athina.ai",
-    logo: "/logos/athina.png",
-    logoW: 150,
-    logoH: 51,
+    domain: "athina.ai",
+    url: "https://www.athina.ai/",
     image: "/img/work-athina.jpg",
-    plate: "#efede9",
-    // Light wordmark — needs darkening to read on white.
-    lightMark: true,
-    blurb:
-      "A shader hero and orbiting spheres that still hit green Lighthouse on a marketing site.",
+    plate: "#0e0e0e",
+    caption: "Making a deeply technical AI product feel immediate, credible and easy to understand.",
     stack: "Webflow · GSAP · p5.js",
     year: "2025",
   },
   {
     index: "03",
-    kicker: "03 / Programme site",
     name: "GROW+",
-    logo: "/logos/grow.png",
-    logoW: 150,
-    logoH: 41,
+    domain: "edelgive-growfund.org",
+    url: "https://edelgive-growfund.org/",
     image: "/img/work-grow.jpg",
     plate: "#eeede1",
-    blurb:
-      "A climate fund explained in scroll — anchors, clusters and landscapes, with a CMS the foundation runs in-house.",
+    caption: "Turning years of impact, data and organisations into one clear digital story.",
     stack: "Webflow · CMS architecture",
     year: "2026",
   },
   {
     index: "04",
-    kicker: "04 / Creative studio",
     name: "Creo Agency",
-    logo: "/logos/creo.svg",
-    logoW: 150,
-    logoH: 37,
+    domain: "creo-agency.com",
+    url: "https://www.creo-agency.com/",
     image: "/img/work-creo.jpg",
     plate: "#efede9",
-    blurb:
-      "A studio site that had to feel handmade and still load fast — their art direction, my build.",
+    caption: "A portfolio designed to feel as expressive as the work inside it.",
     stack: "Webflow · GSAP · CMS",
     year: "2025",
   },
+  {
+    index: "05",
+    name: "Juana de Arco",
+    domain: "juanadearcousa.com",
+    url: "https://www.juanadearcousa.com/",
+    image: "/img/work-juana.jpg",
+    plate: "#f2efe8",
+    caption: "A colourful Buenos Aires label given a storefront that keeps its handmade character.",
+    stack: "Webflow · CMS · Ecommerce",
+    year: "2026",
+  },
 ];
+
+const [lead, ...rest] = projects;
+// Two half-scale rows behind the lead plate: 02+03, then 04+05.
+const pairs = [rest.slice(0, 2), rest.slice(2, 4)];
 ---
 
 <section class="work" id="work">
@@ -68,81 +72,103 @@ const projects = [
         <span class="label label--lg">(01)</span>
         <span class="label label--lg">Selected work</span>
       </p>
+      <p class="rule-head__note">2024 — 2026</p>
     </div>
 
-    <div class="work__intro">
-      <h2 class="work__title" data-reveal>
-        Selected work, at the scale it was made.
-      </h2>
-      <p class="work__note" data-reveal style="--reveal-delay:100ms">
-        Shown the way you'd hang prints — different sizes, one wall.
-      </p>
-    </div>
+    <h2 class="work__title" data-reveal>Five recent builds.</h2>
   </div>
 
-  {
-    projects.map((project, i) => (
-      <article
-        class:list={["work__row", "section", { "work__row--flip": i % 2 === 1 }]}
-        data-reveal
+  {/* 01 — plate bleeds right, caption in the left margin. */}
+  <article class="spread spread--right" data-reveal>
+    <div class="spread__margin">
+      <p class="label spread__index">{lead.index}</p>
+      <h3 class="spread__name">{lead.name}</h3>
+      <p class="spread__caption">{lead.caption}</p>
+      <p class="label spread__facts">
+        <span>{lead.stack}</span>
+        <span>{lead.year}</span>
+      </p>
+      <a
+        class="label link spread__cta"
+        href={lead.url || "#contact"}
+        target={lead.url ? "_blank" : undefined}
+        rel={lead.url ? "noreferrer noopener" : undefined}
       >
-        <a
-          class="plate work__plate"
-          href="#contact"
-          style={`background:${project.plate}`}
-          aria-label={`${project.name} — read the case study`}
-        >
-          <img
-            class="plate__media"
-            src={project.image}
-            alt={`${project.name} — site build`}
-            width="800"
-            height="500"
-            loading={i === 0 ? "eager" : "lazy"}
-            decoding="async"
-          />
-        </a>
+        Visit live website <span aria-hidden="true">↗</span>
+      </a>
+    </div>
 
-        <div class="work__meta">
-          <div class="work__lead">
-            <p class="label work__kicker">{project.kicker}</p>
-            <img
-              class:list={["work__logo", { "is-light": project.lightMark }]}
-              src={project.logo}
-              alt={project.name}
-              width={project.logoW}
-              height={project.logoH}
-              style={`width:${project.logoW}px;height:${project.logoH}px`}
-              loading="lazy"
-              decoding="async"
-            />
-            <p class="work__blurb">{project.blurb}</p>
-          </div>
+    <div class="frame" style={`background:${lead.plate}`}>
+      <div class="frame__bar">
+        <span class="frame__dots" aria-hidden="true"><i /><i /><i /></span>
+        <span class="label label--tight frame__url">{lead.domain}</span>
+      </div>
+      <img
+        class="frame__media"
+        src={lead.image}
+        alt={`${lead.name} — live site`}
+        width="1800"
+        height="1000"
+        loading="eager"
+        decoding="async"
+      />
+    </div>
+  </article>
 
-          <div class="work__foot">
-            <div class="work__facts">
-              <span class="label">{project.stack}</span>
-              <span class="label">{project.year}</span>
+  {/* 02 + 03 and 04 + 05 — the uneven pairs. */}
+  {
+    pairs.map((row) => (
+      <div class="pair section">
+        {row.map((project, i) => (
+          <article class:list={["pair__item", { "pair__item--drop": i === 1 }]} data-reveal>
+            <div class="frame" style={`background:${project.plate}`}>
+              <div class="frame__bar">
+                <span class="frame__dots" aria-hidden="true"><i /><i /><i /></span>
+                <span class="label label--tight frame__url">{project.domain}</span>
+              </div>
+              <img
+                class="frame__media"
+                src={project.image}
+                alt={`${project.name} — live site`}
+                width="1800"
+                height="1000"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
-            <a class="label work__cta" href="#contact">
-              Read the case study <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-        </div>
-      </article>
+
+            <div class="pair__meta">
+              <p class="label spread__index">
+                {project.index} — {project.name}
+              </p>
+              <p class="spread__caption">{project.caption}</p>
+              <div class="pair__foot">
+                <span class="label pair__facts">
+                  {project.stack} — {project.year}
+                </span>
+                <a
+                  class="label link spread__cta"
+                  href={project.url || "#contact"}
+                  target={project.url ? "_blank" : undefined}
+                  rel={project.url ? "noreferrer noopener" : undefined}
+                >
+                  Visit live website <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
     ))
   }
 
-  <div class="work__all section" data-reveal>
-    <a class="btn" href="#contact">View all projects →</a>
-  </div>
 </section>
 
 <style>
   .work {
     display: flex;
     flex-direction: column;
-    padding-bottom: clamp(80px, 10.4vw, 150px);
+    padding-bottom: clamp(64px, 7vw, 100px);
     background: var(--bg);
   }
 
@@ -152,123 +178,69 @@ const projects = [
     padding-top: clamp(64px, 6.25vw, 90px);
   }
 
-  .work__intro {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: clamp(28px, 4vw, 60px);
-    width: 100%;
-    padding-top: clamp(40px, 4.9vw, 70px);
-  }
-
   .work__title {
     max-width: 55.6%;
+    padding-top: clamp(32px, 3.9vw, 56px);
     font-size: var(--text-h2);
     line-height: var(--leading-h2);
     letter-spacing: var(--tracking-h2);
     text-wrap: balance;
   }
 
-  .work__note {
-    max-width: 23.8%;
-    flex-shrink: 0;
+  /* Spread rows ----------------------------------------------------------- */
+
+  .spread {
+    display: grid;
+    align-items: start;
+    gap: clamp(24px, 3vw, 44px);
+    padding-top: clamp(56px, 7vw, 100px);
+  }
+
+  /* The plate keeps the lane on one side and runs to the viewport on the
+     other — the bleed is what makes it read as print. */
+  .spread--right {
+    grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+    padding-left: var(--lane);
+  }
+
+  .spread--left {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 260px);
+    padding-right: var(--lane);
+  }
+
+  .spread__margin {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 6px;
+  }
+
+  .spread__index {
+    color: var(--brand);
+  }
+
+  .spread__name {
+    font-size: var(--text-h4);
+    line-height: var(--leading-h4);
+    letter-spacing: var(--tracking-h4);
+  }
+
+  .spread__caption {
     font-size: var(--text-caption);
     line-height: var(--leading-caption);
     color: var(--ink-muted);
   }
 
-  /* Rows ------------------------------------------------------------------ */
-
-  .work__row {
-    display: grid;
-    grid-template-columns: minmax(0, 800fr) minmax(0, 400fr);
-    align-items: start;
-    gap: clamp(28px, 4.2vw, 60px);
-    padding-top: clamp(56px, 8.3vw, 120px);
-  }
-
-  .work__row--flip {
-    grid-template-columns: minmax(0, 400fr) minmax(0, 800fr);
-  }
-
-  .work__row--flip .work__plate {
-    order: 2;
-  }
-
-  .work__row--flip .work__meta {
-    order: 1;
-  }
-
-  .work__plate {
-    display: block;
-    aspect-ratio: 800 / 500;
-  }
-
-  .work__plate .plate__media {
-    height: 100%;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .work__plate:hover .plate__media {
-      transform: scale(1.03);
-      transition-duration: 700ms;
-    }
-  }
-
-  .work__meta {
+  /* Stack and year get a line each — the margin is too narrow to run them
+     together without an orphan. */
+  .spread__facts {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: clamp(32px, 4vw, 56px);
-    min-height: 100%;
-    align-self: stretch;
-  }
-
-  .work__lead {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-    align-items: flex-start;
-  }
-
-  .work__kicker {
-    color: var(--brand);
-  }
-
-  .work__logo {
-    max-width: 100%;
-    object-fit: contain;
-    object-position: left center;
-  }
-
-  .work__logo.is-light {
-    filter: brightness(0.35);
-  }
-
-  .work__blurb {
-    max-width: 95%;
-    font-size: var(--text-body);
-    line-height: var(--leading-body);
-    color: var(--ink-muted);
-  }
-
-  .work__foot {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding-top: 28px;
-    border-top: 1px solid var(--rule);
-  }
-
-  .work__facts {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    gap: 4px;
     color: var(--ink-faint);
   }
 
-  .work__cta {
+  .spread__cta {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -276,57 +248,132 @@ const projects = [
     color: var(--brand);
   }
 
-  .work__cta span {
+  .spread__cta span {
     display: inline-block;
     transition: transform var(--dur-ui) var(--ease-out-quart);
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .work__cta:hover span {
+    .spread__cta:hover span {
       transform: translate3d(3px, -3px, 0);
     }
   }
 
-  .work__all {
+  /* Browser frame --------------------------------------------------------- */
+
+  .frame {
     display: flex;
-    justify-content: center;
-    padding-top: clamp(40px, 3vw, 44px);
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--ink);
+  }
+
+  .frame__bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--ink);
+    background: var(--bg);
+  }
+
+  .frame__dots {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .frame__dots i {
+    width: 8px;
+    height: 8px;
+    border: 1px solid var(--ink);
+    border-radius: var(--radius-pill);
+  }
+
+  .frame__url {
+    color: var(--ink-muted);
+  }
+
+  .frame__media {
+    display: block;
+    width: 100%;
+    /* Without height:auto the width/height attributes win and the plate
+       crops into the screenshot instead of scaling it. */
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: 50% 0;
+  }
+
+  /* The middle pair ------------------------------------------------------- */
+
+  .pair {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(28px, 4vw, 60px);
+    padding-top: clamp(56px, 7vw, 100px);
+  }
+
+  /* The second plate drops, so the pair never reads as a tidy two-up. */
+  .pair__item--drop {
+    padding-top: clamp(40px, 5vw, 90px);
+  }
+
+  .pair__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: clamp(16px, 1.6vw, 22px);
+  }
+
+  .pair__foot {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+  }
+
+  .pair__facts {
+    color: var(--ink-faint);
   }
 
   @media (max-width: 900px) {
-    .work__intro {
-      flex-direction: column;
-      align-items: flex-start;
+    /* Stacked, nothing bleeds — the lane holds every edge. */
+    .spread--right,
+    .spread--left {
+      grid-template-columns: minmax(0, 1fr);
+      padding-inline: var(--lane);
     }
 
-    .work__row,
-    .work__row--flip {
+    /* Phone reads image-first: the plate leads, the caption follows. */
+    .spread--left .frame,
+    .spread--right .frame {
+      order: -1;
+    }
+
+    .spread__margin {
+      padding-top: 0;
+    }
+
+    .pair {
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .work__row--flip .work__plate {
-      order: 0;
+    .pair__item--drop {
+      padding-top: 0;
     }
 
-    .work__row--flip .work__meta {
-      order: 0;
-    }
-
-    .work__title,
-    .work__note,
-    .work__blurb {
+    .work__title {
       max-width: 100%;
-    }
-
-    /* Stacked, the meta column no longer has a plate to match height with. */
-    .work__meta {
-      min-height: 0;
     }
   }
 
+  @media (max-width: 480px) {  }
+
   @media (prefers-reduced-motion: reduce) {
-    .work__cta span,
-    .work__plate:hover .plate__media {
+    .spread__cta span {
       transition: none;
       transform: none;
     }

@@ -1,50 +1,46 @@
 ---
+// Both quotes are LinkedIn recommendations, trimmed to the working sentences.
+const quotes = [
+  {
+    text: "Working with Geet has been a truly smooth and reliable experience. He is not only skilled in his craft but also incredibly proactive, communicative, and solution-driven.",
+    name: "Chiméne Adoptie",
+    role: "Founder & Creative Strategist, CREO Agency",
+    date: "July 2025",
+  },
+  {
+    text: "Geet and the team at Atomic Designz were instrumental in bringing our website to life. Their cooperative approach and on-time delivery meant minimal back-and-forth for us.",
+    name: "Natasha Bandodkar",
+    role: "Co-Founder & Lead Strategist, Independent Creators Co",
+    date: "June 2025",
+  },
+];
 ---
 
 <section class="says section">
   <div class="rule-head" data-reveal>
     <p class="rule-head__index">
-      <span class="label label--lg">(05)</span>
+      <span class="label label--lg">(04)</span>
       <span class="label label--lg">What people say</span>
     </p>
-    <p class="rule-head__note">One person you can text.</p>
+    <p class="rule-head__note">What it's like to work together.</p>
   </div>
 
-  <div class="says__body">
-    <div class="plate says__plate" data-reveal>
-      <img
-        class="plate__media"
-        src="/img/testimonial.jpg"
-        alt="Geet at the desk, mid-build"
-        width="400"
-        height="500"
-        loading="lazy"
-        decoding="async"
-      />
-    </div>
-
-    <figure class="says__quote" data-reveal style="--reveal-delay:100ms">
-      <blockquote class="says__text">
-        “Geet was instrumental in bringing our website to life. On-time delivery
-        meant minimal back-and-forth for us.”
-      </blockquote>
-
-      <figcaption class="says__foot">
-        <div class="says__who">
-          <span class="label says__name">Natasha Bandodkar</span>
-          <span class="says__dot" aria-hidden="true"></span>
-          <span class="label says__role">
-            Founder · Independent Creators Co
-          </span>
-        </div>
-        <p class="says__second">
-          “Working with Geet has been truly smooth and reliable — incredibly
-          proactive, communicative, and solution-driven.” — Chimene Adeptie,
-          Founder, Creo Agency
-        </p>
-      </figcaption>
-    </figure>
-  </div>
+  <ul class="says__list" data-stagger="90">
+    {
+      quotes.map((quote) => (
+        <li class="says__item" data-reveal>
+          <figure class="says__figure">
+            <blockquote class="says__text">“{quote.text}”</blockquote>
+            <figcaption class="says__foot">
+              <span class="label says__name">{quote.name}</span>
+              <span class="label says__role">{quote.role}</span>
+              <span class="label says__date">{quote.date}</span>
+            </figcaption>
+          </figure>
+        </li>
+      ))
+    }
+  </ul>
 </section>
 
 <style>
@@ -54,29 +50,29 @@
     padding-bottom: var(--section-y);
   }
 
-  .says__body {
+  .says__list {
     display: grid;
-    grid-template-columns: minmax(0, 400fr) minmax(0, 800fr);
-    align-items: stretch;
-    gap: clamp(28px, 4.2vw, 60px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(32px, 4.5vw, 64px);
     width: 100%;
-    padding-top: clamp(44px, 5.5vw, 80px);
+    padding: clamp(44px, 4.9vw, 70px) 0 0;
+    margin: 0;
+    list-style: none;
   }
 
-  .says__plate {
-    aspect-ratio: 400 / 500;
+  .says__item {
+    display: flex;
   }
 
-  .says__plate .plate__media {
-    height: 100%;
-  }
-
-  .says__quote {
+  .says__figure {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: clamp(32px, 4vw, 56px);
+    gap: clamp(28px, 3vw, 44px);
+    width: 100%;
     margin: 0;
+    padding-top: clamp(24px, 2.4vw, 34px);
+    border-top: 1px solid var(--rule);
   }
 
   .says__text {
@@ -84,53 +80,23 @@
     font-size: var(--text-quote);
     line-height: var(--leading-quote);
     letter-spacing: var(--tracking-h4);
-    text-wrap: balance;
+    text-wrap: pretty;
   }
 
   .says__foot {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding-top: clamp(24px, 2.5vw, 36px);
-    border-top: 1px solid var(--rule);
+    gap: 8px;
   }
 
-  .says__who {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .says__name {
-    color: var(--ink);
-  }
-
-  .says__role {
+  .says__role,
+  .says__date {
     color: var(--ink-faint);
   }
 
-  .says__dot {
-    width: 5px;
-    height: 5px;
-    border-radius: var(--radius-pill);
-    background: rgb(26 46 242 / 40%);
-  }
-
-  .says__second {
-    max-width: 87.5%;
-    font-size: var(--text-caption);
-    line-height: var(--leading-caption);
-    color: var(--ink-muted);
-  }
-
   @media (max-width: 900px) {
-    .says__body {
+    .says__list {
       grid-template-columns: minmax(0, 1fr);
-    }
-
-    .says__second {
-      max-width: 100%;
     }
   }
 </style>

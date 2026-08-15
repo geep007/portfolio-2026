@@ -5,7 +5,9 @@ import { HeroReel } from "./hero/HeroReel";
 import { heroSchema } from "./hero/layout";
 import { IntroA } from "./intro/IntroA";
 import { IntroB } from "./intro/IntroB";
-import { introSchema } from "./intro/introLayout";
+import { IntroC } from "./intro/IntroC";
+import { IntroD } from "./intro/IntroD";
+import { introCSchema, introSchema } from "./intro/introLayout";
 import { OutroA } from "./outro/OutroA";
 import { OutroB } from "./outro/OutroB";
 import { outroSchema } from "./outro/outroLayout";
@@ -352,6 +354,7 @@ export const RemotionRoot: React.FC = () => {
           clip: "surreal-carousel.mp4",
           clipStartFrom: 34,
           url: "letsgetsurreal.com",
+          siteUrl: "atomicdesignz.com",
           eyebrow: "ATOMIC DESIGNZ · WEBFLOW & CREATIVE DEV",
           headline: ["Built", "to move"],
           chip: "SELECTED WORK 2026",
@@ -379,6 +382,7 @@ export const RemotionRoot: React.FC = () => {
           clip: "creo-circle.mp4",
           clipStartFrom: 6,
           url: "creo-agency.com",
+          siteUrl: "atomicdesignz.com",
           eyebrow: "",
           headline: ["Atomic", "Designz"],
           chip: "SELECTED WORK 2026",
@@ -386,6 +390,66 @@ export const RemotionRoot: React.FC = () => {
           accent: "#1A2EF2",
           ink: "#333333",
           durationInFrames: 100,
+          fontPairing: "deck",
+          displayFontOverride: "",
+          monoFontOverride: "",
+        }}
+        calculateMetadata={({ props }) => ({
+          durationInFrames: props.durationInFrames,
+        })}
+      />
+      <Composition
+        id="IntroC"
+        component={IntroC}
+        durationInFrames={110}
+        fps={FPS}
+        width={1920}
+        height={1080}
+        schema={introCSchema}
+        defaultProps={{
+          clip: "surreal-globe.mp4",
+          clipStartFrom: 20,
+          url: "",
+          siteUrl: "atomicdesignz.com",
+          eyebrow: "",
+          headline: [],
+          chip: "",
+          ground: "#FAFAFA",
+          accent: "#1A2EF2",
+          ink: "#333333",
+          durationInFrames: 110,
+          fontPairing: "deck" as const,
+          displayFontOverride: "",
+          monoFontOverride: "",
+          screenFit: "contain" as const,
+          screenZoom: 1,
+          screenZoomTo: 1,
+          screenPosition: "50% 50%",
+        }}
+        calculateMetadata={({ props }) => ({
+          durationInFrames: props.durationInFrames,
+        })}
+      />
+      <Composition
+        id="IntroD"
+        component={IntroD}
+        durationInFrames={120}
+        fps={FPS}
+        width={1920}
+        height={1080}
+        schema={introSchema}
+        defaultProps={{
+          clip: "surreal-carousel.mp4",
+          clipStartFrom: 34,
+          url: "letsgetsurreal.com",
+          siteUrl: "atomicdesignz.com",
+          eyebrow: "WHO BUILDS THIS?",
+          headline: ["Built", "to move"],
+          chip: "SELECTED WORK 2026",
+          ground: "#FAFAFA",
+          accent: "#1A2EF2",
+          ink: "#333333",
+          durationInFrames: 120,
           fontPairing: "deck",
           displayFontOverride: "",
           monoFontOverride: "",

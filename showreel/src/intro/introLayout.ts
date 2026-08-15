@@ -22,6 +22,9 @@ export const introSchema = z.object({
   /** URL on the browser chrome (Intro B), so the capture reads as a client's
    *  site rather than as my own headline. Must match the clip. */
   url: z.string(),
+  /** URL on the outer site frame (Intro A) — my domain, not the client's,
+   *  because that frame is the portfolio, not the capture inside it. */
+  siteUrl: z.string(),
   /** Mono line above the headline. Kept to system-label register. */
   eyebrow: z.string(),
   /** Display headline, one array entry per typeset line. */
@@ -40,6 +43,28 @@ export const introSchema = z.object({
 export type IntroProps = z.infer<typeof introSchema>;
 
 /**
+ * Intro C only: how the footage sits inside the CRT's screen.
+ *
+ * The tube is roughly 4:3 and every capture is 16:9, so something has to give.
+ * These are props rather than constants because which one is right depends on
+ * the clip — a full-page scroll wants `contain` (nothing of the layout lost, at
+ * the cost of two bars), a detail shot wants `cover` (fills the glass, loses
+ * the sides).
+ */
+export const introCSchema = introSchema.extend({
+  /** `contain` letterboxes the whole capture; `cover` fills and crops. */
+  screenFit: z.enum(["contain", "cover"]),
+  /** Scale at the first frame. 1 = untouched. Above 1 crops in either fit. */
+  screenZoom: z.number().min(0.5).max(3),
+  /** Scale at the last frame. Equal to `screenZoom` means a dead-still screen. */
+  screenZoomTo: z.number().min(0.5).max(3),
+  /** Which part of the capture stays in view, as CSS object-position. */
+  screenPosition: z.string(),
+});
+
+export type IntroCProps = z.infer<typeof introCSchema>;
+
+/**
  * Fallback only — Root.tsx carries the copy the Studio actually edits and
  * writes back. This exists so a partial `--props` on the CLI cannot crash a
  * render, matching how HeroReel merges over defaultHeroProps.
@@ -48,6 +73,7 @@ export const defaultIntroProps: IntroProps = {
   clip: "surreal-carousel.mp4",
   clipStartFrom: 34,
   url: "letsgetsurreal.com",
+  siteUrl: "atomicdesignz.com",
   eyebrow: "ATOMIC DESIGNZ · WEBFLOW & CREATIVE DEV",
   headline: ["Built", "to move"],
   chip: "SELECTED WORK 2026",
@@ -58,4 +84,12 @@ export const defaultIntroProps: IntroProps = {
   displayFontOverride: "",
   monoFontOverride: "",
   durationInFrames: 90,
+};
+
+export const defaultIntroCProps: IntroCProps = {
+  ...defaultIntroProps,
+  screenFit: "contain",
+  screenZoom: 1,
+  screenZoomTo: 1,
+  screenPosition: "50% 50%",
 };

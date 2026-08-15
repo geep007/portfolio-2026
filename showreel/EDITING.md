@@ -263,9 +263,9 @@ the one that ships.
 
 ---
 
-## Intros and outros (added 13 Aug 2026)
+## Intros and outros (added 13 Aug 2026; C and D added 15 Aug 2026)
 
-Four standalone compositions, separate from `HeroReel`, each rendering to its
+Six standalone compositions, separate from `HeroReel`, each rendering to its
 own file. They are separate on purpose: the first and last frames get judged on
 their own, so they are edited and exported on their own, then cut in once
 chosen.
@@ -274,6 +274,8 @@ chosen.
 |---|---|---|
 | `IntroA` | `npm run render:intro-a` → `out/intro-a.mp4` | Editorial split — type block left, one tall panel of work right |
 | `IntroB` | `npm run render:intro-b` → `out/intro-b.mp4` | Knockout — the work shows only through the letters, then the plate leaves |
+| `IntroC` | `npm run render:intro-c` → `out/intro-c.mp4` | CRT — the site's monitor photograph, footage booting inside the tube |
+| `IntroD` | `npm run render:intro-d` → `out/intro-d.mp4` | Search — a field types the domain, then grows into the page |
 | `OutroA` | `npm run render:outro-a` → `out/outro-a.mp4` | The knockout arriving instead of leaving; ends on the mark with work still moving inside it |
 | `OutroB` | `npm run render:outro-b` → `out/outro-b.mp4` | Same arrival, then the letters fill solid — a flat end card |
 
@@ -292,6 +294,15 @@ Two things learned the hard way and worth keeping:
   puts their sentence under my chip and it reads as my claim. Intro A is cropped
   past it; Intro B and both outros use `creo-circle.mp4`, which is abstract, so
   no foreign type ever appears inside the letters.
+- **One window per plane.** `SiteFrame` (`src/components/SiteFrame.tsx`) is the
+  outer browser chrome from the atomicdesignz.com artboards and wraps a whole
+  composition — Intros A, C and D wear it. `BrowserWindow` is the dark chrome
+  placed *inside* a shot to label a client capture (Intro B). Never nest them.
+  `SiteFrame` eats the bottom 59px of the canvas, so geometry inside it is
+  measured against 1021, not 1080.
+- **Intro C's screen is measured, not inferred.** The blue plate in
+  `public/media/crt-monitor.png` spans x 480→797, y 122→363 at 1280×720, scaled
+  ×1.5 in `IntroC.tsx`. Re-export the photograph and those numbers move.
 - `KnockoutPlate` (`src/components/KnockoutPlate.tsx`) is shared by Intro B and
   both outros — an SVG mask, because `background-clip: text` cannot take a video
   as its paint. Each instance needs its own `maskId`.

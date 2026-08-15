@@ -1,13 +1,13 @@
 ---
 // The headline is split into fixed lines so each can ride its own mask.
 // Splitting in JS would reflow after the font loads; this doesn't.
-const lines = ["We solve the site at", "the smallest unit."];
+const lines = ["We tell stories", "on the web"];
 ---
 
 <section class="hero section" data-hero>
   <p class="eyebrow">
     <span class="label label--lg">(00)</span>
-    <span class="label label--lg">Design &amp; Webflow, one pair of hands</span>
+    <span class="label label--lg">Story-led websites for complex brands</span>
   </p>
 
   <h1 class="hero__title">
@@ -22,12 +22,12 @@ const lines = ["We solve the site at", "the smallest unit."];
 
   <div class="hero__foot">
     <p class="hero__lede">
-      Design and Webflow development from one pair of hands. Below is the work
-      — three sites, built small unit by small unit.
+      We turn complex ideas into websites people understand, remember and act
+      on. One of them helped a founder close a $3M seed round.
     </p>
 
     <div class="hero__actions">
-      <a class="btn" href="#contact">Start a project</a>
+      <a class="btn" href="#contact">Work with us</a>
       <a class="btn btn--ghost" href="#work">See the work</a>
     </div>
   </div>
@@ -115,6 +115,13 @@ const lines = ["We solve the site at", "the smallest unit."];
 
     .hero {
       padding-top: clamp(96px, 22vw, 120px);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .eyebrow :global(.label--lg) {
+      font-size: 12px;
+      letter-spacing: 0.08em;
     }
   }
 
