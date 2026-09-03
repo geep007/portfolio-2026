@@ -2,12 +2,13 @@
   "name": "showreel",
   "version": "1.0.0",
   "private": true,
-  "description": "Geet Parmar — Webflow & Creative Development Partner showreel",
+  "description": "Geet Parmar \u2014 Webflow & Creative Development Partner showreel",
   "scripts": {
     "dev": "remotion studio",
     "edit": "remotion studio",
     "render": "remotion render HeroReel out/hero-reel-30s.mp4",
     "render:short": "remotion render ShowreelShort out/showreel-short.mp4",
+    "render:site": "remotion render SiteReel out/site-reel-23s.mp4",
     "animatic": "remotion render HeroAnimatic out/hero-animatic.mp4",
     "render:intro-a": "remotion render IntroA out/intro-a.mp4",
     "render:intro-b": "remotion render IntroB out/intro-b.mp4",
@@ -17,8 +18,12 @@
     "render:outro-b": "remotion render OutroB out/outro-b.mp4",
     "render:intros": "npm run render:intro-a && npm run render:intro-b && npm run render:intro-c && npm run render:intro-d",
     "render:vertical": "remotion render SurrealVertical out/surreal-vertical.mp4",
+    "render:mascot": "remotion render Mascot out/mascot-frames --sequence --image-format=png && node scripts/publish-mascot-frames.mjs",
     "still": "remotion still HeroReel out/frame.png",
-    "upgrade": "remotion upgrade"
+    "upgrade": "remotion upgrade",
+    "render:sig": "remotion render SigMark out/sig-frames --sequence --image-format=png",
+    "render:launch": "remotion render Launch-atomic out/launch-atomic.mp4 && remotion render Launch-edelgive out/launch-edelgive.mp4",
+    "render:edelgive": "remotion render Plan-edelgive-intro out/edelgive-intro.mp4 && remotion render Plan-edelgive-showcase out/edelgive-showcase.mp4 && remotion render Plan-edelgive-reel out/edelgive-reel.mp4"
   },
   "dependencies": {
     "@remotion/cli": "4.0.418",

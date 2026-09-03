@@ -1,0 +1,118 @@
+---
+import Base from '../layouts/Base.astro';
+
+/**
+ * Chrome shared by the AVAL lab pages. Not linked from the site nav — these
+ * pages exist to evaluate the format, nothing here ships on the marketing site.
+ */
+
+interface Props {
+  title: string;
+  lede: string;
+  /** Rendered under the lede, above the slot. */
+  back?: boolean;
+}
+
+const { title, lede, back = true } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<Base title={`${title} — AVAL lab`} description={lede} noindex>
+  <main class="lab">
+    <header class="lab__head">
+      <p class="lab__eyebrow">Motion lab</p>
+      <h1 class="lab__title">{title}</h1>
+      <p class="lab__lede">{lede}</p>
+      {back && <p class="lab__back"><a href={`${base}/aval`}>← all AVAL demos</a></p>}
+    </header>
+    <slot />
+  </main>
+</Base>
+
+<style is:global>
+  .lab {
+    max-width: 68rem;
+    margin: 0 auto;
+    padding: 6rem 1.5rem 10rem;
+  }
+
+  .lab__eyebrow {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #1a2ef2;
+    margin: 0 0 0.75rem;
+  }
+
+  .lab__title {
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    line-height: 0.95;
+    margin: 0 0 1.5rem;
+  }
+
+  .lab__lede,
+  .lab__note {
+    max-width: 52ch;
+    color: rgb(51 51 51 / 62%);
+  }
+
+  .lab__back {
+    margin-top: 1.5rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+  }
+
+  .lab__back a {
+    color: #1a2ef2;
+  }
+
+  .lab__section {
+    margin-top: 4rem;
+  }
+
+  .lab__h2 {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .lab__controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .lab__controls button {
+    font: inherit;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgb(51 51 51 / 16%);
+    border-radius: 999px;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .lab__probe {
+    margin-top: 1rem;
+    padding: 0.875rem 1rem;
+    border: 1px solid rgb(51 51 51 / 12%);
+    border-radius: 0.5rem;
+    background: rgb(51 51 51 / 3%);
+    font-family: var(--font-mono, monospace);
+    font-size: 0.6875rem;
+    line-height: 1.7;
+    color: rgb(51 51 51 / 72%);
+    white-space: pre;
+    overflow-x: auto;
+    max-width: 30rem;
+  }
+
+  .lab__callout {
+    margin-top: 2rem;
+    padding: 1rem 1.25rem;
+    border-left: 2px solid #1a2ef2;
+    background: rgb(26 46 242 / 4%);
+    max-width: 52ch;
+    font-size: 0.875rem;
+  }
+</style>

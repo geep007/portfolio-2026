@@ -29,6 +29,7 @@ import { EditLayer } from "./EditLayer";
 import { cursorAt } from "./cursorPath";
 import { defaultHeroProps, timelineOf, type HeroProps } from "./layout";
 import { ShotTransition } from "./components/ShotTransition";
+import type { TransitionType } from "./timeline";
 
 loadFonts();
 
@@ -539,7 +540,7 @@ export const HeroReel: React.FC<Partial<HeroProps>> = (input) => {
             durationInFrames={s.duration + s.outroFrames}
           >
             <ShotTransition
-              type={i === 0 ? "cut" : s.transition}
+              type={i === 0 ? "cut" : (s.transition as TransitionType)}
               duration={s.transitionFrames}
               seed={s.id}
             >
