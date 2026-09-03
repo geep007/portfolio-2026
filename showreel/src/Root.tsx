@@ -14,9 +14,15 @@ import { outroSchema } from "./outro/outroLayout";
 import { buildTimeline } from "./hero/timeline";
 import { TOTAL_FRAMES } from "./hero/shots";
 import { ShowreelShort } from "./ShowreelShort";
+import { SiteReel } from "./site/SiteReel";
+import { siteSchema, siteTimeline } from "./site/siteLayout";
 import { SurrealVertical } from "./vertical/SurrealVertical";
+import { Mascot } from "./mascot/Mascot";
+import { SigMark } from "./sig/SigMark";
+import { FPS as MASCOT_FPS, TOTAL as MASCOT_TOTAL } from "./mascot/timeline";
 import { verticalSchema, verticalTimeline } from "./vertical/verticalLayout";
 import { FPS, TOTAL } from "./theme";
+import { MotionSystemCompositions } from "./motion-system/Root";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -36,6 +42,93 @@ export const RemotionRoot: React.FC = () => {
         below. Both persist to this file, so edits survive a restart and land in
         the next render.
       */}
+      {/*
+        The site reel: atomicdesignz.com itself, cut to music. Every shot is a
+        real capture of the live site (see public/site/), so the only things
+        worth editing are the words and the timing — both of which are props
+        below. Same rule as HeroReel: this object literal has to stay hardcoded
+        or the Studio cannot save edits back into it.
+      */}
+      <Composition
+        id="SiteReel"
+        component={SiteReel}
+        durationInFrames={690}
+        fps={FPS}
+        width={1920}
+        height={1080}
+        schema={siteSchema}
+        defaultProps={{
+          url: "atomicdesignz.com",
+          music: "audio/hot-pursuits.mp3",
+          audioStartInSeconds: 16,
+          volume: 0.9,
+          boot: {
+            duration: 54,
+            tag: "( 00 )  STORY-LED WEBSITES FOR COMPLEX BRANDS",
+            type: "atomicdesignz.com",
+          },
+          hero: {
+            duration: 120,
+            clipStartFrom: 90,
+            eyebrow: "THE HEADER PLAYS ITS OWN REEL",
+            headline: ["We tell stories on the web"],
+          },
+          blast: {
+            duration: 120,
+            label: "ONE PAGE, TOP TO BOTTOM",
+            kicker: ["of scroll."],
+          },
+          work: {
+            duration: 138,
+            tag: "( 01 )  SELECTED WORK",
+            heading: "Five recent builds.",
+            cards: [
+              {
+                src: "work-01.png",
+                name: "Surreal",
+                spec: "WEBFLOW · GSAP · WEBGL",
+                position: 0.5,
+              },
+              {
+                src: "work-02.png",
+                name: "Athina AI",
+                spec: "WEBFLOW · CMS · MOTION",
+                position: 0.35,
+              },
+              {
+                src: "work-03.png",
+                name: "Creo & Juana de Arco",
+                spec: "PORTFOLIO · SHOPIFY · ECOMMERCE",
+                position: 0.4,
+              },
+            ],
+          },
+          thesis: {
+            duration: 78,
+            tag: "( 02 )  WHY WE DO IT THIS WAY",
+            lines: ["Specs don't sell.", "Stories do."],
+          },
+          process: {
+            duration: 78,
+            tag: "( 03 )  HOW WE WORK",
+            steps: ["Find the story", "Design it", "Build it"],
+          },
+          mobile: {
+            duration: 48,
+            label: "SAME BUILD, EVERY SCREEN",
+            lines: ["Down to", "320 pixels."],
+          },
+          close: {
+            duration: 54,
+            wordmark: ["Atomic", "Designz"],
+            line: "Story-led websites, built in Webflow",
+            cta: "Work with us",
+          },
+        }}
+        calculateMetadata={({ props }) => ({
+          durationInFrames: siteTimeline(props).total,
+        })}
+      />
       <Composition
         id="HeroReel"
         component={HeroReel}
@@ -618,6 +711,34 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
       />
+      {/*
+        The mascot master for the AVAL bundle. One timeline holding every state
+        body and the transition between them; `aval/mascot/motion.json` slices
+        it back apart by frame range. Rendered square, on transparency, as a PNG
+        sequence — see `npm run render:mascot`.
+      */}
+      <Composition
+        id="Mascot"
+        component={Mascot}
+        durationInFrames={MASCOT_TOTAL}
+        fps={MASCOT_FPS}
+        width={512}
+        height={512}
+      />
+      {/*
+        Email-signature mark. Square, seamless 3s loop, rendered as a PNG
+        sequence and packed into a GIF — see `npm run render:sig`.
+      */}
+      <Composition
+        id="SigMark"
+        component={SigMark}
+        durationInFrames={90}
+        fps={30}
+        width={288}
+        height={288}
+      />
+      {/* Brand Motion System — see motion-system/ARCHITECTURE.md */}
+      <MotionSystemCompositions />
     </>
   );
 };

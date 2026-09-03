@@ -1,37 +1,47 @@
-import { Easing } from "remotion";
+import { atomic } from "./motion-system/brands/atomic/brand";
+import { bezier } from "./motion-system/engine/easing";
 
 /**
- * Lifted from CASE-STUDY-SYSTEM.md — the capabilities deck visual system.
- * Do not invent new values here; the reel has to read as the same object as the deck.
+ * Legacy theme surface for the pre-motion-system components.
+ *
+ * These constants used to BE the brand. They are now derived from the Atomic
+ * BrandSystem (`motion-system/brands/atomic/brand.ts`), so the old reels keep
+ * reading the same values while new work goes through `useBrand()`. Do not add
+ * values here — add them to the brand file.
  */
+const c = atomic.colors;
+
 export const COLOR = {
-  cobalt: "#1A2EF2",
-  cobaltOnDark: "#4757F4",
-  groundLight: "#FAFAFA",
-  groundDark: "#0A0A0A",
-  ink: "#333333",
-  inkMuted: "rgb(51 51 51 / 62%)",
-  inkRule: "rgb(51 51 51 / 16%)",
-  onDark: "#FAFAFA",
-  onDarkMuted: "rgba(250,250,250,0.68)",
-  onDarkRule: "rgba(250,250,250,0.18)",
-  gridLight: "rgba(26,46,242,0.09)",
-  gridDark: "rgba(250,250,250,0.08)",
+  cobalt: c.primary,
+  cobaltOnDark: c.inverse.accent,
+  groundLight: c.background,
+  groundDark: c.inverse.background,
+  ink: c.foreground,
+  inkMuted: c.muted,
+  inkRule: c.rule,
+  onDark: c.inverse.foreground,
+  onDarkMuted: c.inverse.muted,
+  onDarkRule: c.inverse.rule,
+  gridLight: c.semantic!.gridLight,
+  gridDark: c.semantic!.gridDark,
 } as const;
 
 export const FONT = {
-  display: '"Neue Haas Display", "Helvetica Neue", sans-serif',
-  mono: '"Tronica Mono", ui-monospace, monospace',
+  display: atomic.typography.display.stack,
+  mono: atomic.typography.mono!.stack,
 } as const;
 
 /** Expo-out. Everything decelerates hard and lands — nothing drifts. */
-export const OUT = Easing.bezier(0.16, 1, 0.3, 1);
+export const OUT = bezier(atomic.motion.easings.enter);
 /** For pushes and pans that must never look like they stop. */
-export const LINEAR_ISH = Easing.bezier(0.33, 0, 0.67, 1);
+export const LINEAR_ISH = bezier(atomic.motion.easings.travel);
 
 export const FPS = 30;
 
-/** Scene boundaries in frames, 12.0s total. */
+/**
+ * Scene boundaries for the 12s ShowreelShort. Absolute frames — the oldest
+ * timeline in the project, kept as-is because that cut is finished.
+ */
 export const SCENE = {
   open: { from: 0, duration: 42 },
   surreal: { from: 42, duration: 82 },

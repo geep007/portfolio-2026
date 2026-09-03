@@ -306,3 +306,81 @@ Two things learned the hard way and worth keeping:
 - `KnockoutPlate` (`src/components/KnockoutPlate.tsx`) is shared by Intro B and
   both outros — an SVG mask, because `background-clip: text` cannot take a video
   as its paint. Each instance needs its own `maskId`.
+
+---
+
+# Editing the site reel (`SiteReel`)
+
+The 23-second cut of atomicdesignz.com, with *Hot Pursuits* under it.
+
+```bash
+cd showreel
+npm run edit          # Studio → pick SiteReel in the sidebar
+npm run render:site   # → out/site-reel-23s.mp4
+```
+
+## Where everything is
+
+| What | Where |
+|---|---|
+| **All copy and all timings** | `src/Root.tsx` → the `SiteReel` `defaultProps` block |
+| Prop shapes / what is editable | `src/site/siteLayout.ts` |
+| Shot order, cuts, music | `src/site/SiteReel.tsx` |
+| One scene each | `src/site/scenes/*.tsx` |
+| Captures of the live site | `public/site/` |
+
+Every field in `defaultProps` is also a form field in the Studio's right-hand
+**Props** panel — change the words there, hit save, and it writes itself back
+into `Root.tsx`.
+
+## The eight shots
+
+| # | Scene | Frames | What it is | Text you can change |
+|---|---|---|---|---|
+| 1 | `boot` | 54 | URL types itself into an address bar | `tag`, `type` |
+| 2 | `hero` | 120 | Real hero, then the site's own header reel | `eyebrow`, `clipStartFrom` |
+| 3 | `blast` | 120 | The whole page scrolled top to bottom | `label`, `kicker` |
+| 4 | `work` | 138 | Title card + three builds, one hard cut each | `tag`, `heading`, `cards[]` |
+| 5 | `thesis` | 78 | Cobalt slab, pure type | `tag`, `lines` |
+| 6 | `process` | 78 | Process section + 01/02/03 chips | `steps` |
+| 7 | `mobile` | 48 | Phone running the same capture | `label`, `lines` |
+| 8 | `close` | 54 | Contact section, wordmark, CTA | `wordmark`, `line`, `cta` |
+
+`duration` on any scene retimes the whole cut — the composition length is the
+sum of the eight, so shortening one shortens the video.
+
+## Music
+
+`music`, `audioStartInSeconds` (16s is where the drums land) and `volume` are
+props. Fades are automatic: 8 frames in, ~1s out.
+
+## Swapping a work card
+
+Each entry in `work.cards` is `{ src, name, spec, position }`. `src` is a file
+in `public/site/`; `position` is 0 (top of that capture) to 1 (bottom).
+
+## Re-capturing the site
+
+The stills are real full-page screenshots, taken with reveals already fired:
+
+```bash
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  --headless=new --hide-scrollbars --force-device-scale-factor=2 \
+  --window-size=1920,10100 --virtual-time-budget=20000 \
+  --screenshot=full.png https://www.atomicdesignz.com/
+```
+
+Then crop each section out of `full.png` at 1920 wide into `public/site/`.
+`page-strip.png` is the same capture scaled to 1440 wide; `page-mobile.png` is
+the 430px-wide run of the same command.
+
+---
+
+# Brand Motion System (added 3 Sep 2026)
+
+`src/motion-system/` is the brand-agnostic engine that the reels above are
+being migrated onto. Start at `src/motion-system/ARCHITECTURE.md`; agents start
+at `src/motion-system/agent/AGENT_MOTION_GUIDE.md`. Compositions in the Studio
+sidebar: `Launch-atomic` / `Launch-edelgive` (same content, two brands) and
+`Plan-*` (hand-written plans). `theme.ts` now derives from
+`motion-system/brands/atomic/brand.ts` — edit the brand, not the theme.
