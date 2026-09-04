@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hookflo — The Missing Dot · storyboard</title>
+<style>
+:root{
+  --bg:#17171C; --panel:rgba(24,24,27,.62); --solid:#1C1C21; --chrome:#101014;
+  --fg:#FAFAFA; --muted:#9CA3AF; --rule:#27272A;
+  --lav:#C4B5FD; --lavmid:#A692E5; --lavdeep:#6C5DD3; --code:#A78BFA;
+  --ok:#4ADE80; --okp:rgba(22,101,52,.45); --fail:#F94D4D; --failp:rgba(127,29,29,.4);
+  --mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --sans:"Geist",Inter,system-ui,-apple-system,sans-serif;
+}
+@font-face{font-family:"Geist";src:url("../../../public/fonts/Geist-300.woff2") format("woff2");font-weight:300}
+@font-face{font-family:"Geist";src:url("../../../public/fonts/Geist-400.woff2") format("woff2");font-weight:400}
+@font-face{font-family:"Geist";src:url("../../../public/fonts/Geist-500.woff2") format("woff2");font-weight:500}
+@font-face{font-family:"Geist";src:url("../../../public/fonts/Geist-600.woff2") format("woff2");font-weight:600}
+@font-face{font-family:"Geist Mono";src:url("../../../public/fonts/GeistMono-400.woff2") format("woff2");font-weight:400}
+*{box-sizing:border-box}
+body{margin:0;background:#0d0d10;color:var(--fg);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+.label{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:60px;font-weight:400;letter-spacing:-.045em;line-height:.94;margin:20px 0 0}
+h1 em{font-style:normal;color:var(--lav)}
+h2{font-size:32px;font-weight:400;letter-spacing:-.035em;margin:14px 0 4px}
+h3{font-size:17px;font-weight:500;letter-spacing:-.02em;margin:0}
+p{color:var(--muted);font-size:15px;line-height:1.65}
+section{padding:80px 0;border-bottom:1px solid var(--rule);position:relative}
+header{padding:110px 0 80px;border-bottom:1px solid var(--rule);position:relative;overflow:hidden}
+header::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(55% 280px at 50% -70px, rgba(166,146,229,.2), transparent 70%)}
+
+.srcstrip{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:24px}
+.srcstrip figure{margin:0;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:#0e0e12}
+.srcstrip img{display:block;width:100%;height:112px;object-fit:cover;object-position:top center}
+.srcstrip figcaption{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);padding:8px 9px;border-top:1px solid var(--rule)}
+
+.dir{display:grid;grid-template-columns:170px 1fr;gap:0;border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin-top:24px}
+.dir dt{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--lav);
+  padding:16px 18px;border-top:1px solid var(--rule);background:rgba(24,24,27,.5)}
+.dir dd{margin:0;padding:16px 20px;border-top:1px solid var(--rule);font-size:14.5px;line-height:1.6;color:#D4D4D8}
+.dir dt:first-of-type,.dir dd:first-of-type{border-top:none}
+
+/* ================= KEYFRAME STAGE ================= */
+.kf{margin-top:56px}
+.kfhead{display:flex;align-items:baseline;gap:14px;margin-bottom:14px}
+.kfhead .n{font-family:var(--mono);font-size:12px;color:var(--lav);letter-spacing:.14em}
+.kfhead .t{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.1em;margin-left:auto}
+.stage{width:1160px;height:652.5px;overflow:hidden;border:1px solid var(--rule);border-radius:12px 12px 0 0;position:relative;background:var(--bg)}
+.frame{width:1920px;height:1080px;position:absolute;top:0;left:0;transform:scale(.60417);transform-origin:0 0;
+  background:var(--bg);overflow:hidden;font-family:var(--sans)}
+.bloom{position:absolute;left:0;right:0;top:0;height:560px;
+  background:radial-gradient(940px 440px at 50% -120px, rgba(166,146,229,.20), transparent 72%)}
+
+/* --- the mark --- */
+.mark{position:absolute;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr)}
+.mark i{border-radius:50%;background:var(--lavmid);display:block}
+.mark i.hole{background:none}
+.mark i.white{background:#fff}
+
+/* --- panel --- */
+.panel{position:absolute;border:1px solid var(--rule);border-radius:12px;background:var(--panel);
+  overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.55)}
+.chrome{height:58px;background:var(--chrome);border-bottom:1px solid var(--rule);
+  display:flex;align-items:center;padding:0 22px;gap:9px;position:relative}
+.chrome b{width:12px;height:12px;border-radius:50%;display:block;background:#3F3F46}
+.url{position:absolute;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:15px;
+  color:#71717A;background:#17171C;border:1px solid var(--rule);border-radius:7px;padding:5px 16px}
+.url s{text-decoration:none;color:#E4E4E7}
+.rows{padding:20px 0 0}
+.row{height:60px;display:flex;align-items:center;padding:0 26px;gap:20px;position:relative}
+.row+.row{box-shadow:inset 0 1px 0 rgba(39,39,42,.8)}
+.row .dot{width:15px;height:15px;border-radius:50%;background:var(--lavmid);flex:0 0 15px}
+.row .dot.empty{background:none;box-shadow:inset 0 0 0 1px rgba(250,250,250,.09)}
+.row .dot.fail{background:var(--fail)}
+.row .src{flex:0 0 190px;display:flex;align-items:center;gap:12px;font-size:19px;color:#D4D4D8;letter-spacing:-.015em}
+.tile{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:12px;letter-spacing:.02em;flex:0 0 28px}
+.t-st{background:rgba(99,91,255,.20);color:#8B84FF}
+.t-ck{background:rgba(108,71,255,.18);color:#9A82FF}
+.t-sb{background:rgba(62,207,142,.15);color:#3ECF8E}
+.t-gh{background:rgba(228,228,231,.10);color:#D4D4D8}
+.row .ev{flex:1;font-family:var(--mono);font-size:18px;color:#A1A1AA;letter-spacing:-.005em}
+.row .ts{flex:0 0 128px;font-family:var(--mono);font-size:16px;color:#52525B;text-align:right}
+.row .st{flex:0 0 104px;display:flex;justify-content:flex-end}
+.chip{font-family:var(--mono);font-size:15px;padding:4px 12px;border-radius:6px;letter-spacing:.02em}
+.chip.ok{color:var(--ok);background:var(--okp)}
+.chip.bad{color:var(--fail);background:var(--failp)}
+.chip.lav{color:#17171C;background:var(--lav);font-size:14px}
+.chip.pend{color:#71717A;background:rgba(255,255,255,.05)}
+.strip{position:absolute;left:0;right:0;bottom:0;height:56px;border-top:1px solid var(--rule);background:var(--chrome);
+  display:flex;align-items:center;justify-content:space-between;padding:0 26px;
+  font-family:var(--mono);font-size:16px;color:#A1A1AA}
+.strip .hf{color:var(--lav)}
+.toplabel{position:absolute;font-family:var(--mono);font-size:18px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.clock{position:absolute;font-family:var(--mono);font-size:17px;color:#3F3F46;letter-spacing:.08em}
+.dim .row{opacity:.12}
+.dim .row.lit{opacity:1}
+.scanline{position:absolute;height:1px;background:var(--lav)}
+.scanline::after{content:"";position:absolute;right:-1px;top:-9px;width:8px;height:19px;background:var(--lav)}
+
+/* alert card */
+.alert{position:absolute;border:1px solid var(--rule);border-radius:12px;background:var(--solid);overflow:hidden;
+  box-shadow:0 40px 120px rgba(0,0,0,.6)}
+.alert .ah{display:flex;align-items:center;gap:12px;height:60px;padding:0 24px;border-bottom:1px solid var(--rule);
+  font-family:var(--mono);font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.alert .ab{padding:24px 24px 22px}
+.alert .who{display:flex;align-items:center;gap:14px;font-size:21px;color:#E4E4E7;letter-spacing:-.02em;height:32px}
+.alert .who .d{width:15px;height:15px;border-radius:50%;background:var(--fail);flex:0 0 15px}
+.alert .msg{font-size:30px;letter-spacing:-.035em;color:#fff;margin:18px 0 12px;line-height:1.12}
+.alert .meta{font-family:var(--mono);font-size:16px;color:#71717A;line-height:1.75}
+.alert .af{display:flex;align-items:center;justify-content:space-between;height:62px;padding:0 24px;border-top:1px solid var(--rule)}
+.alert .btn{font-family:var(--mono);font-size:15px;color:var(--lav);border:1px solid rgba(196,181,253,.35);
+  border-radius:7px;padding:7px 15px}
+.receipt{position:absolute;font-family:var(--mono);font-size:16px;color:#52525B;line-height:1.8}
+.receipt b{color:var(--ok);font-weight:400}
+
+.head{position:absolute;font-weight:400;letter-spacing:-.045em;line-height:.94;font-size:108px;color:var(--fg)}
+.head em{font-style:normal;color:var(--lav)}
+.wordmark{position:absolute;font-size:46px;font-weight:600;letter-spacing:-.03em;color:#fff}
+.baseline{position:absolute;left:300px;right:300px;bottom:74px;border-top:1px solid var(--rule);padding-top:18px;
+  display:flex;justify-content:space-between;font-family:var(--mono);font-size:17px;color:#71717A}
+.baseline .hf{color:var(--lav)}
+
+/* beat notes */
+.beat{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--rule);border-top:none;
+  border-radius:0 0 12px 12px;overflow:hidden}
+.beat div{padding:16px 18px;border-left:1px solid var(--rule)}
+.beat div:first-child{border-left:none}
+.beat .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--lav);display:block;margin-bottom:7px}
+.beat p{margin:0;font-size:13.5px;line-height:1.55;color:#D4D4D8}
+
+.cont{margin-top:26px;border:1px solid var(--rule);border-radius:12px;background:rgba(24,24,27,.5);padding:34px 30px;overflow-x:auto}
+.cont svg{display:block;min-width:1100px}
+.notes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+.note{border:1px solid var(--rule);border-radius:12px;background:rgba(24,24,27,.5);padding:20px 22px}
+.note .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--lav);display:block;margin-bottom:9px}
+.note p{margin:0;font-size:13.5px;line-height:1.6}
+table.tim{width:100%;border-collapse:collapse;margin-top:22px;font-size:14px}
+table.tim th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  text-align:left;padding:10px 14px;border-bottom:1px solid var(--rule)}
+table.tim td{padding:11px 14px;border-bottom:1px solid var(--rule);color:#D4D4D8}
+table.tim td.m{font-family:var(--mono);color:var(--lav);font-size:13px}
+table.tim td.g{color:var(--muted)}
+
+/* critique */
+.crit{border:1px solid var(--rule);border-radius:12px;overflow:hidden;margin-top:24px}
+.crit .r{display:grid;grid-template-columns:38px 1fr 1fr;border-top:1px solid var(--rule)}
+.crit .r:first-child{border-top:none}
+.crit .r>*{padding:15px 18px}
+.crit .id{font-family:var(--mono);font-size:11px;color:var(--fail);letter-spacing:.1em}
+.crit .p{color:#E4E4E7;font-size:14px;line-height:1.55}
+.crit .f{color:var(--muted);font-size:14px;line-height:1.55;border-left:1px solid var(--rule)}
+.crit .f b{color:var(--lav);font-weight:400;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;display:block;margin-bottom:5px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="label">Hookflo · storyboard · direction A · rev 2</span>
+    <h1>The Missing Dot.<br><em>Seven states, one object.</em></h1>
+    <p style="max-width:680px;margin-top:20px">
+      1920×1080 · 30fps · 20s · no voiceover · no photography.
+      Frames below are designed at full size and scaled; they are the source of truth for
+      composition, scale, typography, negative space and end states in
+      <code style="font-family:var(--mono);color:var(--code)">films/hookflo/MissingDot.tsx</code>.
+      Rev 2 incorporates the self-critique in Section 4.
+    </p>
+  </div>
+</header>
+
+<!-- ============ 1 · SOURCE ============ -->
+<section>
+  <div class="wrap">
+    <span class="label">Section 1 · Source</span>
+    <h2>What the film is answerable to.</h2>
+    <p style="max-width:720px">Full reading in <code style="font-family:var(--mono);color:var(--code)">brands/hookflo/source-study.html</code>.
+      Five things carried into this piece: <b style="color:#E4E4E7;font-weight:400">the mark is a grid with a hole in it</b>;
+      product UI is shown running; one light, overhead; brightness is hierarchy; semantic colour only at chip scale.</p>
+    <div class="srcstrip">
+      <figure><img src="../../../src/motion-system/brands/hookflo/source/01-hero.jpg" alt=""><figcaption>hero · claim beside a running machine</figcaption></figure>
+      <figure><img src="../../../src/motion-system/brands/hookflo/source/02-dashboard.jpg" alt=""><figcaption>console · lit from above</figcaption></figure>
+      <figure><img src="../../../src/motion-system/brands/hookflo/source/03-scrolltext.jpg" alt=""><figcaption>scan · brightness as hierarchy</figcaption></figure>
+      <figure><img src="../../../src/motion-system/brands/hookflo/source/04-features.jpg" alt=""><figcaption>bento · live fragment over prose</figcaption></figure>
+      <figure><img src="../../../src/motion-system/brands/hookflo/source/05-usecases.jpg" alt=""><figcaption>feed · dot · label · time · source</figcaption></figure>
+      <figure><img src="../../../src/motion-system/brands/hookflo/source/06-cta.jpg" alt=""><figcaption>slab · the one raised voice</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 · DIRECTION ============ -->
+<section>
+  <div class="wrap">
+    <span class="label">Section 2 · Creative direction</span>
+    <h2>The Missing Dot.</h2>
+    <dl class="dir">
+      <dt>Concept</dt><dd>The mark is a 3×3 dot field with one position empty and one dot white — a stream of deliveries in which one is missing and one is caught. The film is a single continuous transform between that mark and a live event log.</dd>
+      <dt>Product truth</dt><dd>The event that does not arrive is the one that matters. Hookflo makes the absence visible and puts it where a human is already looking.</dd>
+      <dt>Motion thesis</dt><dd>One geometry, seven states. Nothing is created or destroyed on screen. Dots become rows, a row becomes a gap, a gap becomes a red dot, the dot routes into an alert, the alert resolves back into the row, the rows collapse into the mark.</dd>
+      <dt>Spatial logic</dt><dd>One centred panel that changes width and role. Static camera for the whole film. Nothing crosses the frame edge. The bloom never moves.</dd>
+      <dt>Transition logic</dt><dd>There are no transitions. Every apparent cut is a state change of persistent geometry. The hardest moment in the film is a full stop of motion.</dd>
+      <dt>Typography</dt><dd>Almost silent. A mono label above the panel that rewrites three times, and the site's own headline at the close. Everything between is UI type doing a UI job.</dd>
+      <dt>Density arc</dt><dd>0.08 → 0.55 → 0.72 → <b style="color:var(--lav);font-weight:400">0.28</b> → 0.50 → 0.45 → 0.12. The film's widest moment is the failure; its emptiest is the detection.</dd>
+      <dt>Forbidden</dt><dd>Camera moves · off-frame entrances · fade-in · springs · kinetic type · dramatising the failure at the instant it occurs · particles · node graphs · glow on objects · a second serif.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ 3 · KEYFRAMES ============ -->
+<section>
+  <div class="wrap">
+    <span class="label">Section 3 · Keyframes</span>
+    <h2>Seven states. Each frame is the END state of its beat.</h2>
+
+    <!-- K1 -->
+    <div class="kf">
+      <div class="kfhead"><span class="n">K1</span><h3>IDLE</h3><span class="t">0:00 – 0:02.6 · 78f</span></div>
+      <div class="stage"><div class="frame">
+        <div class="bloom"></div>
+        <div class="mark" style="left:846px;top:414px;gap:38px">
+          <i style="width:52px;height:52px"></i><i style="width:52px;height:52px"></i><i class="hole" style="width:52px;height:52px"></i>
+          <i style="width:52px;height:52px"></i><i style="width:52px;height:52px"></i><i style="width:52px;height:52px"></i>
+          <i style="width:52px;height:52px"></i><i class="white" style="width:52px;height:52px"></i><i style="width:52px;height:52px"></i>
+        </div>
+        <div class="toplabel" style="left:0;right:0;text-align:center;top:714px">Failure-first webhook observability</div>
+        <div class="baseline"><span>03:14:00</span><span class="hf">hookflo</span></div>
+      </div></div>
+      <div class="beat">
+        <div><span class="k">Start state</span><p>Black. Bloom already lit. Nothing on screen.</p></div>
+        <div><span class="k">Action</span><p>Seven dots write in on a 2-frame metronome, reading order. The white dot lands last, alone, after a 10-frame pause. The eyebrow clip-wipes. Then 40 frames of nothing.</p></div>
+        <div><span class="k">End state</span><p>The mark, centred, large enough to be read as geometry rather than as a logo. The hole in the top-right is the only thing in the frame that is not there.</p></div>
+        <div><span class="k">→ K2</span><p>The eight dots are already the first eight row markers. They fan out to the left rail of a panel that has not been drawn yet.</p></div>
+      </div>
+    </div>
+
+    <!-- K2 -->
+    <div class="kf">
+      <div class="kfhead"><span class="n">K2</span><h3>ARRIVE</h3><span class="t">0:02.6 – 0:06.2 · 108f</span></div>
+      <div class="stage"><div class="frame">
+        <div class="bloom"></div>
+        <div class="toplabel" style="left:360px;top:176px">Live deliveries · last 60 seconds</div>
+        <div class="panel" style="left:360px;top:232px;width:1200px;height:620px">
+          <div class="chrome"><b></b><b></b><b></b><span class="url">https://<s>hookflo.com</s>/dashboard</span></div>
+          <div class="rows">
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-st">st</span>Stripe</span><span class="ev">invoice.paid</span><span class="ts">14s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-ck">ck</span>Clerk</span><span class="ev">user.created</span><span class="ts">12s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-sb">sb</span>Supabase</span><span class="ev">row.inserted</span><span class="ts">10s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-gh">gh</span>GitHub</span><span class="ev">issues.opened</span><span class="ts">8s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-st">st</span>Stripe</span><span class="ev">customer.updated</span><span class="ts">6s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-ck">ck</span>Clerk</span><span class="ev">session.created</span><span class="ts">4s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-sb">sb</span>Supabase</span><span class="ev">row.updated</span><span class="ts">2s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-gh">gh</span>GitHub</span><span class="ev">push</span><span class="ts">now</span><span class="st"><span class="chip pend">···</span></span></div>
+          </div>
+          <div class="strip"><span>Monitoring for failures…</span><span class="hf">hookflo</span></div>
+        </div>
+        <div class="clock" style="left:360px;top:892px">03:14:03 · 8 delivered · 0 failed</div>
+      </div></div>
+      <div class="beat">
+        <div><span class="k">Start state</span><p>Eight dots in a 3×3 field at frame centre.</p></div>
+        <div><span class="k">Action</span><p>The panel clips open around the dots; the dots redistribute onto a single left rail as row markers. The mono label writes in above. Rows arrive from below every 12 frames — source tile, event, timestamp — and each pending chip flips to <span style="color:var(--ok)">200</span> nine frames after its row lands.</p></div>
+        <div><span class="k">End state</span><p>Eight rows, all verified, one still pending at the bottom. Status strip running. Counter reading 0 failed.</p></div>
+        <div><span class="k">→ K3</span><p>The cadence is established, so the next arrival is expected. That expectation is the whole mechanism of K3.</p></div>
+      </div>
+    </div>
+
+    <!-- K3 -->
+    <div class="kf">
+      <div class="kfhead"><span class="n">K3</span><h3>DROP</h3><span class="t">0:06.2 – 0:09.0 · 84f</span></div>
+      <div class="stage"><div class="frame">
+        <div class="bloom"></div>
+        <div class="toplabel" style="left:360px;top:176px">Live deliveries · last 60 seconds</div>
+        <div class="panel" style="left:360px;top:232px;width:1200px;height:620px">
+          <div class="chrome"><b></b><b></b><b></b><span class="url">https://<s>hookflo.com</s>/dashboard</span></div>
+          <div class="rows">
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-sb">sb</span>Supabase</span><span class="ev">row.inserted</span><span class="ts">22s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-gh">gh</span>GitHub</span><span class="ev">issues.opened</span><span class="ts">20s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot empty"></span><span class="src" style="color:#3F3F46"><span class="tile" style="background:rgba(255,255,255,.03);color:#3F3F46">st</span>Stripe</span><span class="ev" style="color:#3F3F46">invoice.payment_failed</span><span class="ts" style="color:#2E2E33">18s ago</span><span class="st"></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-ck">ck</span>Clerk</span><span class="ev">session.created</span><span class="ts">14s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-sb">sb</span>Supabase</span><span class="ev">row.updated</span><span class="ts">11s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-st">st</span>Stripe</span><span class="ev">charge.succeeded</span><span class="ts">7s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-ck">ck</span>Clerk</span><span class="ev">user.updated</span><span class="ts">4s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-gh">gh</span>GitHub</span><span class="ev">pull_request.opened</span><span class="ts">now</span><span class="st"><span class="chip ok">200</span></span></div>
+          </div>
+          <div class="strip"><span>Monitoring for failures…</span><span class="hf">hookflo</span></div>
+        </div>
+        <div class="clock" style="left:360px;top:892px">03:14:06 · 12 delivered · 0 failed</div>
+      </div></div>
+      <div class="beat">
+        <div><span class="k">Start state</span><p>The log at cadence, all green.</p></div>
+        <div><span class="k">Action</span><p>One row arrives with no dot, no status chip and its text at 25% — and <b style="color:#E4E4E7;font-weight:400">nothing marks it</b>. Four more rows arrive on top of it and push it up the panel. The metronome misses exactly one beat and recovers. The counter still says 0 failed: the system does not know.</p></div>
+        <div><span class="k">End state</span><p>A gap sitting a third of the way down a busy, healthy log. Densest frame in the film.</p></div>
+        <div><span class="k">→ K4</span><p>Frame ends on a hard stop: mid-arrival, everything freezes. The gap holds its y-position for the rest of the film.</p></div>
+      </div>
+    </div>
+
+    <!-- K4 -->
+    <div class="kf">
+      <div class="kfhead"><span class="n">K4</span><h3>SCAN → DETECT</h3><span class="t">0:09.0 – 0:12.4 · 102f</span></div>
+      <div class="stage"><div class="frame">
+        <div class="bloom"></div>
+        <div class="toplabel" style="left:360px;top:176px;color:var(--fail)">webhook.failed · signature could not be verified</div>
+        <div class="panel dim" style="left:360px;top:232px;width:1200px;height:620px">
+          <div class="chrome"><b></b><b></b><b></b><span class="url">https://<s>hookflo.com</s>/dashboard</span></div>
+          <div class="rows">
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-sb">sb</span>Supabase</span><span class="ev">row.inserted</span><span class="ts">22s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-gh">gh</span>GitHub</span><span class="ev">issues.opened</span><span class="ts">20s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row lit"><span class="dot fail"></span><span class="src"><span class="tile t-st">st</span>Stripe</span><span class="ev" style="color:#fff">invoice.payment_failed</span><span class="ts">18s ago</span><span class="st"><span class="chip bad">410</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-ck">ck</span>Clerk</span><span class="ev">session.created</span><span class="ts">14s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-sb">sb</span>Supabase</span><span class="ev">row.updated</span><span class="ts">11s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-st">st</span>Stripe</span><span class="ev">charge.succeeded</span><span class="ts">7s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-ck">ck</span>Clerk</span><span class="ev">user.updated</span><span class="ts">4s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-gh">gh</span>GitHub</span><span class="ev">pull_request.opened</span><span class="ts">now</span><span class="st"><span class="chip ok">200</span></span></div>
+          </div>
+          <div class="scanline" style="left:1px;right:1px;top:228px"></div>
+          <div class="strip"><span style="color:var(--fail)">1 delivery unverified</span><span class="hf">hookflo</span></div>
+        </div>
+        <div class="clock" style="left:360px;top:892px">03:14:09 · 12 delivered · <span style="color:var(--fail)">1 failed</span></div>
+      </div></div>
+      <div class="beat">
+        <div><span class="k">Start state</span><p>Frozen log at full brightness with a gap in it.</p></div>
+        <div><span class="k">Action</span><p>Every row drops to 12% in one frame. A 1px lavender head travels down the panel at constant speed and <b style="color:#E4E4E7;font-weight:400">halts</b> on the empty row, which returns to 100%. A red dot writes into the empty slot; the missing chip resolves to <span style="color:var(--fail)">410</span>. Label, strip and counter rewrite. Then 34 frames of absolute stillness.</p></div>
+        <div><span class="k">End state</span><p>One lit row in a dark panel. Emptiest state after IDLE — density 0.28. The film's quiet centre.</p></div>
+        <div><span class="k">→ K5</span><p>The red dot is now a discrete object with a known position. It is the thing that travels next.</p></div>
+      </div>
+    </div>
+
+    <!-- K5 -->
+    <div class="kf">
+      <div class="kfhead"><span class="n">K5</span><h3>ROUTE</h3><span class="t">0:12.4 – 0:15.4 · 90f</span></div>
+      <div class="stage"><div class="frame">
+        <div class="bloom"></div>
+        <div class="toplabel" style="left:150px;top:176px">Routing to channel</div>
+        <div class="panel dim" style="left:150px;top:232px;width:700px;height:620px">
+          <div class="chrome" style="padding:0 18px"><b></b><b></b><b></b><span class="url" style="font-size:13px">…<s>hookflo.com</s>/logs</span></div>
+          <div class="rows">
+            <div class="row" style="padding:0 20px;gap:14px"><span class="dot"></span><span class="src" style="flex:0 0 150px;font-size:16px"><span class="tile t-sb" style="width:24px;height:24px;flex:0 0 24px;font-size:11px">sb</span>Supabase</span><span class="ev" style="font-size:15px">row.inserted</span></div>
+            <div class="row" style="padding:0 20px;gap:14px"><span class="dot"></span><span class="src" style="flex:0 0 150px;font-size:16px"><span class="tile t-gh" style="width:24px;height:24px;flex:0 0 24px;font-size:11px">gh</span>GitHub</span><span class="ev" style="font-size:15px">issues.opened</span></div>
+            <div class="row lit" style="padding:0 20px;gap:14px"><span class="dot fail"></span><span class="src" style="flex:0 0 150px;font-size:16px"><span class="tile t-st" style="width:24px;height:24px;flex:0 0 24px;font-size:11px">st</span>Stripe</span><span class="ev" style="font-size:15px;color:#fff">invoice.payment_failed</span></div>
+            <div class="row" style="padding:0 20px;gap:14px"><span class="dot"></span><span class="src" style="flex:0 0 150px;font-size:16px"><span class="tile t-ck" style="width:24px;height:24px;flex:0 0 24px;font-size:11px">ck</span>Clerk</span><span class="ev" style="font-size:15px">session.created</span></div>
+            <div class="row" style="padding:0 20px;gap:14px"><span class="dot"></span><span class="src" style="flex:0 0 150px;font-size:16px"><span class="tile t-sb" style="width:24px;height:24px;flex:0 0 24px;font-size:11px">sb</span>Supabase</span><span class="ev" style="font-size:15px">row.updated</span></div>
+            <div class="row" style="padding:0 20px;gap:14px"><span class="dot"></span><span class="src" style="flex:0 0 150px;font-size:16px"><span class="tile t-st" style="width:24px;height:24px;flex:0 0 24px;font-size:11px">st</span>Stripe</span><span class="ev" style="font-size:15px">charge.succeeded</span></div>
+            <div class="row" style="padding:0 20px;gap:14px"><span class="dot"></span><span class="src" style="flex:0 0 150px;font-size:16px"><span class="tile t-ck" style="width:24px;height:24px;flex:0 0 24px;font-size:11px">ck</span>Clerk</span><span class="ev" style="font-size:15px">user.updated</span></div>
+            <div class="row" style="padding:0 20px;gap:14px"><span class="dot"></span><span class="src" style="flex:0 0 150px;font-size:16px"><span class="tile t-gh" style="width:24px;height:24px;flex:0 0 24px;font-size:11px">gh</span>GitHub</span><span class="ev" style="font-size:15px">pull_request.opened</span></div>
+          </div>
+          <div class="strip" style="padding:0 20px;font-size:14px"><span style="color:var(--fail)">1 unverified</span><span class="hf">hookflo</span></div>
+        </div>
+
+        <svg style="position:absolute;left:0;top:0;width:1920px;height:1080px">
+          <path d="M851,460 H985 V408 H1030" fill="none" stroke="#F94D4D" stroke-width="2"/>
+        </svg>
+
+        <div class="alert" style="left:1030px;top:312px;width:700px">
+          <div class="ah"><span style="width:11px;height:11px;border-radius:3px;background:var(--fail);display:block"></span>
+            <span>#eng-alerts</span><span style="margin-left:auto;letter-spacing:.1em;color:#52525B">via hookflo</span></div>
+          <div class="ab">
+            <div class="who"><span class="d"></span>Stripe · invoice.payment_failed</div>
+            <div class="msg">Delivery failed — signature could not be verified.</div>
+            <div class="meta">410 · endpoint secret rotated<br>03:14:06 · 1 of 1 240 deliveries today</div>
+          </div>
+          <div class="af"><span class="meta" style="font-size:15px">now</span><span class="btn">View log ↗</span></div>
+        </div>
+        <div class="receipt" style="left:1030px;top:700px">delivered to #eng-alerts <b>1.4s</b> after failure<br>email · slack · webhook — all channels acknowledged</div>
+        <div class="clock" style="left:150px;top:892px">03:14:11 · routing 1 event</div>
+      </div></div>
+      <div class="beat">
+        <div><span class="k">Start state</span><p>One lit red row in a dark full-width panel.</p></div>
+        <div><span class="k">Action</span><p>The panel contracts to a 700px left column (its rows shrink with it — the log keeps running). The red dot exits the panel's right edge at its own row height, then turns up and right, at cubic-in-out. Where it stops, an alert card writes itself line by line and the dot becomes the card's leading marker.</p></div>
+        <div><span class="k">End state</span><p>Two panels, asymmetric, connected by a right-angled path that lives entirely in the gutter between them. The only travel in the whole film has just happened.</p></div>
+        <div><span class="k">→ K6</span><p>The card's marker is the object that flips colour next; the log column is still holding the failed row at the same y.</p></div>
+      </div>
+    </div>
+
+    <!-- K6 -->
+    <div class="kf">
+      <div class="kfhead"><span class="n">K6</span><h3>RESOLVE</h3><span class="t">0:15.4 – 0:17.6 · 66f</span></div>
+      <div class="stage"><div class="frame">
+        <div class="bloom"></div>
+        <div class="toplabel" style="left:360px;top:176px">Live deliveries · last 60 seconds</div>
+        <div class="panel" style="left:360px;top:232px;width:1200px;height:620px">
+          <div class="chrome"><b></b><b></b><b></b><span class="url">https://<s>hookflo.com</s>/dashboard</span></div>
+          <div class="rows">
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-sb">sb</span>Supabase</span><span class="ev">row.inserted</span><span class="ts">34s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-gh">gh</span>GitHub</span><span class="ev">issues.opened</span><span class="ts">32s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot" style="background:var(--lav)"></span><span class="src" style="color:#fff"><span class="tile t-st">st</span>Stripe</span><span class="ev" style="color:#E4E4E7">invoice.payment_failed</span><span class="ts">30s ago</span><span class="st"><span class="chip lav">alerted</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-ck">ck</span>Clerk</span><span class="ev">session.created</span><span class="ts">26s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-sb">sb</span>Supabase</span><span class="ev">row.updated</span><span class="ts">23s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-st">st</span>Stripe</span><span class="ev">charge.succeeded</span><span class="ts">19s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-ck">ck</span>Clerk</span><span class="ev">user.updated</span><span class="ts">16s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+            <div class="row"><span class="dot"></span><span class="src"><span class="tile t-gh">gh</span>GitHub</span><span class="ev">pull_request.opened</span><span class="ts">12s ago</span><span class="st"><span class="chip ok">200</span></span></div>
+          </div>
+          <div class="strip"><span>Monitoring for failures…</span><span class="hf">hookflo</span></div>
+        </div>
+        <div class="clock" style="left:360px;top:892px">03:14:14 · 12 delivered · <span style="color:var(--lav)">1 alerted</span></div>
+      </div></div>
+      <div class="beat">
+        <div><span class="k">Start state</span><p>Split frame: dim log column left, alert card right.</p></div>
+        <div><span class="k">Action</span><p>The alert card clips shut toward its own leading dot; the dot travels back down the same right-angled path into its row. The column returns to 1200px and to full brightness. The chip flips from <span style="color:var(--fail)">410</span> to <span style="color:var(--lav)">alerted</span>. Label, strip and counter rewrite. Then stillness.</p></div>
+        <div><span class="k">End state</span><p>The same composition as K2 — with one lavender row in it. The film's one accent, in the one place it belongs.</p></div>
+        <div><span class="k">→ K7</span><p>Rows compress toward the centre; the row markers are the only survivors, and they are already dots.</p></div>
+      </div>
+    </div>
+
+    <!-- K7 -->
+    <div class="kf">
+      <div class="kfhead"><span class="n">K7</span><h3>MARK</h3><span class="t">0:17.6 – 0:20.0 · 72f</span></div>
+      <div class="stage"><div class="frame">
+        <div class="bloom"></div>
+        <div class="mark" style="left:300px;top:352px;gap:22px">
+          <i style="width:30px;height:30px"></i><i style="width:30px;height:30px"></i><i class="hole" style="width:30px;height:30px"></i>
+          <i style="width:30px;height:30px"></i><i style="width:30px;height:30px"></i><i style="width:30px;height:30px"></i>
+          <i style="width:30px;height:30px"></i><i class="white" style="width:30px;height:30px"></i><i style="width:30px;height:30px"></i>
+        </div>
+        <div class="wordmark" style="left:472px;top:393px">Hookflo</div>
+        <div class="head" style="left:300px;top:534px">Monitor every<br><em>webhook event.</em></div>
+        <div class="baseline"><span>03:14:17 · monitoring for failures…</span><span class="hf">hookflo.com</span></div>
+      </div></div>
+      <div class="beat">
+        <div><span class="k">Start state</span><p>Full-width healthy log.</p></div>
+        <div><span class="k">Action</span><p>Rows collapse: text drops out, the eight markers converge on the 3×3 field, landing on the left margin this time. The wordmark clip-wipes beside them. The headline mask-rises under the lockup, second line in lavender — the site's own hero, rebuilt.</p></div>
+        <div><span class="k">End state</span><p>Lockup above, headline below, both on the 300px margin, the whole right half empty. The hole is still there.</p></div>
+        <div><span class="k">→ end</span><p>Last 24 frames: nothing moves except the clock on the baseline. It does not stop.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 · SELF-CRITIQUE ============ -->
+<section>
+  <div class="wrap">
+    <span class="label">Section 4 · Self-critique · rev 1 → rev 2</span>
+    <h2>What was wrong with the first pass.</h2>
+    <p style="max-width:760px">Rev 1 was rendered at full size and inspected as static design. Seven problems,
+      all of them the same problem: <b style="color:#E4E4E7;font-weight:400">the frames had the brand's colours and type but
+      were behaving like a diagram, not like Hookflo.</b> Fixed frames are what you see above.</p>
+    <div class="crit">
+      <div class="r"><div class="id">C1</div>
+        <div class="p">The log panel was 748px tall holding 544px of content. 200px of dead air inside a container reads as an unfinished layout, not as negative space — and this brand's negative space is always <i>outside</i> containers.</div>
+        <div class="f"><b>fix</b>Panel to 1200×620, rows to 60px, eight of them. Content now fills the panel and the breathing room moved outside it, where the brand keeps it.</div></div>
+      <div class="r"><div class="id">C2</div>
+        <div class="p">No mono label above the panel — a direct violation of the brand's own rule R7, and it left the top sixth of every frame empty. It also meant the film had no way to speak without narrating.</div>
+        <div class="f"><b>fix</b>An uppercase mono label above the panel that rewrites three times: <i>Live deliveries</i> → <i>webhook.failed</i> → <i>Routing to channel</i>. That is now the film's entire voice, and it is the site's own device.</div></div>
+      <div class="r"><div class="id">C3</div>
+        <div class="p">Source names were bare text. On the site a source is always paired with its mark; without them the rows read as an abstract diagram of a log rather than as a log. This was the biggest generic risk in the piece.</div>
+        <div class="f"><b>fix</b>28px monogram tiles in each service's own colour at low saturation — <span class="tile t-st" style="display:inline-flex;vertical-align:middle;width:22px;height:22px;font-size:10px">st</span> <span class="tile t-ck" style="display:inline-flex;vertical-align:middle;width:22px;height:22px;font-size:10px">ck</span> <span class="tile t-sb" style="display:inline-flex;vertical-align:middle;width:22px;height:22px;font-size:10px">sb</span> <span class="tile t-gh" style="display:inline-flex;vertical-align:middle;width:22px;height:22px;font-size:10px">gh</span> — borrowing the ecosystem without making it the hero.</div></div>
+      <div class="r"><div class="id">C4</div>
+        <div class="p">The scan line was misaligned with the row it stops on, and ran the full frame width. It is the single most brand-specific gesture in the film and it was sloppy.</div>
+        <div class="f"><b>fix</b>Aligned to the failing row's centre and clipped to the panel's inner width. The scan happens <i>inside</i> the instrument, because that is where Hookflo is looking.</div></div>
+      <div class="r"><div class="id">C5</div>
+        <div class="p">The route path was drawn straight across the dimmed rows. It read as a rendering mistake, and it broke rule R1 by treating the panel as if it were not a container.</div>
+        <div class="f"><b>fix</b>The path now begins at the panel's right edge at the failing row's height and lives entirely in the gutter between the two panels. The dot leaves the container properly, and the gutter — previously empty — becomes the place where routing is legible.</div></div>
+      <div class="r"><div class="id">C6</div>
+        <div class="p">K5's bottom-right quadrant was a void with nothing placed in it. Unplaced voids are the difference between asymmetry and imbalance.</div>
+        <div class="f"><b>fix</b>A mono delivery receipt under the card — <i>delivered to #eng-alerts 1.4s after failure</i> — which weights the corner and is also the film's proof of the actual product claim.</div></div>
+      <div class="r"><div class="id">C7</div>
+        <div class="p">K7 had mark, wordmark and headline at three competing scales, all starting from the same x with no structure between them. It looked like an end card rather than like this brand.</div>
+        <div class="f"><b>fix</b>Restacked as the site does it: small lockup above, 108px headline below, both on the 300px margin, right half left empty. It is now recognisably the hookflo.com hero, rebuilt in the film's own geometry.</div></div>
+      <div class="r"><div class="id">C8</div>
+        <div class="p">Nothing carried a running count, so the DROP beat's central claim — <i>the system does not know yet</i> — was invisible in a still.</div>
+        <div class="f"><b>fix</b>A mono counter under the panel: <i>12 delivered · 0 failed</i> during the drop, <span style="color:var(--fail)">1 failed</span> after detection, <span style="color:var(--lav)">1 alerted</span> after resolution. Three words carry the entire product argument.</div></div>
+    </div>
+    <p style="max-width:760px;margin-top:22px">
+      <b style="color:#E4E4E7;font-weight:400">What was checked and left alone:</b> the panel stays dead-centre for
+      K2/K3/K4/K6. It is the most symmetrical choice available and normally a warning sign, but here the panel is
+      one persistent object being re-read — moving it between states would break the film's only structural idea.
+      The asymmetry lives where the brand puts it: inside the container in K5, and against the margin in K1 and K7.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 5 · CONTINUITY ============ -->
+<section>
+  <div class="wrap">
+    <span class="label">Section 5 · Spatial continuity</span>
+    <h2>One object, seven readings.</h2>
+    <p style="max-width:720px">The band is the persistent log panel: width and x-position over time.
+      The line is the tracked dot — the same object from the mark's centre through the failing row, the route,
+      the alert card and back.</p>
+    <div class="cont">
+      <svg viewBox="0 0 1120 330" width="1120" height="330">
+        <defs><style>
+          .ax{stroke:#27272A;stroke-width:1}
+          .st2{fill:#9CA3AF;font-family:"Geist Mono",monospace;font-size:10px;letter-spacing:.12em}
+          .lb{fill:#52525B;font-family:"Geist Mono",monospace;font-size:9px}
+          .band{fill:rgba(24,24,27,.9);stroke:#27272A}
+          .trk{stroke:#C4B5FD;stroke-width:2;fill:none}
+          .trkf{stroke:#F94D4D;stroke-width:2;fill:none}
+        </style></defs>
+        <line class="ax" x1="0" y1="34" x2="1120" y2="34"/>
+        <line class="ax" x1="0" y1="272" x2="1120" y2="272"/>
+        <g class="st2">
+          <text x="8" y="22">IDLE</text><text x="168" y="22">ARRIVE</text><text x="328" y="22">DROP</text>
+          <text x="488" y="22">SCAN</text><text x="648" y="22">DETECT</text><text x="808" y="22">ROUTE</text><text x="968" y="22">RESOLVE / MARK</text>
+        </g>
+        <g class="ax">
+          <line x1="160" y1="34" x2="160" y2="272"/><line x1="320" y1="34" x2="320" y2="272"/>
+          <line x1="480" y1="34" x2="480" y2="272"/><line x1="640" y1="34" x2="640" y2="272"/>
+          <line x1="800" y1="34" x2="800" y2="272"/><line x1="960" y1="34" x2="960" y2="272"/>
+        </g>
+        <path class="band" d="M60,150 L160,60 L320,60 L480,60 L640,60 L720,60 L800,72 L800,190 L900,60 L1000,60 L1060,150 L1000,246 L900,246 L800,246 L720,246 L640,246 L480,246 L320,246 L160,246 Z" opacity="0.9"/>
+        <text class="lb" x="200" y="82">log panel · 1200px centred · mounted once</text>
+        <text class="lb" x="806" y="100">contracted · 700px left</text>
+        <text class="lb" x="906" y="82">restored 1200px</text>
+        <text class="lb" x="1006" y="150">collapse</text>
+        <rect x="800" y="96" width="130" height="64" fill="rgba(28,28,33,1)" stroke="#27272A"/>
+        <text class="lb" x="808" y="120">alert card</text>
+        <text class="lb" x="808" y="134">writes → shuts</text>
+        <path class="trk" d="M60,153 L160,153 L320,120"/>
+        <path class="trkf" d="M320,120 L640,120 L740,120 L740,128 L800,128 L860,128"/>
+        <path class="trk" d="M860,128 L900,122 L960,120 L1060,153"/>
+        <circle cx="60" cy="153" r="4" fill="#C4B5FD"/>
+        <circle cx="320" cy="120" r="4" fill="none" stroke="#52525B" stroke-dasharray="2 2"/>
+        <circle cx="640" cy="120" r="4" fill="#F94D4D"/>
+        <circle cx="860" cy="128" r="4" fill="#F94D4D"/>
+        <circle cx="1060" cy="153" r="4" fill="#C4B5FD"/>
+        <g class="lb">
+          <text x="34" y="176">mark centre</text>
+          <text x="286" y="112">becomes a gap</text>
+          <text x="596" y="112">red dot written in</text>
+          <text x="836" y="150">into the card</text>
+          <text x="996" y="176">back to the mark</text>
+        </g>
+        <text class="st2" x="8" y="300">DENSITY</text>
+        <polyline class="trk" style="stroke:#52525B" points="60,318 160,300 320,292 480,312 640,312 800,302 960,306 1060,320"/>
+        <g class="lb"><text x="140" y="296">.55</text><text x="300" y="288">.72</text><text x="462" y="326">.28</text><text x="782" y="298">.50</text><text x="1042" y="316">.12</text></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 · MOTION NOTES ============ -->
+<section style="border-bottom:none;padding-bottom:120px">
+  <div class="wrap">
+    <span class="label">Section 6 · Motion notes</span>
+    <h2>Why each thing moves.</h2>
+    <div class="notes">
+      <div class="note"><span class="k">Cadence, not stagger</span><p>Rows arrive every 12 frames exactly. A designer's stagger implies a person placed them; an interval implies a machine emitting them. The interval breaks in exactly one place — the drop misses a single beat.</p></div>
+      <div class="note"><span class="k">The failure is not announced</span><p>No flash, no shake, no push-in at the moment of the drop. The row is blank and the film carries on over it for 60 frames. If the film reacted, it would be claiming the problem is visible — the opposite of the product.</p></div>
+      <div class="note"><span class="k">The hard stop</span><p>The most important cut is not a cut: at 0:09.0 all motion ceases in one frame and every row drops to 12%. Everything after that is Hookflo looking, and the change of agent is felt without being stated.</p></div>
+      <div class="note"><span class="k">Scan is linear</span><p>The reading head moves at constant speed with no ease at either end, straight from the site's scroll-linked paragraph. An eased head reads as a spotlight; a constant one reads as a process.</p></div>
+      <div class="note"><span class="k">One travel only</span><p>Exactly one object crosses the frame in 20 seconds: the red dot, on a right-angled path, at cubic-in-out, entirely within the gutter. Because nothing else has ever travelled, it does not need to be big.</p></div>
+      <div class="note"><span class="k">Brightness is the edit</span><p>Nothing fades in. Brightness rises within a state and steps down only at a state boundary. Every reveal is a change of attention over material that was already there.</p></div>
+      <div class="note"><span class="k">The clock never resets</span><p>03:14:00 → 03:14:17, running under everything including the stillness. Proof that the world did not pause between beats, and what makes seven states one continuous event.</p></div>
+      <div class="note"><span class="k">Three holds</span><p>40 frames on the mark, 34 on the lit failing row, 24 on the final lockup. Nothing moves in any of them. These are the only moments the composition can be read, and they carry the piece's statements.</p></div>
+      <div class="note"><span class="k">The accent budget</span><p>Lavender marks one thing per state: the mark, the scan head, the alerted chip, the second headline line. Red exists for 5.4 seconds and never occupies more than 15px until the alert card. Green is always chip-scale.</p></div>
+    </div>
+
+    <table class="tim">
+      <tr><th>state</th><th>frames</th><th>verb</th><th>what moves</th><th>what is still</th></tr>
+      <tr><td class="m">idle</td><td class="m">0–78</td><td>write · hold</td><td>eight dots, on a 2f metronome</td><td class="g">everything else, for 40f</td></tr>
+      <tr><td class="m">arrive</td><td class="m">78–186</td><td>arrive · verify</td><td>panel clips open; rows every 12f; chips flip at +9f</td><td class="g">panel geometry, camera, bloom</td></tr>
+      <tr><td class="m">drop</td><td class="m">186–270</td><td>drop</td><td>rows continue over the gap; one beat missed</td><td class="g">the film's reaction — there is none</td></tr>
+      <tr><td class="m">scan</td><td class="m">270–330</td><td>scan</td><td>a 1px head, linear, top to the failing row</td><td class="g">all rows, at 12%</td></tr>
+      <tr><td class="m">detect</td><td class="m">330–372</td><td>detect · flip · hold</td><td>red dot writes; chip resolves to 410; label and counter rewrite</td><td class="g">34 frames of nothing at the end</td></tr>
+      <tr><td class="m">route</td><td class="m">372–462</td><td>route · write</td><td>panel contracts; dot travels the gutter; card composes line by line</td><td class="g">the log column, dim and running</td></tr>
+      <tr><td class="m">resolve</td><td class="m">462–528</td><td>resolve · flip</td><td>card shuts; dot returns; brightness restored; chip → alerted</td><td class="g">row y-position, unchanged since 186</td></tr>
+      <tr><td class="m">mark</td><td class="m">528–600</td><td>collapse · hold</td><td>rows compress to the 3×3; lockup and headline land</td><td class="g">last 24 frames — only the clock</td></tr>
+    </table>
+  </div>
+</section>
+
+</body>
+</html>

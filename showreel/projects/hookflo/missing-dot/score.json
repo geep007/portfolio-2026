@@ -1,0 +1,133 @@
+{
+  "kind": "score",
+  "id": "hookflo/missing-dot",
+  "provenance": {
+    "version": 1,
+    "producedBy": "scorer",
+    "producedAt": "2026-09-04",
+    "inputHash": "migrated",
+    "derivedFrom": ["storyboard@1", "creative-direction@1"]
+  },
+
+  "storyboardId": "hookflo/missing-dot",
+  "fps": 30,
+  "duration": 600,
+  "space": { "w": 1920, "h": 1080 },
+
+  "states": [
+    { "id": "idle", "from": 0, "to": 78 },
+    { "id": "arrive", "from": 78, "to": 192 },
+    { "id": "drop", "from": 192, "to": 270 },
+    { "id": "scan", "from": 270, "to": 324 },
+    { "id": "detect", "from": 324, "to": 378 },
+    { "id": "route", "from": 378, "to": 468 },
+    { "id": "resolve", "from": 468, "to": 534 },
+    { "id": "mark", "from": 534, "to": 600 }
+  ],
+
+  "cues": {
+    "markWrite": 8,
+    "markStep": 2,
+    "markWhite": 44,
+    "eyebrow": 50,
+
+    "panelOpen": 78,
+    "panelOpenLen": 18,
+    "migrate": 86,
+    "migrateStep": 2,
+    "migrateLen": 22,
+    "topLabel": 100,
+
+    "rowContent": [108, 120, 132, 156, 168, 180, 192, 204, 216],
+    "verifyDelay": 8,
+
+    "dim": 270,
+    "dimLen": 4,
+    "scanFrom": 274,
+    "scanTo": 320,
+    "litRow": 316,
+
+    "failDot": 324,
+    "failChip": 334,
+    "failLabel": 330,
+
+    "contract": 378,
+    "contractLen": 24,
+    "travel": 402,
+    "travelLen": 30,
+    "card": 426,
+    "cardStep": 6,
+    "receipt": 450,
+
+    "cardShut": 468,
+    "cardShutLen": 18,
+    "travelBack": 474,
+    "restore": 486,
+    "restoreLen": 24,
+    "alerted": 498,
+
+    "collapseText": 534,
+    "collapse": 540,
+    "collapseStep": 2,
+    "collapseLen": 30,
+    "collapseAlerted": 552,
+    "collapseAlertedLen": 28,
+    "wordmark": 570,
+    "headline": 578
+  },
+
+  "geometry": {
+    "frame": { "w": 1920, "h": 1080 },
+    "margin": 300,
+    "panel": {
+      "open": { "x": 360, "w": 1200 },
+      "contracted": { "x": 150, "w": 700 },
+      "y": 210,
+      "h": 680,
+      "chrome": 58,
+      "padTop": 20,
+      "strip": 56
+    },
+    "row": { "h": 60, "padX": 26, "dot": 15 },
+    "markOpen": { "x": 844, "y": 414, "pitch": 90, "dot": 52 },
+    "markClose": { "x": 300, "y": 352, "pitch": 52, "dot": 30 },
+    "hole": 2,
+    "white": 7,
+    "card": { "x": 1030, "y": 292, "w": 700 },
+    "receipt": { "x": 1030, "y": 680 },
+    "wordmark": { "x": 472, "y": 393, "size": 46 },
+    "headline": { "x": 300, "y": 534, "size": 108 }
+  },
+
+  "content": {
+    "clock": { "hour": "03", "startMinute": 14 },
+    "deliveries": [
+      { "source": "supabase", "name": "Supabase", "event": "row.inserted", "age": 22 },
+      { "source": "github", "name": "GitHub", "event": "issues.opened", "age": 20 },
+      { "source": "stripe", "name": "Stripe", "event": "invoice.payment_failed", "age": 18, "failed": true },
+      { "source": "clerk", "name": "Clerk", "event": "session.created", "age": 14 },
+      { "source": "supabase", "name": "Supabase", "event": "row.updated", "age": 11 },
+      { "source": "stripe", "name": "Stripe", "event": "charge.succeeded", "age": 7 },
+      { "source": "clerk", "name": "Clerk", "event": "user.updated", "age": 4 },
+      { "source": "github", "name": "GitHub", "event": "pull_request.opened", "age": 2 },
+      { "source": "stripe", "name": "Stripe", "event": "customer.updated", "age": 0 }
+    ],
+    "sourceTiles": {
+      "stripe": { "tag": "st", "fg": "#8B84FF", "bg": "rgba(99,91,255,0.20)" },
+      "clerk": { "tag": "ck", "fg": "#9A82FF", "bg": "rgba(108,71,255,0.18)" },
+      "supabase": { "tag": "sb", "fg": "#3ECF8E", "bg": "rgba(62,207,142,0.15)" },
+      "github": { "tag": "gh", "fg": "#D4D4D8", "bg": "rgba(228,228,231,0.10)" }
+    }
+  },
+
+  "continuity": [
+    "The dot at the centre of the mark and the dot in the failing row are the same object; its screen position is interpolated, never cut.",
+    "The log panel is mounted once for the whole film. Width, x and row brightness animate; it is never unmounted.",
+    "Row order is append-only. A row that has arrived never disappears, only dims.",
+    "The failing row keeps its y-position from the moment it arrives until the end of RESOLVE.",
+    "The alert card writes itself out of the routed dot; the dot becomes the card's leading status dot.",
+    "The mono clock runs from frame 0 to the last frame and never resets.",
+    "Brightness only increases within a state and only decreases at a state boundary. Nothing fades in.",
+    "The metronome at cues.rowContent breaks exactly once: 132 -> 156 is 24 frames, not 12. That gap is the failure."
+  ]
+}

@@ -1,0 +1,337 @@
+{
+  "directionId": "one-run-observed",
+  "aspectRatio": "16:9",
+  "durationTarget": 18,
+  "states": [
+    {
+      "id": "claim",
+      "purpose": "Open on the hero claim as composure, not announcement. Establish black frame, one light source, and the brand's willingness to let type sit under legibility.",
+      "visual": "Black frame. Two-line headline sits large-left at about a third of frame width, near-black on black — legible only where its edges catch light. Three matte spheres, unequal sizes, single terminator lit from upper left, drift across it at different rates and pass in front of the letterforms uncomposited, occluding whole words. No scrim, no glow, no lift. Far right, a four-line 13px grey body block, faintest thing in frame. Huge empty middle between headline and body — that gap is the layout. Above the headline a small mono kicker in grey caps sits as the only fully readable text, giving the top band a job. Nothing else resolves.",
+      "hierarchy": [
+        "Sphere cluster (only lit object)",
+        "Occluded hero headline",
+        "Right body block",
+        "Mono kicker"
+      ],
+      "persists": [],
+      "entering": [
+        "sphere.a",
+        "sphere.b",
+        "sphere.c",
+        "headline.hero",
+        "body.right",
+        "label.mono"
+      ],
+      "leaving": [],
+      "copy": [
+        "ONE RUN, OBSERVED",
+        "Ship AI to production 10x faster",
+        "Every inference gets a score.",
+        "Prompts, experiments, datasets,",
+        "production traffic — one unit",
+        "of evidence at a time."
+      ],
+      "refs": [
+        "ref.hero",
+        "ref.section.spheres",
+        "ref.font.display"
+      ],
+      "weight": 0.22
+    },
+    {
+      "id": "eclipse",
+      "purpose": "Collapse three lights into one. The eclipse resolves to a single lit disc, and that disc is the atomic unit — one inference — before it is ever called that.",
+      "visual": "Same three spheres, same drift, but the terminator rotates so the lit crescents swing together and overlap into one continuous lit disc. As they converge the two outer spheres fall toward black by luminance alone — they do not leave frame, they stop being lit. Headline recedes to near-nothing behind them. Body block and mono kicker dim but hold position. What remains is one small illuminated peach-white disc, centred slightly left of middle, on pure black. It settles — a beat of complete stillness at dot scale. One lit object, and a large amount of measured black.",
+      "hierarchy": [
+        "Single lit disc (the dot)",
+        "Residual sphere masses in black",
+        "Dimmed headline",
+        "Mono kicker"
+      ],
+      "persists": [
+        "sphere.a",
+        "sphere.b",
+        "sphere.c",
+        "headline.hero",
+        "body.right",
+        "label.mono"
+      ],
+      "entering": [
+        "dot.hero"
+      ],
+      "leaving": [],
+      "copy": [
+        "ONE RUN, OBSERVED",
+        "One inference"
+      ],
+      "refs": [
+        "ref.section.spheres",
+        "ref.logo.glyph"
+      ],
+      "weight": 0.12
+    },
+    {
+      "id": "rules",
+      "purpose": "Give the dot its line. Establish the rule grid as the brand's structure and the dot's law: it lands ON a rule, never between.",
+      "visual": "Horizontal 1px rules wipe in from the left at staggered offsets, evenly spaced, running full bleed — knocking out where text sits and resuming as ghost columns beyond it. The spheres have fallen entirely to black; only their absence remains. The peach dot has not moved: the rule arrives underneath it, so the grid registers to the dot rather than the dot descending. Headline resurfaces from near-black to grey, left, two tight lines with exactly one word in tan. Right body block raises to legible grey between rules. Mono kicker holds above. The middle stays empty on purpose but is now crossed by the ruled band, so the void is structured rather than vacant. Dead still after the wipe — no shimmer, no sweep across the stack.",
+      "hierarchy": [
+        "Dot on its rule",
+        "Rule stack wiping in",
+        "Headline with one tan word",
+        "Right body block"
+      ],
+      "persists": [
+        "dot.hero",
+        "headline.hero",
+        "body.right",
+        "label.mono",
+        "sphere.a",
+        "sphere.b",
+        "sphere.c"
+      ],
+      "entering": [
+        "rules.stack",
+        "rule.carrier"
+      ],
+      "leaving": [],
+      "copy": [
+        "ONE RUN, OBSERVED",
+        "One inference, one score,",
+        "one line of evidence",
+        "A dot lands on a rule.",
+        "Every run Athina scores sits on",
+        "that line — and some fail."
+      ],
+      "refs": [
+        "ref.section.ruled",
+        "ref.section.collaborate",
+        "ref.logo.glyph"
+      ],
+      "weight": 0.3
+    },
+    {
+      "id": "score",
+      "purpose": "First measurement. The dot travels its own line into the eval grid and becomes the failing cell. Hold long enough to read the number that is not good.",
+      "visual": "The dot travels right along its rule — the only sustained motion in the film — and crosses into a rounded inset panel that washes up from black, cropped only at the bottom edge as if scrolled past, never touching left or right edges. Inside: an eval grid at true density, greyed prompt rows, mono score column already resolved — 0.87, 0.75, 0.42, 0.34. The dot arrives at the 0.42 row and a pale peach cell tint washes in behind the number that was already there. A green tint sits above on 0.87 so the mixed reading is visible in one still. Small Athina glyph mark and its label sit at the panel's top-left so the panel is identified, not floating. Rules continue as ghost runs left and right of the panel; the carrier rule passes behind it unbroken. Hard hold on 0.42.",
+      "hierarchy": [
+        "0.42 cell with peach wash",
+        "Dot parked on carrier rule at that row",
+        "Eval grid at true density",
+        "Panel label with glyph mark"
+      ],
+      "persists": [
+        "dot.hero",
+        "rule.carrier",
+        "rules.stack",
+        "headline.hero",
+        "body.right",
+        "label.mono"
+      ],
+      "entering": [
+        "panel.eval",
+        "grid.eval",
+        "mark.glyph.small"
+      ],
+      "leaving": [
+        "sphere.a",
+        "sphere.b",
+        "sphere.c"
+      ],
+      "copy": [
+        "Experiment · gpt-4o · faithfulness",
+        "0.87",
+        "0.75",
+        "0.42",
+        "0.34",
+        "One score is not a verdict."
+      ],
+      "refs": [
+        "ref.product.experiment",
+        "ref.font.body",
+        "ref.logo.glyph"
+      ],
+      "weight": 0.82
+    },
+    {
+      "id": "query",
+      "purpose": "Second reading of the same run: the dataset. The dot steps one rule down — a discrete vertical move — proving the rule grid is the film's coordinate system.",
+      "visual": "The dot steps down exactly one rule, no diagonal, then travels a short run right into the SQL result row. The eval panel does not unmount — it stays, dimmed, cropped above — while a second inset panel washes up beneath it: SQL editor with a real query, Run query control, mono status reading 105 ms, squat blue bar chart beside the dataset table. Blue is contained inside the panel; the editorial frame stays black, white, peach. Dot sits on the highlighted result row's rule with a pale tint behind it. Panel carries the small glyph mark and label. Right body block holds. Short hold — long enough to read 105 ms and see which row is the failing one.",
+      "hierarchy": [
+        "Dot on the SQL result row",
+        "105 ms status and blue bars",
+        "Dimmed eval panel above",
+        "Right body block"
+      ],
+      "persists": [
+        "dot.hero",
+        "rule.carrier",
+        "rules.stack",
+        "panel.eval",
+        "grid.eval",
+        "mark.glyph.small",
+        "headline.hero",
+        "label.mono"
+      ],
+      "entering": [
+        "panel.sql"
+      ],
+      "leaving": [],
+      "copy": [
+        "SELECT * FROM inferences WHERE score < 0.5",
+        "105 ms",
+        "1,284 rows",
+        "Query the runs, not the vibes."
+      ],
+      "refs": [
+        "ref.product.sql",
+        "ref.font.body"
+      ],
+      "weight": 0.75
+    },
+    {
+      "id": "observe",
+      "purpose": "Third reading: the same unit in production. Densest frame in the film, and honest — the headline number is 72.3%, not a green board.",
+      "visual": "Dot steps one rule down again and settles. The monitoring panel washes up from black under the two dimmed panels above it — inset, bottom-cropped, flat and square to camera. A defocused rainbow gradient sits directly behind the panel glass, the only saturated wash on the page. Inside at true density: 72.3% pass rate as the largest mono figure, with 32,541 inferences, $64.21 and 945ms beside it, blue and green histograms below, all already resolved. A row of equal outlined pills shares borders across the panel top — Prompt, Evaluate, Experiment, Annotate, Prototype — stroke-only, exactly one outlined bright as active. Beside the header the persona line shows Data Scientists active with Product Manager and QA Team in place beneath at low opacity. Panel carries the glyph mark and label. Headline left reads with its one tan word. Hold on 72.3%.",
+      "hierarchy": [
+        "72.3% pass rate",
+        "Dot parked on the monitoring band's rule",
+        "Pill row with one active member",
+        "Stacked dimmed panels above"
+      ],
+      "persists": [
+        "dot.hero",
+        "rule.carrier",
+        "rules.stack",
+        "panel.eval",
+        "panel.sql",
+        "mark.glyph.small",
+        "headline.hero",
+        "label.mono"
+      ],
+      "entering": [
+        "panel.monitor",
+        "pills.row",
+        "personas.list",
+        "wash.rainbow"
+      ],
+      "leaving": [],
+      "copy": [
+        "Complete visibility into your production AI",
+        "72.3% pass rate",
+        "32,541 inferences",
+        "$64.21",
+        "945ms",
+        "Data Scientists"
+      ],
+      "refs": [
+        "ref.product.monitoring",
+        "ref.section.observe",
+        "ref.section.blur",
+        "ref.section.personas"
+      ],
+      "weight": 0.95
+    },
+    {
+      "id": "glyph",
+      "purpose": "Reveal that the path was the mark. Pull back until the traversed rules resolve at glyph scale — the same drawing, further out. Longest stillness; the film ends here.",
+      "visual": "Camera pulls back continuously. Panels fall to black by luminance without unmounting — their light drains, their outlines go. What remains is the rule stack the dot travelled, compressed by scale: short stacked horizontal rules with peach dots parked on them, one dot per line, exactly the nav glyph. No assembly, no particles — the drawing was always this, just closer. Beside it the wordmark surfaces from near-black by brightness alone: bold ATHINA, light AI, baseline aligned with the glyph. Mono kicker holds top-left, closing the frame it opened. Right column reduces to a single grey line. Everything else black. Nothing moves for the last beat.",
+      "hierarchy": [
+        "Glyph: stacked rules with parked dots",
+        "Wordmark ATHINA AI",
+        "Mono kicker",
+        "Single grey closing line"
+      ],
+      "persists": [
+        "dot.hero",
+        "rule.carrier",
+        "rules.stack",
+        "label.mono",
+        "body.right"
+      ],
+      "entering": [
+        "wordmark.athina"
+      ],
+      "leaving": [
+        "panel.eval",
+        "panel.sql",
+        "panel.monitor",
+        "grid.eval",
+        "pills.row",
+        "personas.list",
+        "mark.glyph.small",
+        "headline.hero"
+      ],
+      "copy": [
+        "ONE RUN, OBSERVED",
+        "ATHINA AI",
+        "One run, observed."
+      ],
+      "refs": [
+        "ref.logo.mark",
+        "ref.logo.glyph",
+        "ref.section.ruled"
+      ],
+      "weight": 0.18
+    }
+  ],
+  "critique": [
+    {
+      "stateId": "claim",
+      "problem": "Top band of frame was empty and unplaced — headline large-left, body far right, nothing above. Read as unfinished layout rather than deliberate asymmetry, and the film had no way to speak without narrating.",
+      "fix": "Added persistent mono kicker 'ONE RUN, OBSERVED' in grey caps top-left, present from claim through glyph. Gives the top sixth a job and closes the film on the line it opened with."
+    },
+    {
+      "stateId": "score",
+      "problem": "Product panels were bare UI — grid and numbers with no identification. Brand pairs a surface with its mark; unmarked panels read as generic dashboard screenshots, a diagram of product rather than the product.",
+      "fix": "Each inset panel carries the small dot-and-bar glyph mark plus a real label at top-left (e.g. 'Experiment · gpt-4o · faithfulness'). Panel becomes evidence of a named run."
+    },
+    {
+      "stateId": "score",
+      "problem": "Only the 0.42 peach cell was described, so the still read as a single failing number rather than a mixed honest score column.",
+      "fix": "Score column shows 0.87, 0.75, 0.42, 0.34 all resolved, green tint visible above the peach one so the mixed reading is legible in one static frame."
+    },
+    {
+      "stateId": "eclipse",
+      "problem": "Spheres 'converge and disappear' implied an unmount, which would be a cut. Continuity rule says the sphere set persists and falls to black by luminance.",
+      "fix": "Rewrote as terminator rotation collapsing lit crescents into one disc while outer spheres drop to black in place; spheres stay in persists through 'rules' and only appear in leaving at 'score'."
+    },
+    {
+      "stateId": "rules",
+      "problem": "Dot 'descending onto the rule' would be a vertical move off-grid, violating the dot's law (on a rule, never between, discrete steps only).",
+      "fix": "Inverted the motion: the dot stays fixed and the wiping rule arrives underneath it. The grid registers to the dot, not the reverse."
+    },
+    {
+      "stateId": "query",
+      "problem": "Second panel replacing the first would remount the product surface — a cut in a continuity film — and would lose the sense of one run read three ways.",
+      "fix": "Eval panel persists dimmed and bottom-cropped above; SQL panel washes up beneath it. Panels stack rather than swap, so 'observe' shows the whole read history in one frame."
+    },
+    {
+      "stateId": "observe",
+      "problem": "Densest state was described as a monitoring dashboard only — the two brand devices that make it Athina (outlined shared-border pill row, faded inactive personas) were missing, so it behaved like any analytics board.",
+      "fix": "Added stroke-only pill row with exactly one active member, and persona list with Data Scientists active over faded Product Manager and QA Team held in place."
+    },
+    {
+      "stateId": "glyph",
+      "problem": "'Panels disappear and the glyph appears' is a logo-build reveal — forbidden. Glyph must be reached by scale and framing only.",
+      "fix": "Panels drain to black by luminance; camera pulls back so the already-present rule stack and parked dots resolve at glyph scale. Same drawing, further out."
+    },
+    {
+      "stateId": "claim",
+      "problem": "Film's central claim (one inference is the atomic unit) was invisible in any early still, and the headline risked losing the one-tinted-word rule.",
+      "fix": "Headline carries exactly one tan word ('production'). Copy at eclipse and rules names the unit — 'One inference, one score, one line of evidence' — so the claim reads in a frozen frame."
+    }
+  ],
+  "kind": "storyboard",
+  "id": "athina/first",
+  "provenance": {
+    "version": 1,
+    "producedBy": "storyboarder",
+    "producedAt": "2026-09-04",
+    "inputHash": "748868be",
+    "derivedFrom": [
+      "brand-brief@1",
+      "creative-direction@1",
+      "assets@1"
+    ]
+  }
+}

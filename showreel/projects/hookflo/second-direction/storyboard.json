@@ -1,0 +1,305 @@
+{
+  "directionId": "last-seen",
+  "aspectRatio": "16:9",
+  "durationTarget": 20,
+  "states": [
+    {
+      "id": "feed",
+      "purpose": "Establish the instrument: one hairline panel, four columns, every row current. Nothing wrong yet; frame must read as running product, not diagram.",
+      "visual": "Centred hairline panel, 12px radius, stopping short of frame edges; one lavender bloom above its top edge, centred. Above the panel, uppercase mono channel label at wide tracking: EVENT FEED. Inside, five feed rows on fixed pitch, no dead air top or bottom — each row is status dot, source monogram at low saturation with its name in mono beside it (Stripe, Resend, Clerk, Supabase, Stripe), event name in Geist 400 at -0.045em in the wide middle column, green status chip at chip scale, right-aligned mono timestamp reading 2M AGO. Every timestamp #9CA3AF; source names a step below event names in brightness. A caret blinks at the foot of the list where the next row will land, so the still reads as live. Row three — Stripe / invoice.payment_succeeded — visually identical to its neighbours in every respect.",
+      "hierarchy": [
+        "event names",
+        "timestamps",
+        "source monograms + names",
+        "channel label"
+      ],
+      "persists": [],
+      "entering": [
+        "panel",
+        "bloom",
+        "label EVENT FEED",
+        "five rows",
+        "stale row node",
+        "stale timestamp node",
+        "green chips",
+        "emit caret"
+      ],
+      "leaving": [],
+      "copy": [
+        "EVENT FEED",
+        "STRIPE  invoice.payment_succeeded  2M AGO",
+        "RESEND  email.delivered  2M AGO",
+        "CLERK  user.created  2M AGO",
+        "SUPABASE  db.row.inserted  2M AGO"
+      ],
+      "refs": [
+        "ref.product.dashboard",
+        "ref.font.mono",
+        "ref.logo.mark"
+      ],
+      "weight": 0.55
+    },
+    {
+      "id": "cadence",
+      "purpose": "Show the machine beat: rows emit on a fixed interval and every timestamp rewrites to 2M AGO on the same beat. Densest passage — the disguise is built here.",
+      "visual": "Same panel, same rect. List now full to its lower edge; a new row clips into place at the bottom on a fixed interval while the top row's brightness steps down one grey value, so the stack reads as a conveyor without scrolling or reordering. On every beat all right-hand timestamps substitute to 2M AGO simultaneously — the column pulses as text, not as motion. Every row carries its monogram and a green chip; green chips are the only colour besides the bloom. Row three sits third from top, unchanged, rewriting with the rest. Channel label above reads EVENT FEED. Frame otherwise still.",
+      "hierarchy": [
+        "timestamp column rewriting in unison",
+        "incoming row at list foot",
+        "event names",
+        "channel label"
+      ],
+      "persists": [
+        "panel",
+        "bloom",
+        "label EVENT FEED",
+        "five rows",
+        "stale row node",
+        "stale timestamp node",
+        "green chips"
+      ],
+      "entering": [
+        "emitted rows"
+      ],
+      "leaving": [
+        "emit caret"
+      ],
+      "copy": [
+        "EVENT FEED",
+        "2M AGO",
+        "2M AGO",
+        "2M AGO",
+        "2M AGO"
+      ],
+      "refs": [
+        "ref.product.dashboard",
+        "ref.font.mono"
+      ],
+      "weight": 0.85
+    },
+    {
+      "id": "skip",
+      "purpose": "The event of the film happens and nothing marks it. Row three is not rewritten while the beat continues around it — the still must show 9M AGO sitting in a column of 2M AGO.",
+      "visual": "Identical composition, identical cadence. On one beat the timestamp column substitutes to 2M AGO everywhere except row three, which now reads 9M AGO in the same #9CA3AF as its neighbours. No shake, no chip change, no badge — row three's chip still green, dot still green, monogram unchanged. Only difference in the whole frame is two characters of mono text. Next emitted row lands at the foot on schedule. Channel label above the panel substitutes from EVENT FEED to LAST SEEN — the film's only narration, and it is a label, not a sentence.",
+      "hierarchy": [
+        "row three timestamp odd against column",
+        "timestamp column",
+        "channel label LAST SEEN",
+        "event names"
+      ],
+      "persists": [
+        "panel",
+        "bloom",
+        "five rows",
+        "stale row node",
+        "stale timestamp node",
+        "green chips",
+        "emitted rows"
+      ],
+      "entering": [
+        "label LAST SEEN"
+      ],
+      "leaving": [
+        "label EVENT FEED"
+      ],
+      "copy": [
+        "LAST SEEN",
+        "STRIPE  invoice.payment_succeeded  9M AGO",
+        "RESEND  email.delivered  2M AGO",
+        "CLERK  user.created  2M AGO",
+        "SUPABASE  db.row.inserted  2M AGO"
+      ],
+      "refs": [
+        "ref.product.dashboard",
+        "ref.font.mono"
+      ],
+      "weight": 0.8
+    },
+    {
+      "id": "age",
+      "purpose": "Time separates one row from the field. Stale clock steps 41M, 3H on a linear beat and climbs in grey value toward white while every other row dims one step.",
+      "visual": "Same rect, same pitch, no reorder. Neighbouring rows step down one grey level together — event names, monograms and timestamps settle back toward #9CA3AF and below, so the panel darkens as a body. Row three holds position and identity; its Stripe monogram stays at the same low saturation, but its timestamp is the one text in frame gaining brightness, substituting 41M AGO then 3H AGO on a linear beat. Its own green chip is still green — the row still claims health, which is the point. Cadence continues but thinner: fewer rows land, longer gaps. LAST SEEN sits above the panel.",
+      "hierarchy": [
+        "stale timestamp climbing to white",
+        "stale row identity",
+        "dimmed neighbour rows",
+        "channel label LAST SEEN"
+      ],
+      "persists": [
+        "panel",
+        "bloom",
+        "label LAST SEEN",
+        "five rows",
+        "stale row node",
+        "stale timestamp node",
+        "green chips",
+        "emitted rows"
+      ],
+      "entering": [],
+      "leaving": [],
+      "copy": [
+        "LAST SEEN",
+        "STRIPE  invoice.payment_succeeded  41M AGO",
+        "RESEND  email.delivered  2M AGO",
+        "CLERK  user.created  2M AGO",
+        "SUPABASE  db.row.inserted  2M AGO"
+      ],
+      "refs": [
+        "ref.product.dashboard",
+        "ref.section.scrolltext",
+        "ref.font.mono"
+      ],
+      "weight": 0.6
+    },
+    {
+      "id": "silence",
+      "purpose": "Emptiest frame. Cadence stops entirely; the only thing moving in the film is one number climbing. Elapsed silence made literal.",
+      "visual": "Emission halts. Lower rows dimmed almost to the panel's own hairline value — present, legible, receded — and the list trims so the panel still fills without dead air: the panel's height clips shut a step so no empty band opens inside it, emptiness staying outside the container. Row three sits third from top at full white on its timestamp, monogram and event name at normal reading brightness. Nothing else changes state. LAST SEEN above; bloom unchanged. Stale timestamp substitutes once more on the beat.",
+      "hierarchy": [
+        "stale timestamp at white",
+        "stale row",
+        "receded neighbours",
+        "channel label"
+      ],
+      "persists": [
+        "panel",
+        "bloom",
+        "label LAST SEEN",
+        "stale row node",
+        "stale timestamp node",
+        "green chips"
+      ],
+      "entering": [],
+      "leaving": [
+        "emitted rows"
+      ],
+      "copy": [
+        "LAST SEEN",
+        "STRIPE  invoice.payment_succeeded  3H AGO"
+      ],
+      "refs": [
+        "ref.product.dashboard",
+        "ref.font.mono"
+      ],
+      "weight": 0.22
+    },
+    {
+      "id": "alert",
+      "purpose": "The absence is delivered where a human already looks. Feed clips shut, lavender card clips open in the same rect carrying the same monogram and the same row.",
+      "visual": "Feed clips shut top-to-bottom inside the panel rect, and in the same rect — same width, same centre, same 12px radius — the grainy lavender slab clips open. Film's only inverted surface and its one accent. On it: mono label above, ALERT · STRIPE, then the same Stripe monogram at the same low saturation the row carried, then one line in Geist 400 at -0.045em, then a single mono elapsed figure. No red anywhere; the identity string is verbatim what the feed showed. Bloom above the panel unchanged in intensity. Nothing outside the panel but label and bloom.",
+      "hierarchy": [
+        "one Geist line on the slab",
+        "elapsed figure in mono",
+        "Stripe monogram",
+        "mono label above"
+      ],
+      "persists": [
+        "panel",
+        "bloom",
+        "stale row identity",
+        "Stripe monogram",
+        "stale timestamp value"
+      ],
+      "entering": [
+        "lavender card"
+      ],
+      "leaving": [
+        "feed rows",
+        "label LAST SEEN",
+        "green chips"
+      ],
+      "copy": [
+        "ALERT · STRIPE",
+        "invoice.payment_succeeded has not fired",
+        "LAST SEEN 3H AGO"
+      ],
+      "refs": [
+        "ref.section.cta",
+        "ref.font.display",
+        "ref.font.mono"
+      ],
+      "weight": 0.35
+    },
+    {
+      "id": "mark",
+      "purpose": "Resolve to the brand's own geometry, derived from what was already on screen. End on stillness.",
+      "visual": "Lavender card clips away from its own edges in the same rect. The status dots that led the surviving feed rows are still present, and they settle on a linear path into the 3x3 field at small scale at the panel centre — top-right position empty, bottom-centre dot white, the rest low grey. Hairline panel still there around it, still short of the frame edge; bloom still above it. Mono wordmark below the field at wide tracking. No motion after the dots land; hold on a static frame.",
+      "hierarchy": [
+        "3x3 mark at panel centre",
+        "wordmark below",
+        "panel hairline",
+        "bloom"
+      ],
+      "persists": [
+        "panel",
+        "bloom",
+        "row status dots"
+      ],
+      "entering": [
+        "3x3 field",
+        "wordmark"
+      ],
+      "leaving": [
+        "lavender card"
+      ],
+      "copy": [
+        "HOOKFLO"
+      ],
+      "refs": [
+        "ref.logo.mark",
+        "ref.font.mono"
+      ],
+      "weight": 0.12
+    }
+  ],
+  "critique": [
+    {
+      "stateId": "feed",
+      "problem": "Source names written as bare mono text (STRIPE, RESEND). Without monograms the panel reads as a diagram of a log, not a log — violates C3 PAIR A SOURCE WITH ITS MARK.",
+      "fix": "Every row now carries its service monogram at low saturation beside the name, in feed, cadence, skip, age, silence, and repeated on the alert card."
+    },
+    {
+      "stateId": "feed",
+      "problem": "Frame read as static screenshot: nothing in the still said 'running instrument' (R2 SHOW IT RUNNING).",
+      "fix": "Added blinking caret at the foot of the list where the next row lands, plus timestamps reading 2M AGO, so the opening still is legibly live."
+    },
+    {
+      "stateId": "skip",
+      "problem": "Central claim invisible in a still, and the mono channel label above the panel (R7) was missing from the whole board, leaving the top band of every frame empty.",
+      "fix": "Added channel label above the panel throughout: EVENT FEED for feed/cadence, substituting to LAST SEEN at skip. Label is the film's only narration and it fills the top band."
+    },
+    {
+      "stateId": "silence",
+      "problem": "Dimming rows out of the panel opened an empty band inside the container — dead air inside a panel (C1), an unplaced void.",
+      "fix": "Panel height clips shut one step as the list trims, so emptiness stays outside the container; frame gets emptier without the panel getting hollow."
+    },
+    {
+      "stateId": "age",
+      "problem": "Original frame dimmed the stale row's green chip, implying the system had reacted — contradicts the concept that the row still claims health.",
+      "fix": "Stale row's chip and dot stay green for the whole film; only its timestamp grey value climbs."
+    },
+    {
+      "stateId": "alert",
+      "problem": "Card copy asserted a benefit sentence and repeated the source as bare text; accent risked landing on two things at once (R4).",
+      "fix": "Card shows the same monogram from the row, one Geist line of evidence, one mono elapsed figure. Lavender marks exactly one surface — the slab — nothing else accented."
+    },
+    {
+      "stateId": "mark",
+      "problem": "3x3 field described as appearing, which would remount new dots and break the direction's continuity rule.",
+      "fix": "Field derives from surviving row status dots already on screen; they translate on a linear path into grid positions."
+    }
+  ],
+  "kind": "storyboard",
+  "id": "hookflo/second-direction",
+  "provenance": {
+    "version": 1,
+    "producedBy": "storyboarder",
+    "producedAt": "2026-09-04",
+    "inputHash": "e6e24a81",
+    "derivedFrom": [
+      "brand-brief@1",
+      "creative-direction@1",
+      "assets@1"
+    ]
+  }
+}

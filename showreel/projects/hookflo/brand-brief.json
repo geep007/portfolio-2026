@@ -1,0 +1,228 @@
+{
+  "kind": "brand-brief",
+  "id": "hookflo",
+  "provenance": {
+    "version": 1,
+    "producedBy": "brandAnalyst",
+    "producedAt": "2026-09-04",
+    "inputHash": "d239db8d",
+    "derivedFrom": [
+      "assets@1"
+    ]
+  },
+  "brand": "hookflo",
+  "identitySummary": "A near-black instrument panel lit by one lavender bloom overhead. Geist at tight negative tracking, uppercase mono labels, hairline containers at 12px radius. Product UI is shown running rather than posed. Precise, quiet, slightly nocturnal — a monitoring console, not an ad.",
+  "productTruth": "Webhook failures are silent; the event that does not arrive is the one that matters, and Hookflo puts that absence where a human is already looking.",
+  "audience": "Developers and small SaaS teams who own an integration they cannot see failing.",
+  "markLogic": "The mark is a 3x3 grid of nine positions holding eight dots: the top-right position is EMPTY and the bottom-centre dot is WHITE. Read as a field of webhook deliveries in which one is missing and one is caught — which is exactly the product. The brand drew its own metaphor and then used it as a logo without ever animating it. Any Hookflo geometry can be derived from that field, and returning to it is how a piece ends.",
+  "inversions": [
+    "The category hero bleeds an oversized dashboard off the right edge to imply the product is bigger than the viewport. Hookflo shows a small, fully enclosed terminal that is typing while you read. Its claim is vigilance, not size — so no camera moves, no bleeds, no off-frame entrances.",
+    "The eyebrow says FAILURE-FIRST and every screenshot on the site is green. That tension is the brand; a film in which nothing goes wrong renders the surface and misreads the argument."
+  ],
+  "visualRules": [
+    {
+      "id": "R1",
+      "name": "CONTAIN",
+      "rule": "Everything lives inside a hairline panel at 12px radius, stopping short of the frame edge. Nothing bleeds.",
+      "refs": [
+        "ref.hero",
+        "ref.section.features"
+      ]
+    },
+    {
+      "id": "R2",
+      "name": "SHOW IT RUNNING",
+      "rule": "Product UI is a live instrument, not a screenshot: carets blink, strips read, toggles are on, timestamps say 2m ago. The frame stays still; the interface inside it moves.",
+      "refs": [
+        "ref.hero",
+        "ref.product.dashboard"
+      ]
+    },
+    {
+      "id": "R3",
+      "name": "ONE LIGHT, OVERHEAD",
+      "rule": "A single lavender bloom above the top edge of a section, centred. Never a glow around an object, never a side light, never two.",
+      "refs": [
+        "ref.hero"
+      ]
+    },
+    {
+      "id": "R4",
+      "name": "ONE ACCENT PER VIEW",
+      "rule": "Lavender marks exactly one thing in any composition — the second headline line, or the active control, or the CTA. Never two at once.",
+      "refs": [
+        "ref.section.cta"
+      ]
+    },
+    {
+      "id": "R5",
+      "name": "SEMANTIC COLOUR IS RATIONED",
+      "rule": "Green means connected, red means failed, and both exist only at chip and dot scale. Never a field, never a gradient, never a glow.",
+      "refs": [
+        "ref.product.dashboard",
+        "ref.section.usecases"
+      ]
+    },
+    {
+      "id": "R6",
+      "name": "BRIGHTNESS IS HIERARCHY",
+      "rule": "One family, one weight. Levels are made by size and grey value; #9CA3AF is a full member of the hierarchy. Attention is modelled as illumination.",
+      "refs": [
+        "ref.section.scrolltext"
+      ]
+    },
+    {
+      "id": "R7",
+      "name": "LABELS ABOVE, IN MONO",
+      "rule": "Uppercase mono at wide tracking, always above the thing it names, never beside it. A channel marker, not a caption.",
+      "refs": [
+        "ref.product.dashboard"
+      ]
+    },
+    {
+      "id": "R8",
+      "name": "ASYMMETRY LIVES INSIDE CONTAINERS",
+      "rule": "The page is a stack of centred max-width containers. Imbalance is allowed within one, never against the page itself.",
+      "refs": [
+        "ref.section.features"
+      ]
+    },
+    {
+      "id": "R9",
+      "name": "THE MARK IS A GRID WITH A HOLE",
+      "rule": "3x3, one position empty, one dot white. Any Hookflo geometry derives from that field.",
+      "refs": [
+        "ref.logo.mark"
+      ]
+    }
+  ],
+  "compositionRules": [
+    {
+      "id": "C1",
+      "name": "NEGATIVE SPACE OUTSIDE",
+      "rule": "Breathing room sits outside containers. Dead air inside a panel reads as an unfinished layout."
+    },
+    {
+      "id": "C2",
+      "name": "STATIC FRAME",
+      "rule": "The frame never travels. Everything that moves, moves inside a container that does not."
+    },
+    {
+      "id": "C3",
+      "name": "PAIR A SOURCE WITH ITS MARK",
+      "rule": "A third-party service is never bare text; it carries its monogram at low saturation. Without it a log reads as a diagram of a log.",
+      "refs": [
+        "ref.product.dashboard"
+      ]
+    }
+  ],
+  "motionImplications": [
+    {
+      "id": "M1",
+      "name": "CADENCE, NOT STAGGER",
+      "rule": "Rows arrive on a fixed interval. A stagger with an ease implies a designer placed the items; an interval implies a machine emitted them."
+    },
+    {
+      "id": "M2",
+      "name": "BRIGHTNESS IS THE EDIT",
+      "rule": "Nothing fades in. Brightness rises within a state and steps down only at a state boundary. Every reveal is a change of attention over material already present.",
+      "refs": [
+        "ref.section.scrolltext"
+      ]
+    },
+    {
+      "id": "M3",
+      "name": "READING HEADS ARE LINEAR",
+      "rule": "A constant-speed head reads as a process; an eased one reads as a spotlight."
+    },
+    {
+      "id": "M4",
+      "name": "ORTHOGONAL TRAVEL",
+      "rule": "Containers are strictly rectangular, so anything that travels walks right angles. A bezier reads as another brand within one frame."
+    },
+    {
+      "id": "M5",
+      "name": "DO NOT ANNOUNCE THE FAILURE",
+      "rule": "A failure is unmarked at the instant it occurs. Reacting to it claims the problem is visible, which is the opposite of the product."
+    },
+    {
+      "id": "M6",
+      "name": "STILLNESS IS A BEAT",
+      "rule": "Holds of 20-40 frames with nothing moving are where the piece can be read. Budget them explicitly."
+    },
+    {
+      "id": "M7",
+      "name": "CLIP, DO NOT FADE",
+      "rule": "Surfaces open and shut from their own edges. Opacity is a property of a surface, not a transition."
+    }
+  ],
+  "failureModes": [
+    {
+      "id": "F1",
+      "name": "FLOATING CARDS IN 3D",
+      "rule": "The site never breaks the picture plane. One tumbling card and it becomes every Framer template of 2024."
+    },
+    {
+      "id": "F2",
+      "name": "GLOW ON EVERYTHING",
+      "rule": "There is one light and it is above the section. Rim-lighting the panels turns an instrument into a poster."
+    },
+    {
+      "id": "F3",
+      "name": "PURPLE AS A THEME",
+      "rule": "Lavender is an accent on near-black plus one slab. Fields, purple type everywhere, purple gradients behind headlines are all off-brand."
+    },
+    {
+      "id": "F4",
+      "name": "SPRINGS AND OVERSHOOT",
+      "rule": "This is a monitoring console; overshoot reads as a toy."
+    },
+    {
+      "id": "F5",
+      "name": "PARTICLES, NODES, CONNECTION LINES",
+      "rule": "The default visual cliche for webhooks, and nowhere on the site."
+    },
+    {
+      "id": "F6",
+      "name": "FLYING THE CAMERA INTO THE DASHBOARD",
+      "rule": "The frame is static on this site every time. A push-in is somebody else's brand."
+    },
+    {
+      "id": "F7",
+      "name": "KINETIC TYPOGRAPHY",
+      "rule": "Type here changes brightness and position. It does not scale, rotate, track out, or land word by word."
+    },
+    {
+      "id": "F8",
+      "name": "FADE-UP STAGGER",
+      "rule": "The universal SaaS tell. Elements arrive on a machine cadence or clip open in place."
+    },
+    {
+      "id": "F9",
+      "name": "A RED SCREEN AT THE FAILURE",
+      "rule": "The most obvious motion-design move and completely wrong: semantic colour never leaves chip scale."
+    }
+  ],
+  "tokens": {
+    "background": "#17171C",
+    "foreground": "#FAFAFA",
+    "panel": "rgba(24,24,27,0.6)",
+    "chrome": "#101014",
+    "rule": "#27272A",
+    "muted": "#9CA3AF",
+    "accent": "#C4B5FD",
+    "primary": "#6C5DD3",
+    "inverseGround": "#A692E5",
+    "ok": "#4ADE80",
+    "fail": "#F94D4D",
+    "bloom": "rgba(166,146,229,0.20)",
+    "radius": 12,
+    "displayTracking": "-0.045em"
+  },
+  "signatureRefs": [
+    "ref.logo.mark",
+    "ref.hero",
+    "ref.section.scrolltext",
+    "ref.product.dashboard"
+  ]
+}

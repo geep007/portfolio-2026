@@ -1,0 +1,83 @@
+{
+  "kind": "assets",
+  "id": "hookflo",
+  "provenance": {
+    "version": 1,
+    "producedBy": "extractor",
+    "producedAt": "2026-09-04",
+    "inputHash": "8a5c8523"
+  },
+  "source": "https://hookflo.com",
+  "mode": "brand-derived",
+  "assets": [
+    {
+      "ref": "ref.hero",
+      "kind": "screenshot",
+      "path": "showreel/src/motion-system/brands/hookflo/source/01-hero.jpg",
+      "section": "hero",
+      "caption": "Claim left, small enclosed terminal right, typing, status strip below."
+    },
+    {
+      "ref": "ref.product.dashboard",
+      "kind": "product-ui",
+      "path": "showreel/src/motion-system/brands/hookflo/source/02-dashboard.jpg",
+      "section": "dashboard",
+      "caption": "Event feed: dot, source, event name, timestamp, green status chip."
+    },
+    {
+      "ref": "ref.section.scrolltext",
+      "kind": "screenshot",
+      "path": "showreel/src/motion-system/brands/hookflo/source/03-scrolltext.jpg",
+      "section": "scroll paragraph",
+      "caption": "Words at 35% grey lifting to white as the scroll passes."
+    },
+    {
+      "ref": "ref.section.features",
+      "kind": "screenshot",
+      "path": "showreel/src/motion-system/brands/hookflo/source/04-features.jpg",
+      "section": "bento",
+      "caption": "Asymmetric bento cards, each with a live working fragment on top."
+    },
+    {
+      "ref": "ref.section.usecases",
+      "kind": "screenshot",
+      "path": "showreel/src/motion-system/brands/hookflo/source/05-usecases.jpg",
+      "section": "use cases",
+      "caption": "Table with toggles on and status chips green; chip row above."
+    },
+    {
+      "ref": "ref.section.cta",
+      "kind": "screenshot",
+      "path": "showreel/src/motion-system/brands/hookflo/source/06-cta.jpg",
+      "section": "CTA",
+      "caption": "The one inverted surface: grainy lavender slab, serif headline."
+    },
+    {
+      "ref": "ref.logo.mark",
+      "kind": "logo",
+      "path": "showreel/src/motion-system/brands/hookflo/source/01-hero.jpg",
+      "section": "nav",
+      "caption": "3x3 dot grid: top-right position empty, bottom-centre dot white."
+    },
+    {
+      "ref": "ref.font.display",
+      "kind": "font",
+      "path": "showreel/public/fonts/Geist-400.woff2",
+      "caption": "Geist 400, display and body, -0.045em tracking.",
+      "font": {
+        "family": "Geist",
+        "weight": 400
+      }
+    },
+    {
+      "ref": "ref.font.mono",
+      "kind": "font",
+      "path": "showreel/public/fonts/GeistMono-400.woff2",
+      "caption": "Geist Mono 400, uppercase labels and timestamps.",
+      "font": {
+        "family": "Geist Mono",
+        "weight": 400
+      }
+    }
+  ]
+}

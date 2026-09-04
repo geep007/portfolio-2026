@@ -1,0 +1,324 @@
+{
+  "brand": "Athina AI",
+  "identitySummary": "A measurement instrument that behaves like a dark room with one lamp. Black page, near-invisible type, then a single lit object: a sphere, a peach dot, a pastel product panel. Everything is either fully legible or deliberately most of the way to black — Athina uses illegibility as confidence, not as decoration. Structure is ruled lines: parallel horizontal runs stacked across the screen, with dots parked on individual lines. Product surfaces break the mono discipline with soft desaturated pastels (plum, mint, olive, peach) and are shown at real density, uncropped, with real and unflattering numbers.",
+  "productTruth": "Collaborative platform to develop, evaluate and observe LLM features: prompt/experiment grids scoring rows 0–1, SQL over datasets, and production monitoring of pass rate, cost, latency. The product's atomic unit is one inference on one run, given a score.",
+  "audience": "Technical + non-technical AI teams shipping to production: data scientists (SQL, datasets), product managers, QA. People who must defend a number, not admire a chart.",
+  "markLogic": "The mark is the product drawn. The nav glyph (ref.logo.glyph) is a set of short stacked horizontal rules with one dot riding one line — a stack of parallel runs with a single inference pinned to a single trace. That exact drawing scales three ways on the site without ever being called a logo: it is the bullet beside every persona name (ref.section.personas), it is the \"Watch demo\" / \"Explore documentation\" cursor glyph, and it is blown to full-bleed as an entire section — a black band of thin rules with peach dots parked on individual lines (ref.section.ruled). Dots never sit between lines; they always land ON a line. The wordmark repeats the hierarchy: bold ATHINA, light AI — the platform is the weight, the AI is the modifier. So the mark says: many parallel runs, one of them observed. Scoring, not generating.",
+  "tokens": {
+    "bg.black": "#000000",
+    "bg.white": "#FFFFFF",
+    "ink.hero": "#1C1C1C",
+    "ink.body": "#8C8C8C",
+    "accent.peach": "#F3CFC0",
+    "accent.tan": "#C9AE86",
+    "accent.pink": "#E48AA6",
+    "slab.plum": "#3E3341",
+    "slab.olive": "#3A4239",
+    "slab.mint": "#DDE9DC",
+    "score.good": "#DCF0D0",
+    "score.bad": "#F7DCC9",
+    "chart.blue": "#7CC0F0",
+    "rule.width": "1px",
+    "rule.gap": "13px",
+    "dot.d": "12px",
+    "radius.pill": "999px",
+    "radius.slab": "16px",
+    "type.display": "geometric grotesque, single weight, tight 2 lines",
+    "type.body": "13px / 1.55 grey"
+  },
+  "visualRules": [
+    {
+      "id": "v1",
+      "name": "Type may sit below legibility",
+      "rule": "Headlines are allowed to run near-black on black and be physically occluded by objects. The hero line is readable only at its edges (ref.hero). Never add a scrim, glow or contrast lift to 'fix' it — reduced legibility IS the brand's composure.",
+      "refs": [
+        "ref.hero",
+        "ref.font.display"
+      ]
+    },
+    {
+      "id": "v2",
+      "name": "Rules are the grid, dots are the data",
+      "rule": "Structure is 1px horizontal rules at even ~13px gaps running full bleed. Peach dots always land ON a rule, never between. Text blocks knock rules out rather than overlay them — the rule stops where content starts and resumes as ghost columns beside it.",
+      "refs": [
+        "ref.section.ruled",
+        "ref.section.collaborate"
+      ]
+    },
+    {
+      "id": "v3",
+      "name": "One light source",
+      "rule": "Spheres are lit white→black on a single terminator, sizes unequal, overlapping to form eclipse shapes. All soft light in the brand comes from the same direction. No rim light, no double highlight, no chrome.",
+      "refs": [
+        "ref.section.spheres",
+        "ref.hero"
+      ]
+    },
+    {
+      "id": "v4",
+      "name": "Colour is only in product",
+      "rule": "The page is black, white and peach. Saturated colour (mint, plum, olive, blue charts, green/peach score tints, rainbow blur) appears only inside product panels or directly behind them. Editorial surfaces never take a brand gradient.",
+      "refs": [
+        "ref.section.blur",
+        "ref.section.persona.card",
+        "ref.product.monitoring"
+      ]
+    },
+    {
+      "id": "v5",
+      "name": "Score tint, not score colour",
+      "rule": "Evaluation state is carried by pale cell washes behind a mono number: green for high, peach for low (0.87 green, 0.42 peach). Tints are pastel, never signal-red or signal-green, and never applied to type.",
+      "refs": [
+        "ref.product.experiment",
+        "ref.product.monitoring"
+      ]
+    },
+    {
+      "id": "v6",
+      "name": "Product shown whole and honest",
+      "rule": "UI is rendered at true density with real labels and real numbers, including unimpressive ones (0.34, 0.57 coherence, 72.3% pass rate). Panels crop at the frame edge but are never faked, simplified or reduced to three big stats.",
+      "refs": [
+        "ref.product.monitoring",
+        "ref.product.sql",
+        "ref.product.experiment"
+      ]
+    },
+    {
+      "id": "v7",
+      "name": "Outlined pills, one filled",
+      "rule": "Mode is expressed as a row of equal outlined pills sharing borders, with exactly one member outlined-bright/filled as active. Pills are stroke-only; the active state changes stroke and text weight, not fill colour.",
+      "refs": [
+        "ref.section.tabs",
+        "ref.section.observe"
+      ]
+    },
+    {
+      "id": "v8",
+      "name": "Lists show their inactive members",
+      "rule": "Sequences reveal what comes next by leaving it in place at low opacity rather than hiding it: Product Manager and QA Team sit visible and faded under the active Data Scientists. Nothing enters from nowhere.",
+      "refs": [
+        "ref.section.personas"
+      ]
+    },
+    {
+      "id": "v9",
+      "name": "One tinted word",
+      "rule": "Emphasis in a headline is one word in tan or peach inside an otherwise white line ('production'). Never two words, never a gradient on type, never a box.",
+      "refs": [
+        "ref.section.observe"
+      ]
+    }
+  ],
+  "compositionRules": [
+    {
+      "id": "c1",
+      "name": "Black frame, one lit object",
+      "rule": "Each frame holds one illuminated thing on black: a sphere cluster, a dot on a line, or a pastel product slab. Everything else falls toward the background. Never two competing light sources in one frame.",
+      "refs": [
+        "ref.hero",
+        "ref.section.ruled"
+      ]
+    },
+    {
+      "id": "c2",
+      "name": "Wide left, narrow right",
+      "rule": "Headline sits large-left at roughly 1/3 width; supporting body sits far right as a 4-line 13px grey block, with the horizontal band running between them. Large asymmetric gap in the middle is the layout, not an error.",
+      "refs": [
+        "ref.section.collaborate",
+        "ref.font.body"
+      ]
+    },
+    {
+      "id": "c3",
+      "name": "Full-bleed band, contained panel",
+      "rule": "Editorial bands run edge to edge; product lives in a rounded panel that is inset, or cropped only at the bottom of frame as if scrolled past. Product never bleeds off left and right.",
+      "refs": [
+        "ref.section.tabs",
+        "ref.product.monitoring"
+      ]
+    },
+    {
+      "id": "c4",
+      "name": "Occlusion is allowed",
+      "rule": "Objects pass in front of type and other objects and are not composited around it. Overlap builds the eclipse; z-order is the only depth cue used.",
+      "refs": [
+        "ref.hero",
+        "ref.section.spheres"
+      ]
+    }
+  ],
+  "motionImplications": [
+    {
+      "id": "m1",
+      "name": "Dots travel along rules",
+      "rule": "Peach dots move horizontally on their line and stop on it. They may change line only by a discrete vertical step, never a diagonal arc. A dot arriving = an inference logged.",
+      "refs": [
+        "ref.section.ruled",
+        "ref.logo.glyph"
+      ]
+    },
+    {
+      "id": "m2",
+      "name": "Rules draw from one edge",
+      "rule": "Horizontal rules extend from the left as thin wipes at slightly staggered offsets, and knock out where text will land. Rules never fade in as a block.",
+      "refs": [
+        "ref.section.ruled",
+        "ref.section.collaborate"
+      ]
+    },
+    {
+      "id": "m3",
+      "name": "Spheres drift, terminator rotates",
+      "rule": "Sphere motion is slow parallax translation at different rates by size, plus rotation of the light terminator so the eclipse tightens. Spheres never spin, bounce or scale-pop.",
+      "refs": [
+        "ref.section.spheres"
+      ]
+    },
+    {
+      "id": "m4",
+      "name": "Score fills in place",
+      "rule": "Eval values resolve by the cell tint washing in behind an already-present number, not by counting up. The grid is mounted once and its cells change state.",
+      "refs": [
+        "ref.product.experiment"
+      ]
+    },
+    {
+      "id": "m5",
+      "name": "Active moves along the pill row",
+      "rule": "Tab changes are the active stroke sliding between adjacent pills on a shared border; the pill row itself is static and persistent across the film.",
+      "refs": [
+        "ref.section.tabs",
+        "ref.section.observe"
+      ]
+    },
+    {
+      "id": "m6",
+      "name": "Brightness is the transition",
+      "rule": "Elements arrive and leave by luminance, not by translate/scale. Type surfaces from near-black to grey; faded personas raise opacity in place.",
+      "refs": [
+        "ref.hero",
+        "ref.section.personas"
+      ]
+    },
+    {
+      "id": "m7",
+      "name": "Hold on the number",
+      "rule": "Every measurement beat ends on a still frame long enough to read the number (~1s+). Motion resolves into stillness on a value; nothing keeps moving under a stat.",
+      "refs": [
+        "ref.product.monitoring"
+      ]
+    }
+  ],
+  "failureModes": [
+    {
+      "id": "f1",
+      "name": "AI-purple gradient",
+      "rule": "Athina's only saturated field is a defocused rainbow wash sitting BEHIND product, out of frame's attention. Turning that into a purple/blue AI gradient background, a glowing orb, or neon edge-light makes it every LLM tool. Colour must stay behind glass or inside a chip.",
+      "refs": [
+        "ref.section.blur",
+        "ref.section.spheres"
+      ]
+    },
+    {
+      "id": "f2",
+      "name": "Making the hero readable",
+      "rule": "The instinct to raise headline contrast, drop a dark scrim under the spheres, or move type clear of them destroys the one gesture the brand actually owns: a claim it does not shout.",
+      "refs": [
+        "ref.hero"
+      ]
+    },
+    {
+      "id": "f3",
+      "name": "Rules used as texture",
+      "rule": "The ruled band is a data structure, not a pattern. Animating rules as ambient shimmer, scanlines, waveform or audio-EQ bars turns the mark into wallpaper and breaks the one-dot-on-one-line reading.",
+      "refs": [
+        "ref.section.ruled",
+        "ref.logo.glyph"
+      ]
+    },
+    {
+      "id": "f4",
+      "name": "All-green dashboard",
+      "rule": "Every real number on this site is mixed: 0.42, 0.34, 0.57 coherence, 72.3% pass. Replacing them with 99.9% and all-green cells makes the product a claim instead of an instrument. Show the failing cell.",
+      "refs": [
+        "ref.product.experiment",
+        "ref.product.monitoring"
+      ]
+    },
+    {
+      "id": "f5",
+      "name": "Counting numbers up",
+      "rule": "Odometer roll-ups on 32,541 / $64.21 / 72.3% read as ad. Values are measured, so they appear resolved; state changes happen in the tint behind them.",
+      "refs": [
+        "ref.product.monitoring"
+      ]
+    },
+    {
+      "id": "f6",
+      "name": "Speed film",
+      "rule": "The site says '10x faster' but shows only scrutiny. A film built on whip-pans, streaking light and fast cuts contradicts every composition. Athina's speed is that judgement arrives, not that motion is quick.",
+      "refs": [
+        "ref.hero",
+        "ref.product.experiment"
+      ]
+    },
+    {
+      "id": "f7",
+      "name": "Dashboard flyover",
+      "rule": "3D-tilting the UI panel, floating cards in perspective, or exploding it into layers. Product is shown flat, square to camera, at true density, sitting still.",
+      "refs": [
+        "ref.product.monitoring",
+        "ref.product.sql"
+      ]
+    },
+    {
+      "id": "f8",
+      "name": "Logo build from nothing",
+      "rule": "Assembling the glyph out of particles or morphing it from a network graph. The glyph exists at full-screen scale in the film's own world; get to it by scale and framing, not by construction animation.",
+      "refs": [
+        "ref.logo.glyph",
+        "ref.section.ruled"
+      ]
+    },
+    {
+      "id": "f9",
+      "name": "Persona carousel",
+      "rule": "Sliding Data Scientists / PM / QA through as a rotating carousel. The site keeps inactive members stacked and faded in place — the hierarchy is visible at rest.",
+      "refs": [
+        "ref.section.personas"
+      ]
+    },
+    {
+      "id": "f10",
+      "name": "Sphere as mascot",
+      "rule": "Giving the spheres bounce, squash, eye-like highlight or orbiting satellites. They are lit objects casting an eclipse — the only property that should animate is the terminator.",
+      "refs": [
+        "ref.section.spheres"
+      ]
+    }
+  ],
+  "inversions": [
+    "Category default for LLM observability is an oversized dark dashboard bled off-frame with neon graphs. Athina's hero shows no product at all — a headline you can barely read, occluded by three matte spheres. It withholds where competitors overwhelm, then shows the product later at full honest density. Restraint first, evidence second, never a rendering of 'intelligence'.",
+    "The product screens are LIGHT and pastel — mint, plum, olive, cream, pale-blue charts — inside a black site. The inverse of the usual dark-mode-ops aesthetic: the marketing is night, the tool is daylight. Colour is a property of working, not of branding.",
+    "The numbers shown are unflattering on purpose: 0.42 peach, 0.34, 57% coherence, 72.3% pass rate. The brand advertises its own product finding problems rather than reporting success, which is why the eval tint palette is pale rather than red/green alarm."
+  ],
+  "signatureRefs": [
+    "ref.logo.glyph",
+    "ref.section.ruled",
+    "ref.hero",
+    "ref.section.spheres",
+    "ref.product.experiment",
+    "ref.section.observe"
+  ],
+  "kind": "brand-brief",
+  "id": "athina/first",
+  "provenance": {
+    "version": 1,
+    "producedBy": "brandAnalyst",
+    "producedAt": "2026-09-04",
+    "inputHash": "5d2a9c75",
+    "derivedFrom": [
+      "assets@1"
+    ]
+  }
+}

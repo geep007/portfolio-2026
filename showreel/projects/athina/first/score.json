@@ -1,0 +1,571 @@
+{
+  "storyboardId": "athina-one-run-observed",
+  "fps": 30,
+  "duration": 540,
+  "space": {
+    "w": 1920,
+    "h": 1080
+  },
+  "states": [
+    {
+      "id": "claim",
+      "from": 0,
+      "to": 54
+    },
+    {
+      "id": "eclipse",
+      "from": 54,
+      "to": 84
+    },
+    {
+      "id": "rules",
+      "from": 84,
+      "to": 138
+    },
+    {
+      "id": "score",
+      "from": 138,
+      "to": 264
+    },
+    {
+      "id": "query",
+      "from": 264,
+      "to": 372
+    },
+    {
+      "id": "observe",
+      "from": 372,
+      "to": 492
+    },
+    {
+      "id": "glyph",
+      "from": 492,
+      "to": 540
+    }
+  ],
+  "cues": {
+    "kickerSurface": 6,
+    "kickerSurfaceLen": 14,
+    "headlineEdgeLift": 10,
+    "headlineEdgeLiftLen": 20,
+    "bodyBlockSurface": 18,
+    "bodyBlockSurfaceLen": 22,
+    "sphereDriftStart": 0,
+    "sphereDriftStep": [
+      0,
+      7,
+      15
+    ],
+    "terminatorRotate": 44,
+    "terminatorRotateLen": 26,
+    "crescentConverge": 54,
+    "crescentConvergeLen": 22,
+    "outerSpheresFall": 60,
+    "outerSpheresFallLen": 18,
+    "headlineRecede": 56,
+    "headlineRecedeLen": 16,
+    "dotMount": 70,
+    "dotSettle": 76,
+    "eclipseHold": 78,
+    "eclipseHoldLen": 6,
+    "ruleWipeStart": 88,
+    "ruleWipeStep": 2,
+    "ruleWipeLen": 26,
+    "carrierRuleWipe": 92,
+    "carrierRuleWipeLen": 22,
+    "ghostColumnResume": 104,
+    "headlineResurface": 100,
+    "headlineResurfaceLen": 24,
+    "tanWordLift": 112,
+    "tanWordLiftLen": 14,
+    "bodyBlockRaise": 106,
+    "bodyBlockRaiseLen": 22,
+    "rulesDeadHold": 130,
+    "rulesDeadHoldLen": 8,
+    "dotTravelScore": 142,
+    "dotTravelScoreLen": 46,
+    "evalPanelWash": 150,
+    "evalPanelWashLen": 30,
+    "evalRowsResolve": 168,
+    "evalRowsStep": 5,
+    "greenTintWash": 196,
+    "greenTintWashLen": 18,
+    "dotLandsScore": 188,
+    "tintWash": 192,
+    "tintWashLen": 20,
+    "evalMarkSurface": 176,
+    "evalMarkSurfaceLen": 16,
+    "scoreHardHold": 214,
+    "scoreHardHoldLen": 50,
+    "dotStepQuery": 268,
+    "dotStepQueryLen": 8,
+    "dotTravelQuery": 278,
+    "dotTravelQueryLen": 30,
+    "evalPanelDim": 270,
+    "evalPanelDimLen": 22,
+    "queryPanelWash": 282,
+    "queryPanelWashLen": 28,
+    "sqlLineSurface": 296,
+    "sqlLineSurfaceLen": 16,
+    "runControlSurface": 302,
+    "statusResolve": 308,
+    "barChartRaise": 306,
+    "barChartStep": 4,
+    "resultRowTint": 314,
+    "resultRowTintLen": 16,
+    "dotLandsQuery": 310,
+    "queryHold": 330,
+    "queryHoldLen": 42,
+    "dotStepObserve": 376,
+    "dotStepObserveLen": 8,
+    "observePanelWash": 386,
+    "observePanelWashLen": 32,
+    "gradientWashBehind": 384,
+    "gradientWashBehindLen": 40,
+    "passRateResolve": 408,
+    "statFiguresStep": 6,
+    "histogramRaise": 416,
+    "histogramStep": 5,
+    "pillRowSurface": 398,
+    "pillRowSurfaceLen": 18,
+    "activePillSlide": 424,
+    "activePillSlideLen": 14,
+    "personaLineSurface": 410,
+    "personaLineSurfaceLen": 16,
+    "observeHold": 446,
+    "observeHoldLen": 46,
+    "pullBack": 494,
+    "pullBackLen": 30,
+    "panelsDrainToBlack": 494,
+    "panelsDrainToBlackLen": 24,
+    "wordmarkSurface": 508,
+    "wordmarkSurfaceLen": 20,
+    "rightColumnReduce": 500,
+    "rightColumnReduceLen": 16,
+    "finalStill": 528,
+    "finalStillLen": 12
+  },
+  "geometry": {
+    "rules": {
+      "pitch": 26,
+      "originY": 286,
+      "count": 22,
+      "thickness": 1,
+      "bleedLeft": 0,
+      "bleedRight": 1920,
+      "carrierIndex": 10,
+      "knockoutPadX": 24
+    },
+    "dot": {
+      "radius": 9,
+      "glyphRadius": 5,
+      "eclipseX": 820,
+      "eclipseY": 546,
+      "eclipseScale": 1,
+      "ruleIndexByState": {
+        "eclipse": 10,
+        "rules": 10,
+        "score": 10,
+        "query": 11,
+        "observe": 12,
+        "glyph": 12
+      },
+      "xByState": {
+        "eclipse": 820,
+        "rules": 820,
+        "score": 1520,
+        "query": 1180,
+        "observe": 900,
+        "glyph": 820
+      }
+    },
+    "spheres": [
+      {
+        "cx": 470,
+        "cy": 500,
+        "r": 96,
+        "driftX": 210,
+        "driftY": -18
+      },
+      {
+        "cx": 760,
+        "cy": 566,
+        "r": 58,
+        "driftX": 96,
+        "driftY": 22
+      },
+      {
+        "cx": 300,
+        "cy": 612,
+        "r": 132,
+        "driftX": 288,
+        "driftY": -34
+      }
+    ],
+    "eclipseDisc": {
+      "cx": 820,
+      "cy": 546,
+      "r": 34
+    },
+    "kicker": {
+      "x": 160,
+      "y": 150,
+      "size": 16,
+      "tracking": 3.2
+    },
+    "headline": {
+      "x": 160,
+      "lineY": [
+        478,
+        542
+      ],
+      "size": 58,
+      "lineHeight": 64,
+      "maxWidth": 560,
+      "tanWordIndexLine": 1,
+      "tanWordIndex": 0
+    },
+    "bodyBlock": {
+      "x": 1560,
+      "y": 170,
+      "width": 300,
+      "size": 18,
+      "lineHeight": 27,
+      "lines": 4
+    },
+    "panels": {
+      "eval": {
+        "x": 700,
+        "y": 430,
+        "w": 1060,
+        "h": 190,
+        "radius": 18,
+        "cropBottom": 1080
+      },
+      "query": {
+        "x": 700,
+        "y": 560,
+        "w": 1060,
+        "h": 210,
+        "radius": 18,
+        "cropBottom": 1080
+      },
+      "observe": {
+        "x": 700,
+        "y": 586,
+        "w": 1060,
+        "h": 494,
+        "radius": 18,
+        "cropBottom": 1080
+      }
+    },
+    "panelMark": {
+      "dx": 28,
+      "dy": 30,
+      "glyphSize": 18,
+      "labelDx": 54,
+      "labelSize": 14
+    },
+    "evalGrid": {
+      "x": 728,
+      "headerY": 468,
+      "colX": {
+        "experiment": 728,
+        "model": 1000,
+        "metric": 1230,
+        "score": 1560
+      },
+      "rowY": [
+        494,
+        520,
+        546,
+        572
+      ],
+      "rowHeight": 26,
+      "cellSize": 16,
+      "tintRect": {
+        "dx": -12,
+        "w": 120,
+        "h": 22
+      },
+      "tintRowIndex": 2,
+      "greenRowIndex": 0
+    },
+    "sql": {
+      "editorX": 728,
+      "editorY": 596,
+      "editorW": 1004,
+      "editorH": 92,
+      "lineY": 624,
+      "size": 17,
+      "runControl": {
+        "x": 1600,
+        "y": 596,
+        "w": 120,
+        "h": 32
+      },
+      "statusX": 728,
+      "statusY": 700,
+      "resultRowY": 572,
+      "resultRowX": 728,
+      "resultRowW": 1004,
+      "barChart": {
+        "x": 1330,
+        "y": 656,
+        "w": 380,
+        "h": 86,
+        "bars": 7,
+        "barGap": 8
+      },
+      "table": {
+        "x": 728,
+        "y": 730,
+        "w": 560,
+        "rowHeight": 26
+      }
+    },
+    "monitor": {
+      "gradient": {
+        "x": 700,
+        "y": 586,
+        "w": 1060,
+        "h": 494,
+        "blur": 120
+      },
+      "pills": {
+        "x": 728,
+        "y": 640,
+        "w": 700,
+        "h": 34,
+        "count": 5,
+        "activeIndex": 2,
+        "stroke": 1
+      },
+      "persona": {
+        "x": 1500,
+        "y": 634,
+        "lineHeight": 24,
+        "size": 15,
+        "activeIndex": 0
+      },
+      "passRate": {
+        "x": 728,
+        "y": 726,
+        "size": 88
+      },
+      "stats": [
+        {
+          "x": 1180,
+          "y": 716,
+          "size": 30
+        },
+        {
+          "x": 1400,
+          "y": 716,
+          "size": 30
+        },
+        {
+          "x": 1620,
+          "y": 716,
+          "size": 30
+        }
+      ],
+      "histograms": [
+        {
+          "x": 728,
+          "y": 866,
+          "w": 440,
+          "h": 120,
+          "bars": 18,
+          "barGap": 6
+        },
+        {
+          "x": 1240,
+          "y": 866,
+          "w": 440,
+          "h": 120,
+          "bars": 18,
+          "barGap": 6
+        }
+      ]
+    },
+    "glyphOut": {
+      "worldScale": 1,
+      "worldOriginX": 820,
+      "worldOriginY": 546,
+      "glyphX": 780,
+      "glyphY": 520,
+      "ruleLength": 46,
+      "wordmarkX": 940,
+      "wordmarkY": 572,
+      "wordmarkSize": 42,
+      "rightColumnX": 1560,
+      "rightColumnY": 170,
+      "rightColumnSize": 16,
+      "litRules": [
+        10,
+        11,
+        12
+      ],
+      "glyphCx": 820,
+      "glyphHalfWidth": 66,
+      "glyphDotOffsets": [
+        -46,
+        8,
+        52
+      ],
+      "glyphOriginY": 492,
+      "glyphCy": 572
+    }
+  },
+  "content": {
+    "kicker": "ONE RUN, OBSERVED",
+    "headlines": {
+      "claim": [
+        "Ship AI to production",
+        "10x faster"
+      ],
+      "rules": [
+        "One inference, one score,",
+        "one line of evidence"
+      ],
+      "observe": [
+        "Complete visibility into",
+        "your production AI"
+      ]
+    },
+    "tanWord": "evidence",
+    "body": {
+      "claim": [
+        "Every inference gets a score.",
+        "Prompts, experiments, datasets,",
+        "production traffic \u2014 one unit",
+        "of evidence at a time."
+      ],
+      "rules": [
+        "A dot lands on a rule.",
+        "Every run Athina scores sits on",
+        "that line \u2014 and some fail."
+      ],
+      "score": [
+        "One score is not a verdict."
+      ],
+      "query": [
+        "Query the runs, not the vibes."
+      ],
+      "glyph": [
+        "One run, observed."
+      ]
+    },
+    "eclipseLabel": "One inference",
+    "evalGrid": {
+      "header": [
+        "Experiment",
+        "Model",
+        "Metric",
+        "Score"
+      ],
+      "rows": [
+        {
+          "experiment": "Experiment",
+          "model": "gpt-4o",
+          "metric": "faithfulness",
+          "score": "0.87",
+          "tint": "green"
+        },
+        {
+          "experiment": "Experiment",
+          "model": "gpt-4o",
+          "metric": "faithfulness",
+          "score": "0.75",
+          "tint": "none"
+        },
+        {
+          "experiment": "Experiment",
+          "model": "gpt-4o",
+          "metric": "faithfulness",
+          "score": "0.42",
+          "tint": "peach"
+        },
+        {
+          "experiment": "Experiment",
+          "model": "gpt-4o",
+          "metric": "faithfulness",
+          "score": "0.34",
+          "tint": "none"
+        }
+      ]
+    },
+    "panelLabels": {
+      "eval": "Athina \u00b7 Evaluate",
+      "query": "Athina \u00b7 Query",
+      "observe": "Athina \u00b7 Observe"
+    },
+    "sql": {
+      "query": "SELECT * FROM inferences WHERE score < 0.5",
+      "runControl": "Run query",
+      "status": "105 ms",
+      "rows": "1,284 rows"
+    },
+    "monitor": {
+      "passRate": "72.3%",
+      "passRateLabel": "pass rate",
+      "stats": [
+        {
+          "value": "32,541",
+          "label": "inferences"
+        },
+        {
+          "value": "$64.21",
+          "label": "cost"
+        },
+        {
+          "value": "945ms",
+          "label": "latency"
+        }
+      ],
+      "pills": [
+        "Prompt",
+        "Evaluate",
+        "Experiment",
+        "Annotate",
+        "Prototype"
+      ],
+      "activePill": "Experiment",
+      "personas": [
+        "Data Scientists",
+        "Product Manager",
+        "QA Team"
+      ],
+      "activePersona": "Data Scientists"
+    },
+    "wordmark": {
+      "bold": "ATHINA",
+      "light": "AI"
+    }
+  },
+  "continuity": [
+    "Dot mounted once at cue dotMount (f70) and never unmounted; only x, ruleIndex, scale animate.",
+    "Carrier rule index 10 mounted at carrierRuleWipe (f92) and persists to f540; rules added, never removed.",
+    "Eval grid mounted once at evalPanelWash (f150); rows persist, only tint rects animate behind resolved numbers.",
+    "Eval panel dims at evalPanelDim but stays mounted through observe and glyph.",
+    "Pill row mounted at pillRowSurface (f398) static; only active stroke slides between adjacent pills on shared border.",
+    "World scale continuous: glyphOut.worldScale 0.42 applied to the same rule stack from 'rules', no new drawing.",
+    "Three spheres mounted at f0 persist through eclipse; luminance falls to 0, no unmount.",
+    "Dot vertical is quantised: y = rules.originY + ruleIndex * rules.pitch, never interpolated diagonally.",
+    "Panels never cross x 700 or x 1760; crop only at frame bottom 1080.",
+    "Blue confined to sql.barChart and monitor.histograms; frame palette stays black, white, peach, tan."
+  ],
+  "kind": "score",
+  "id": "athina/first",
+  "provenance": {
+    "version": 3,
+    "producedBy": "scorer",
+    "producedAt": "2026-09-04",
+    "inputHash": "refined-after-critique",
+    "derivedFrom": [
+      "storyboard@1",
+      "creative-direction@1"
+    ]
+  }
+}
