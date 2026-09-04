@@ -1,0 +1,289 @@
+{
+  "kind": "storyboard",
+  "id": "hookflo/missing-dot",
+  "provenance": {
+    "version": 2,
+    "producedBy": "storyboarder",
+    "producedAt": "2026-09-04",
+    "inputHash": "16ea0755",
+    "derivedFrom": [
+      "creative-direction@1",
+      "brand-brief@1",
+      "assets@1"
+    ]
+  },
+  "directionId": "hookflo/missing-dot",
+  "aspectRatio": "16:9",
+  "durationTarget": 20,
+  "states": [
+    {
+      "id": "idle",
+      "purpose": "Establish the mark as geometry rather than as a logo, so the hole is registered before it means anything.",
+      "visual": "Black, bloom already lit above the top edge. Eight dots write in on a 2-frame metronome in reading order; the white dot lands last, alone, after a pause. The mark sits centred and large. The hole in the top-right is the only thing in the frame that is not there. A mono eyebrow clip-wipes in, then 40 frames of nothing.",
+      "hierarchy": [
+        "the mark",
+        "the hole in it",
+        "the eyebrow"
+      ],
+      "persists": [],
+      "entering": [
+        "mark dots",
+        "white dot",
+        "eyebrow",
+        "clock"
+      ],
+      "leaving": [],
+      "copy": [
+        "Failure-first webhook observability",
+        "03:14:00",
+        "hookflo"
+      ],
+      "refs": [
+        "ref.logo.mark"
+      ],
+      "weight": 0.13
+    },
+    {
+      "id": "arrive",
+      "purpose": "Turn the mark into the product and establish a cadence the viewer will expect to continue.",
+      "visual": "The panel clips open around the dots; the dots redistribute in two orthogonal legs onto a single left rail as row markers. A mono label writes in above the panel. Rows arrive every 12 frames — monogram tile, source, event name, timestamp — and each pending chip flips to 200 nine frames after its row lands. A status strip runs along the bottom.",
+      "hierarchy": [
+        "the arriving row",
+        "the rail of markers",
+        "the label above"
+      ],
+      "persists": [
+        "mark dots (now row markers)",
+        "clock"
+      ],
+      "entering": [
+        "log panel",
+        "mono label",
+        "rows",
+        "status strip",
+        "counter"
+      ],
+      "leaving": [
+        "mark as mark"
+      ],
+      "copy": [
+        "Live deliveries · last 60 seconds",
+        "hookflo.com/dashboard",
+        "Monitoring for failures…",
+        "8 delivered · 0 failed"
+      ],
+      "refs": [
+        "ref.product.dashboard"
+      ],
+      "weight": 0.19
+    },
+    {
+      "id": "drop",
+      "purpose": "Let the failure happen without the film noticing. This is the film's entire argument.",
+      "visual": "The metronome misses exactly one beat and one row never arrives, leaving a gap a third of the way down a busy, healthy log. The film carries on over it: later rows keep landing, chips keep flipping green, the counter keeps counting. Densest frame in the film. Nothing marks the gap.",
+      "hierarchy": [
+        "the continuing cadence",
+        "the gap, unmarked"
+      ],
+      "persists": [
+        "log panel",
+        "all previously arrived rows",
+        "clock",
+        "label"
+      ],
+      "entering": [
+        "the remaining rows"
+      ],
+      "leaving": [],
+      "refs": [
+        "ref.product.dashboard"
+      ],
+      "weight": 0.13
+    },
+    {
+      "id": "scan",
+      "purpose": "Change the agent from 'your app emitting' to 'Hookflo looking', felt rather than stated.",
+      "visual": "All motion ceases in one frame and every row drops to 12%. A 1px lavender head travels down the inside of the panel at constant speed, no ease at either end, and halts on the empty row, which returns to 100%.",
+      "hierarchy": [
+        "the reading head",
+        "the row it stops on"
+      ],
+      "persists": [
+        "log panel",
+        "every row",
+        "clock"
+      ],
+      "entering": [
+        "scan head"
+      ],
+      "leaving": [
+        "cadence",
+        "full brightness"
+      ],
+      "refs": [
+        "ref.section.scrolltext"
+      ],
+      "weight": 0.09
+    },
+    {
+      "id": "detect",
+      "purpose": "Name what happened, at chip scale, and then stop entirely so it can be read.",
+      "visual": "A red marker writes into the empty slot; the missing chip resolves to 410. The label, strip and counter rewrite. The scan head leaves once the marker is written. Then 34 frames of absolute stillness: one lit row in a dark panel, the emptiest state after IDLE.",
+      "hierarchy": [
+        "the red marker",
+        "the 410 chip",
+        "the rewritten label"
+      ],
+      "persists": [
+        "log panel",
+        "every row at 12%",
+        "the lit failing row",
+        "clock"
+      ],
+      "entering": [
+        "red marker",
+        "410 chip"
+      ],
+      "leaving": [
+        "scan head"
+      ],
+      "copy": [
+        "webhook.failed · signature could not be verified",
+        "1 delivery unverified",
+        "12 delivered · 1 failed"
+      ],
+      "weight": 0.09
+    },
+    {
+      "id": "route",
+      "purpose": "Show the product doing its one job: putting the failure where a human already is.",
+      "visual": "The panel contracts to a narrow column on the left. The red marker travels the gutter on a right-angled path at cubic-in-out — the only object that crosses the frame in the whole film — and the alert card clips open downward from its own header on the right, composing line by line out of that dot. A mono delivery receipt sits beneath the card.",
+      "hierarchy": [
+        "the travelling marker",
+        "the alert card composing",
+        "the dim log column, still running"
+      ],
+      "persists": [
+        "log panel (contracted, not remounted)",
+        "the failing row at its y-position",
+        "clock"
+      ],
+      "entering": [
+        "alert card",
+        "route stroke",
+        "receipt"
+      ],
+      "leaving": [],
+      "copy": [
+        "Routing to channel",
+        "delivered to #eng-alerts 1.4s after failure"
+      ],
+      "weight": 0.15
+    },
+    {
+      "id": "resolve",
+      "purpose": "Return the system to health with exactly one thing changed.",
+      "visual": "The alert card clips shut toward its own leading dot; the marker travels back down the same right-angled path into its row. The column returns to full width and full brightness. The chip flips from 410 to alerted. The same composition as ARRIVE, with one lavender row in it — the film's one accent, in the one place it belongs. Then stillness.",
+      "hierarchy": [
+        "the alerted row",
+        "the restored log"
+      ],
+      "persists": [
+        "log panel",
+        "the failing row's y-position, unchanged since it arrived",
+        "clock"
+      ],
+      "entering": [],
+      "leaving": [
+        "alert card",
+        "route stroke",
+        "receipt"
+      ],
+      "copy": [
+        "Monitoring for failures…",
+        "12 delivered · 1 alerted"
+      ],
+      "weight": 0.11
+    },
+    {
+      "id": "mark",
+      "purpose": "End where the film began, with the hole still in it.",
+      "visual": "Rows give up their text; the eight markers converge on the 3x3 field, landing on the left margin this time, the alerted marker arriving last and landing white. The wordmark clip-wipes beside them and the headline mask-rises below, second line in lavender — the site's own hero, rebuilt. Lockup above, headline below, both on the 300px margin, the right half empty. Last 24 frames: nothing moves except the clock.",
+      "hierarchy": [
+        "the mark",
+        "the headline",
+        "the clock, still running"
+      ],
+      "persists": [
+        "the eight markers",
+        "clock"
+      ],
+      "entering": [
+        "wordmark",
+        "headline"
+      ],
+      "leaving": [
+        "rows",
+        "panel",
+        "strip"
+      ],
+      "copy": [
+        "Hookflo",
+        "Monitor every webhook event.",
+        "hookflo.com"
+      ],
+      "refs": [
+        "ref.logo.mark",
+        "ref.hero"
+      ],
+      "weight": 0.12
+    }
+  ],
+  "critique": [
+    {
+      "stateId": null,
+      "problem": "Rev 1 had the brand's colours and type but behaved like a diagram rather than like Hookflo. Seven instances of the same problem.",
+      "fix": "All seven fixed below; rev 2 is what was built."
+    },
+    {
+      "stateId": "arrive",
+      "problem": "The log panel was 748px tall holding 544px of content. 200px of dead air inside a container reads as an unfinished layout, and this brand's negative space is always outside containers (C1).",
+      "fix": "Panel to 1200x620, rows to 60px, eight of them. Breathing room moved outside the panel."
+    },
+    {
+      "stateId": null,
+      "problem": "No mono label above the panel — a direct violation of R7 — leaving the top sixth of every frame empty and the film with no way to speak without narrating.",
+      "fix": "An uppercase mono label above the panel that rewrites three times: Live deliveries -> webhook.failed -> Routing to channel. That is the film's entire voice, and it is the site's own device."
+    },
+    {
+      "stateId": "arrive",
+      "problem": "Source names were bare text. The site always pairs a source with its mark; without them the rows read as an abstract diagram of a log. The biggest generic risk in the piece.",
+      "fix": "28px monogram tiles in each service's own colour at low saturation — st, ck, sb, gh. The single largest gain in the project."
+    },
+    {
+      "stateId": "scan",
+      "problem": "The scan line was misaligned with the row it stops on and ran the full frame width — the most brand-specific gesture in the film, executed sloppily.",
+      "fix": "Aligned to the failing row's centre and clipped to the panel's inner width. The scan happens inside the instrument."
+    },
+    {
+      "stateId": "route",
+      "problem": "The route path ran straight across the dimmed rows, reading as a rendering mistake and breaking R1 by treating the panel as if it were not a container.",
+      "fix": "The path begins at the panel's right edge at the failing row's height and lives entirely in the gutter between the two panels, which was previously empty."
+    },
+    {
+      "stateId": "route",
+      "problem": "The bottom-right quadrant was an unplaced void — the difference between asymmetry and imbalance.",
+      "fix": "A mono delivery receipt under the card, which weights the corner and is also the film's proof of the product claim."
+    },
+    {
+      "stateId": "mark",
+      "problem": "Mark, wordmark and headline sat at three competing scales from the same x with no structure between them. It read as an end card rather than as this brand.",
+      "fix": "Restacked as the site does it: small lockup above, 108px headline below, both on the 300px margin, right half empty."
+    },
+    {
+      "stateId": "drop",
+      "problem": "The DROP beat's central claim — that the system does not know yet — was invisible in a still.",
+      "fix": "A running counter: 8 delivered · 0 failed -> 1 failed -> 1 alerted."
+    }
+  ]
+}

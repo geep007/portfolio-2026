@@ -1,0 +1,178 @@
+{
+  "runId": "athina-01",
+  "project": "athina",
+  "film": "first",
+  "mode": "brand-derived",
+  "startedAt": "2026-09-04T08:06:42.119Z",
+  "stages": [
+    {
+      "model": "claude-opus-5",
+      "promptTokens": 81950,
+      "promptChars": 996,
+      "iterations": 1,
+      "inputTokens": 14,
+      "outputTokens": 4232,
+      "cachedInputTokens": 63990,
+      "cacheCreationTokens": 17946,
+      "adapterBaselineTokens": 11301,
+      "costUsd": 0.32574100000000006,
+      "latencyMs": 65908,
+      "retries": 0,
+      "calls": 1,
+      "finishReason": "tool_use",
+      "providerRequestId": "cd782ad1-84bc-43be-b880-8887beb9bd95",
+      "artifact": "assets@1",
+      "artifactInputs": [],
+      "filesRead": [],
+      "skillFiles": [
+        "agent/SYSTEM_PRINCIPLES.md",
+        "agent/skills/brand-archaeology.md"
+      ],
+      "sourceUrls": [
+        "https://www.athina.ai/"
+      ],
+      "cacheHit": false,
+      "cacheKey": "b6925ac5",
+      "rawSourceReread": true,
+      "stage": "extract",
+      "role": "extractor"
+    },
+    {
+      "model": "claude-opus-5",
+      "promptTokens": 49465,
+      "promptChars": 3703,
+      "iterations": 1,
+      "inputTokens": 8,
+      "outputTokens": 5905,
+      "cachedInputTokens": 33346,
+      "cacheCreationTokens": 16111,
+      "adapterBaselineTokens": 10747,
+      "costUsd": 0.32544799999999996,
+      "latencyMs": 90988,
+      "retries": 0,
+      "calls": 1,
+      "finishReason": "tool_use",
+      "providerRequestId": "50a76f78-b78c-4fa2-9801-22df91d7d498",
+      "artifact": "brand-brief@1",
+      "artifactInputs": [
+        "assets@1"
+      ],
+      "filesRead": [],
+      "skillFiles": [
+        "agent/SYSTEM_PRINCIPLES.md",
+        "agent/skills/brand-archaeology.md"
+      ],
+      "sourceUrls": [
+        "https://www.athina.ai/"
+      ],
+      "cacheHit": false,
+      "cacheKey": "5d2a9c75",
+      "rawSourceReread": true,
+      "stage": "archaeology",
+      "role": "brandAnalyst"
+    },
+    {
+      "model": "claude-opus-5",
+      "promptTokens": 42446,
+      "promptChars": 12304,
+      "iterations": 1,
+      "inputTokens": 6,
+      "outputTokens": 11160,
+      "cachedInputTokens": 28011,
+      "cacheCreationTokens": 14429,
+      "adapterBaselineTokens": 4929,
+      "costUsd": 0.43732550000000003,
+      "latencyMs": 132037,
+      "retries": 0,
+      "calls": 1,
+      "finishReason": "tool_use",
+      "providerRequestId": "0b6ca129-d5c7-47e6-9dff-5a567259c37f",
+      "artifact": "creative-direction@1",
+      "artifactInputs": [
+        "brand-brief@1",
+        "assets@1"
+      ],
+      "filesRead": [],
+      "skillFiles": [
+        "agent/SYSTEM_PRINCIPLES.md",
+        "agent/skills/creative-direction.md"
+      ],
+      "sourceUrls": [],
+      "cacheHit": false,
+      "cacheKey": "52b2481e",
+      "rawSourceReread": false,
+      "stage": "direction",
+      "role": "creativeDirector"
+    },
+    {
+      "model": "claude-opus-5",
+      "promptTokens": 26519,
+      "promptChars": 12890,
+      "iterations": 1,
+      "inputTokens": 4,
+      "outputTokens": 10316,
+      "cachedInputTokens": 13930,
+      "cacheCreationTokens": 12585,
+      "adapterBaselineTokens": 5090,
+      "costUsd": 0.390735,
+      "latencyMs": 122259,
+      "retries": 0,
+      "calls": 1,
+      "finishReason": "tool_use",
+      "providerRequestId": "4df4d1ba-5629-41fd-8e2d-803f9cc6e286",
+      "artifact": "storyboard@1",
+      "artifactInputs": [
+        "brand-brief@1",
+        "creative-direction@1",
+        "assets@1"
+      ],
+      "filesRead": [],
+      "skillFiles": [
+        "agent/SYSTEM_PRINCIPLES.md",
+        "agent/skills/storyboard.md"
+      ],
+      "sourceUrls": [],
+      "cacheHit": false,
+      "cacheKey": "748868be",
+      "rawSourceReread": false,
+      "stage": "storyboard",
+      "role": "storyboarder"
+    }
+  ],
+  "finishedAt": "2026-09-04T08:13:33.318Z",
+  "summary": {
+    "totalInputTokens": 32,
+    "totalOutputTokens": 31613,
+    "totalCachedInputTokens": 139277,
+    "totalCacheCreationTokens": 61071,
+    "totalAdapterBaselineTokens": 32067,
+    "totalPipelineTokens": 199926,
+    "totalBilledTokens": 231993,
+    "totalCalls": 4,
+    "cacheHits": 0,
+    "cacheMisses": 4,
+    "retries": 0,
+    "latencyMs": 411192,
+    "byStage": {
+      "extract": 74881,
+      "archaeology": 44623,
+      "direction": 48677,
+      "storyboard": 31745
+    },
+    "largestByInput": {
+      "stage": "extract",
+      "tokens": 70649
+    },
+    "largestByOutput": {
+      "stage": "direction",
+      "tokens": 11160
+    },
+    "rawSourceReads": [
+      "extract",
+      "archaeology"
+    ],
+    "illegalRawSourceReads": [],
+    "costUsd": 1.4792495,
+    "unmeasured": []
+  }
+}

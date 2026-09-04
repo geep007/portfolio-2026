@@ -23,6 +23,14 @@
     "upgrade": "remotion upgrade",
     "render:sig": "remotion render SigMark out/sig-frames --sequence --image-format=png",
     "render:launch": "remotion render Launch-atomic out/launch-atomic.mp4 && remotion render Launch-edelgive out/launch-edelgive.mp4",
+    "render:hookflo": "remotion render Hookflo-MissingDot out/hookflo/missing-dot.mp4",
+    "render:athina": "remotion render Athina-OneRunObserved out/athina/one-run-observed.mp4",
+    "render:grow": "remotion render GrowWhatHoldsItUp out/grow-what-holds-it-up.mp4",
+    "check:artifacts": "node scripts/check-artifacts.mjs",
+    "verify": "BMS_ENTRY=scripts/verify.ts node scripts/run-pipeline.mjs",
+    "report": "node scripts/run-report.mjs",
+    "pipeline": "node scripts/run-pipeline.mjs",
+    "pipeline:baseline": "node scripts/run-pipeline.mjs --baseline",
     "render:edelgive": "remotion render Plan-edelgive-intro out/edelgive-intro.mp4 && remotion render Plan-edelgive-showcase out/edelgive-showcase.mp4 && remotion render Plan-edelgive-reel out/edelgive-reel.mp4"
   },
   "dependencies": {

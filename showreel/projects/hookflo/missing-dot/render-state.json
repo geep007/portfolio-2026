@@ -1,0 +1,43 @@
+{
+  "kind": "render-state",
+  "id": "hookflo/missing-dot",
+  "provenance": {
+    "version": 1,
+    "producedBy": "implementer",
+    "producedAt": "2026-09-04",
+    "inputHash": "migrated",
+    "derivedFrom": ["score@1", "storyboard@2", "creative-direction@1"]
+  },
+
+  "composition": "Hookflo-MissingDot",
+  "from": { "brandBrief": 1, "direction": 1, "storyboard": 2, "score": 1, "assets": 1 },
+  "renderPath": "showreel/out/hookflo/missing-dot.mp4",
+
+  "qaFrames": [
+    { "stateId": "idle", "frame": 60, "path": "showreel/out/hookflo/frames/f060.png" },
+    { "stateId": "arrive", "frame": 150, "path": "showreel/out/hookflo/frames/f150.png" },
+    { "stateId": "drop", "frame": 240, "path": "showreel/out/hookflo/frames/f240.png" },
+    { "stateId": "scan", "frame": 300, "path": "showreel/out/hookflo/frames/f300.png" },
+    { "stateId": "detect", "frame": 350, "path": "showreel/out/hookflo/frames/f350.png" },
+    { "stateId": "route", "frame": 440, "path": "showreel/out/hookflo/frames/f440.png" },
+    { "stateId": "resolve", "frame": 510, "path": "showreel/out/hookflo/frames/f510.png" },
+    { "stateId": "mark", "frame": 585, "path": "showreel/out/hookflo/frames/f585.png" }
+  ],
+  "contactSheet": "showreel/out/hookflo/contact-sheet.png",
+
+  "critique": {
+    "status": "passed",
+    "findings": [
+      { "id": "V1", "stateId": "arrive", "violates": "direction.forbiddenBehaviours[6]", "problem": "Nine dots each flying its own diagonal from the mark to its row read as a particle effect.", "fix": "Rebuilt as two orthogonal legs — spread vertically into row order, then align left onto the rail; reversed on the way home. It now reads as a grid unfolding into a list and matches the film's route grammar.", "applied": true },
+      { "id": "V2", "stateId": "detect", "violates": "brief.motionImplications.M3", "problem": "The scan head parked on the row it had found and struck through the text for 40 frames. A reading head that stays is a decoration.", "fix": "It leaves once Hookflo has written its marker.", "applied": true },
+      { "id": "V3", "stateId": "route", "violates": "direction.continuityRules[3]", "problem": "The failing row lost its status chip when the panel contracted, right as the alert card claims 410.", "fix": "The timestamp column still drops in the narrow panel; the chip never does, because it is the evidence.", "applied": true },
+      { "id": "V4", "stateId": "route", "violates": "direction.forbiddenBehaviours[10]", "problem": "'email · slack · webhook — all channels acknowledged' was a claim rather than evidence, and the most advertising-shaped thing in the piece.", "fix": "Cut.", "applied": true }
+    ]
+  },
+
+  "limits": [
+    "No sound. The score assumes a metronome that misses a beat at the drop and a Slack knock at the alert; neither exists in the render. The drop is designed to be heard before it is seen.",
+    "The ending's meaning is thin without the setup: that the alerted marker lands on the mark's white dot is legible only to a viewer who registered the white dot in the first three seconds.",
+    "The panel stays dead-centre for four of the eight states. Deliberate — it is one persistent object being re-read — but it is the most symmetrical choice available."
+  ]
+}

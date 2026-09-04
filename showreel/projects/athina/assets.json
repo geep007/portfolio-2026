@@ -1,0 +1,127 @@
+{
+  "source": "https://www.athina.ai/",
+  "mode": "brand-derived",
+  "assets": [
+    {
+      "ref": "ref.hero",
+      "kind": "screenshot",
+      "path": "projects/athina/source/01-hero.jpg",
+      "caption": "Black hero, huge grey \"Ship AI to prod 10x faster\", three white sphere gradients overlapping type",
+      "section": "hero"
+    },
+    {
+      "ref": "ref.logo.mark",
+      "kind": "logo",
+      "path": "https://cdn.prod.website-files.com/670cb23343dfaffd7368be46/6732517c00b219fc50f0b5e5_athina-text-black-transparent.png",
+      "caption": "Wordmark: bold ATHINA plus light AI, left of it small dot-and-bar glyph",
+      "section": "nav"
+    },
+    {
+      "ref": "ref.logo.glyph",
+      "kind": "icon",
+      "path": "projects/athina/source/01-hero.jpg",
+      "caption": "Nav glyph: stacked short horizontal rules with one dot riding a line",
+      "section": "nav"
+    },
+    {
+      "ref": "ref.section.spheres",
+      "kind": "image",
+      "path": "projects/athina/source/01-hero.jpg",
+      "caption": "Three soft-lit spheres, white-to-black gradient, different sizes, floating over headline as eclipse forms",
+      "section": "hero"
+    },
+    {
+      "ref": "ref.product.experiment",
+      "kind": "product-ui",
+      "path": "projects/athina/source/02-experiment-slab.jpg",
+      "caption": "Eval grid: greyed text rows, right columns scored 0.75/0.87/0.42 tinted green to peach",
+      "section": "develop"
+    },
+    {
+      "ref": "ref.section.tabs",
+      "kind": "screenshot",
+      "path": "projects/athina/source/02-experiment-slab.jpg",
+      "caption": "Plum slab with pill tabs Prompt Evaluate Experiment Annotate Prototype, Experiment outlined active",
+      "section": "develop"
+    },
+    {
+      "ref": "ref.section.ruled",
+      "kind": "screenshot",
+      "path": "projects/athina/source/03-ruled-scatter.jpg",
+      "caption": "Black band of thin horizontal rules, peach dots parked on lines, text knocking rules out",
+      "section": "collaborate"
+    },
+    {
+      "ref": "ref.section.collaborate",
+      "kind": "keyframe",
+      "path": "projects/athina/source/03-ruled-scatter.jpg",
+      "caption": "\"Collaborate with your entire team\" white headline, rules resume as ghost columns beside it",
+      "section": "collaborate"
+    },
+    {
+      "ref": "ref.section.personas",
+      "kind": "screenshot",
+      "path": "projects/athina/source/04-personas-data.jpg",
+      "caption": "White page, persona list Data Scientists active, Product Manager and QA Team faded below",
+      "section": "personas"
+    },
+    {
+      "ref": "ref.product.sql",
+      "kind": "product-ui",
+      "path": "projects/athina/source/04-personas-data.jpg",
+      "caption": "SQL editor with Run query, 105 ms status, blue bar chart, dataset table beside",
+      "section": "personas"
+    },
+    {
+      "ref": "ref.section.persona.card",
+      "kind": "screenshot",
+      "path": "projects/athina/source/04-personas-data.jpg",
+      "caption": "Dark-olive panel, pink dot cluster, \"Work with your Data\", dotted grid, mint background",
+      "section": "personas"
+    },
+    {
+      "ref": "ref.product.monitoring",
+      "kind": "product-ui",
+      "path": "projects/athina/source/05-monitoring.jpg",
+      "caption": "Observe dashboard: 72.3% pass rate, 32,541 inferences, $64.21, 945ms, blue green histograms",
+      "section": "observe"
+    },
+    {
+      "ref": "ref.section.observe",
+      "kind": "keyframe",
+      "path": "projects/athina/source/05-monitoring.jpg",
+      "caption": "\"Complete visibility into your production AI\", \"production\" in tan, five outlined tab pills",
+      "section": "observe"
+    },
+    {
+      "ref": "ref.section.blur",
+      "kind": "palette",
+      "path": "projects/athina/source/05-monitoring.jpg",
+      "caption": "Blurred rainbow gradient wash behind dashboard, only saturated colour on otherwise mono page",
+      "section": "observe"
+    },
+    {
+      "ref": "ref.font.display",
+      "kind": "font",
+      "path": "https://www.athina.ai/",
+      "caption": "Geometric grotesque, wide apertures, tall x-height, single-weight headlines set tight two lines",
+      "section": "type"
+    },
+    {
+      "ref": "ref.font.body",
+      "kind": "font",
+      "path": "https://www.athina.ai/",
+      "caption": "Same grotesque at 13px, loose leading, grey-on-black, short four-line paragraph blocks",
+      "section": "type"
+    }
+  ],
+  "kind": "assets",
+  "id": "athina/first",
+  "provenance": {
+    "version": 1,
+    "producedBy": "extractor",
+    "producedAt": "2026-09-04",
+    "inputHash": "b6925ac5",
+    "derivedFrom": []
+  }
+}

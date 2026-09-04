@@ -1,0 +1,33 @@
+{
+  "note": "Written once, at selection time. Nothing downstream reads this file. It exists so a human can see what was considered, and so a later run does not re-pitch the same three ideas.",
+  "criteria": ["brandSpecificity", "productTruth", "continuity", "legibility", "restraint", "typeRole", "pacing", "endability", "buildability", "memorability"],
+  "candidates": [
+    {
+      "id": "missing-dot",
+      "title": "A · The Missing Dot",
+      "pitch": "The mark, given time. Its empty position opens into a live log, a delivery goes missing there unmarked, Hookflo finds and routes it, and the log collapses back into the mark.",
+      "scores": { "brandSpecificity": 5, "productTruth": 5, "continuity": 5, "legibility": 5, "restraint": 5, "typeRole": 5, "pacing": 5, "endability": 5, "buildability": 4, "memorability": 5 },
+      "total": 49,
+      "selected": true
+    },
+    {
+      "id": "silent-night",
+      "title": "B · Silent Night / 03:14",
+      "pitch": "A real-time night-shift film with a mono clock as protagonist; nothing happens for a long time and then one thing does.",
+      "scores": { "brandSpecificity": 4, "productTruth": 4, "continuity": 4, "legibility": 4, "restraint": 5, "typeRole": 4, "pacing": 2, "endability": 4, "buildability": 4, "memorability": 4 },
+      "total": 39,
+      "selected": false,
+      "salvaged": "The mono clock became the persistent baseline running under every frame of A, including the stillness. It is what makes eight states read as one continuous event rather than eight shots."
+    },
+    {
+      "id": "the-scan",
+      "title": "C · The Scan",
+      "pitch": "The site's scroll-linked illumination at full commitment: a reading head moving over a dense field, brightness as the only edit.",
+      "scores": { "brandSpecificity": 5, "productTruth": 2, "continuity": 4, "legibility": 4, "restraint": 5, "typeRole": 3, "pacing": 4, "endability": 3, "buildability": 4, "memorability": 4 },
+      "total": 38,
+      "selected": false,
+      "salvaged": "The scan head became A's detection mechanism — the brand-native way to move attention across a dense field, which A needed."
+    }
+  ],
+  "decidedBy": "Brand specificity and continuity. A derives from something that could belong to no other company — the hole in Hookflo's own mark — and carries one object through eight states without cutting away."
+}

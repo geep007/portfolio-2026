@@ -23,6 +23,8 @@ import { FPS as MASCOT_FPS, TOTAL as MASCOT_TOTAL } from "./mascot/timeline";
 import { verticalSchema, verticalTimeline } from "./vertical/verticalLayout";
 import { FPS, TOTAL } from "./theme";
 import { MotionSystemCompositions } from "./motion-system/Root";
+import { WhatHoldsItUp } from "./grow/WhatHoldsItUp";
+import { FPS as GROW_FPS, TOTAL_FRAMES as GROW_TOTAL } from "./grow/timeline";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -738,6 +740,19 @@ export const RemotionRoot: React.FC = () => {
         height={288}
       />
       {/* Brand Motion System — see motion-system/ARCHITECTURE.md */}
+      {/*
+        GROW+ / EdelGive — "What Holds It Up". An authored film, like HeroReel:
+        one persistent composition on one clock, translated from the approved
+        Paper keyframes. No props, because every number in it is a keyframe.
+      */}
+      <Composition
+        id="GrowWhatHoldsItUp"
+        component={WhatHoldsItUp}
+        durationInFrames={GROW_TOTAL}
+        fps={GROW_FPS}
+        width={1920}
+        height={1080}
+      />
       <MotionSystemCompositions />
     </>
   );

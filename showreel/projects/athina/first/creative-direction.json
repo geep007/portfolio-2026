@@ -1,0 +1,122 @@
+{
+  "brand": "Athina AI",
+  "title": "One Run, Observed",
+  "concept": "One peach dot is one inference. The film mounts a single dot on a single rule and never unmounts it. Opening: the hero claim, near-black, occluded by three drifting spheres — a claim not shouted. The terminator rotates until the eclipse tightens to a single lit disc, and that disc IS the dot; it lands ON a rule as the ruled band draws in from the left. The dot travels its line into the eval grid, becoming the 0.42 peach cell — the failing one. It steps one rule down into the SQL result row, one rule down again into the monitoring band at 72.3% pass. Each stop holds long enough to read the number. Finally the frame pulls back: traversed lines still there, dots parked on each, resolving at glyph scale — stacked rules, one dot riding one line. The mark was the path the whole time. Wordmark surfaces by luminance beside it.",
+  "productTruth": "Athina scores LLM inferences: prompt/experiment grids scoring rows 0–1, SQL over datasets, production monitoring of pass rate, cost, latency. Atomic unit is one inference on one run given a score — and honest scores are mixed (0.42, 0.34, 57% coherence, 72.3% pass).",
+  "motionThesis": "Motion is measurement arriving, not speed. The only sustained travel is horizontal along a rule; everything else changes by luminance in place. Judgement arrives, then the frame stops so the number can be read.",
+  "heroMotif": "A single peach dot riding a single horizontal rule — born from the sphere eclipse, carried through eval cell, SQL row and monitoring band, parked at the end inside the full-scale glyph.",
+  "spatialLogic": "Black frame, one lit object. Rules are the grid: 1px horizontal runs at even ~13px gaps, full bleed, knocked out where text lands and resuming as ghost columns beside it. Headline large-left at ~1/3 width, 13px grey four-line body far right, big empty middle. Product lives in an inset rounded panel, flat and square to camera, cropped only at bottom edge as if scrolled past — never bleeding left/right. Depth is z-order only: spheres pass in front of type, uncomposited. Dot's vertical position is quantised to rule indices; camera scale is the only change of scope.",
+  "transitionLogic": "Brightness is the transition. Type surfaces near-black→grey; panels wash up from black; faded members raise opacity in place. The only spatial transition is the dot's horizontal travel and its discrete one-rule vertical step, which carries the eye between states. No cut breaks the rule grid: the rule the dot sits on persists across every state change and re-registers the new frame.",
+  "typographyRole": "Type is a claim that does not shout. Geometric grotesque, single weight, tight two-line headlines. Hero line runs near-black on black, physically occluded by spheres, readable only at edges — never scrimmed, glowed or lifted. Body is 13px grey, four lines, right column. Emphasis is exactly one word in tan/peach per headline ('production'). Numbers are mono, already resolved, never counted up. Wordmark appears once at the end: bold ATHINA, light AI.",
+  "imageryRole": "Product is evidence, shown whole and honest: true density, real labels, unflattering numbers (0.42 peach, 0.34, 57% coherence, 72.3% pass, 32,541, $64.21, 945ms). Pastel plum/mint/olive/cream surfaces are the only colour, existing only inside product panels or as the defocused rainbow wash behind glass. Spheres are matte, one light source, single terminator, unequal sizes, overlapping.",
+  "pacingArc": [
+    {
+      "state": "claim",
+      "note": "Slowest beat. Hero line near-black, three spheres drift at different rates across it. Nothing resolves yet."
+    },
+    {
+      "state": "eclipse",
+      "note": "Terminator rotates, spheres tighten to one lit disc. Held, then disc settles to dot scale."
+    },
+    {
+      "state": "rules",
+      "note": "Rules wipe in from left at staggered offsets, knock out for text. Dot lands ON a rule. Quiet."
+    },
+    {
+      "state": "score",
+      "note": "Dot travels its line into eval grid; cell tint washes in behind 0.42 peach. Hard hold ~1.2s on the failing number."
+    },
+    {
+      "state": "query",
+      "note": "Dot steps one rule down into SQL result row; 105 ms status and blue bar chart resolve. Short hold."
+    },
+    {
+      "state": "observe",
+      "note": "Step down again; monitoring panel washes up, pill row with one active member. Hold on 72.3% pass rate."
+    },
+    {
+      "state": "glyph",
+      "note": "Pull back to glyph scale: traversed rules with dots parked. Wordmark surfaces. Longest stillness, film ends on it."
+    }
+  ],
+  "densityArc": [
+    {
+      "state": "claim",
+      "density": 0.22
+    },
+    {
+      "state": "eclipse",
+      "density": 0.12
+    },
+    {
+      "state": "rules",
+      "density": 0.3
+    },
+    {
+      "state": "score",
+      "density": 0.82
+    },
+    {
+      "state": "query",
+      "density": 0.75
+    },
+    {
+      "state": "observe",
+      "density": 0.95
+    },
+    {
+      "state": "glyph",
+      "density": 0.18
+    }
+  ],
+  "continuityRules": [
+    "One dot instance is mounted at 'eclipse' and never unmounted; its x, its rule index and its scale animate. Same object in every later state.",
+    "The rule the dot rides is mounted at 'rules' and persists to 'glyph'. Rules may be added but none that has carried the dot is removed.",
+    "The eval grid is mounted once at 'score'; cells change state via tint washing in behind already-present numbers. Rows are never re-created.",
+    "The pill row appears at 'observe' and stays static; only the active stroke slides between adjacent pills on a shared border.",
+    "World scale is continuous: 'glyph' is the same rule stack from 'rules' seen from further out, not a new drawing.",
+    "Sphere set from 'claim' persists through 'eclipse'; spheres do not unmount, they fall to black by luminance."
+  ],
+  "permittedMotionVerbs": [
+    "travel",
+    "step",
+    "wipe",
+    "wash",
+    "surface",
+    "fade",
+    "drift",
+    "rotate",
+    "hold",
+    "settle",
+    "pullback",
+    "slide"
+  ],
+  "forbiddenBehaviours": [
+    "No AI-purple/blue gradient background, glowing orb or neon edge-light. Saturated colour only behind glass or inside a product chip (f1).",
+    "Never add scrim, glow or contrast lift under the hero headline to make it readable. Occlusion by spheres stays (f2, v1).",
+    "Rules must never be ambient texture: no shimmer, scanline sweep, waveform or EQ-bar animation across the rule stack (f3).",
+    "No all-green dashboard. Every numeric beat must include a failing or unimpressive value: 0.42, 0.34, 57% coherence, 72.3% (f4).",
+    "No counting up. No odometer roll on 32,541 / $64.21 / 72.3%. Numbers appear already resolved; only tint behind them changes (f5, m4).",
+    "No whip-pans, streaking light, speed lines or fast cutting. No beat shorter than the time needed to read its number (f6).",
+    "No 3D tilt, perspective float or layer explosion of any product panel. UI stays flat, square to camera, still (f7).",
+    "Glyph must never be constructed from particles, network graph or logo-build assembly. Reach it by scale and framing only (f8).",
+    "No persona carousel or sliding member list; inactive members stay in place at low opacity (f9, v8).",
+    "Spheres must not bounce, squash, spin, scale-pop, gain rim light, double highlight or satellites. Only the terminator rotates (f10, m3).",
+    "Dot must never move diagonally or sit between rules. Horizontal travel on its line plus discrete vertical steps only (m1, v2).",
+    "Two competing light sources in one frame is forbidden; one illuminated object per frame (c1).",
+    "Product panel must not bleed off left and right edges; inset panel, bottom crop only (c3).",
+    "No brand gradient on editorial surfaces, no gradient on type, never two tinted words in a headline (v4, v9)."
+  ],
+  "kind": "creative-direction",
+  "id": "athina/first",
+  "provenance": {
+    "version": 1,
+    "producedBy": "creativeDirector",
+    "producedAt": "2026-09-04",
+    "inputHash": "52b2481e",
+    "derivedFrom": [
+      "brand-brief@1",
+      "assets@1"
+    ]
+  }
+}

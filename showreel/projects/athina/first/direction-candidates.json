@@ -1,0 +1,65 @@
+{
+  "note": "Written once, at selection time. Nothing downstream reads this file.",
+  "candidates": [
+    {
+      "id": "one-run-observed",
+      "title": "One Run, Observed",
+      "pitch": "One peach dot is one inference. Born from the sphere eclipse, it lands on a rule and never leaves the rule system: travels into the 0.42 failing cell, steps down to the SQL row, steps down to 72.3% pass. Pull back — the traversed lines are the glyph. The mark was the path.",
+      "scores": {
+        "brandSpecificity": 5,
+        "productTruth": 5,
+        "continuity": 5,
+        "legibility": 5,
+        "restraint": 5,
+        "typeRole": 4,
+        "pacing": 5,
+        "endability": 5,
+        "buildability": 4,
+        "memorability": 5
+      },
+      "total": 48,
+      "selected": true
+    },
+    {
+      "id": "failing-cell",
+      "title": "The Failing Cell",
+      "pitch": "Film is an argument with one number. Grid mounts full, cells blank. Tints wash in row by row — greens, then one peach 0.42. Camera holds. Everything after is that cell defended: the SQL that found it, the monitoring that logged it. Ends back on 0.42, unfixed.",
+      "salvaged": "Winner takes the hard hold on the failing cell as the film's densest beat, and the refusal to resolve it into success.",
+      "scores": {
+        "brandSpecificity": 4,
+        "productTruth": 5,
+        "continuity": 4,
+        "legibility": 4,
+        "restraint": 5,
+        "typeRole": 3,
+        "pacing": 4,
+        "endability": 3,
+        "buildability": 4,
+        "memorability": 3
+      },
+      "total": 39,
+      "selected": false
+    },
+    {
+      "id": "night-and-day",
+      "title": "Night and Day",
+      "pitch": "Marketing is night, tool is daylight. Black editorial frames alternate with pastel product slabs washing up from black — plum tabs, mint persona card, cream eval grid — each returning to black. Colour exists only while work is happening. Ends when the last panel dims and only the peach dot stays lit.",
+      "salvaged": "Winner takes 'colour exists only while work happens' — pastel panels wash up from black by luminance and fall back, never bleeding into editorial frames.",
+      "scores": {
+        "brandSpecificity": 4,
+        "productTruth": 4,
+        "continuity": 2,
+        "legibility": 4,
+        "restraint": 4,
+        "typeRole": 3,
+        "pacing": 3,
+        "endability": 4,
+        "buildability": 4,
+        "memorability": 3
+      },
+      "total": 35,
+      "selected": false
+    }
+  ],
+  "decidedBy": "Brand specificity then continuity. 'One Run, Observed' comes from the mark's own logic — many parallel runs, one observed — so it can carry no other logo. One dot, one rule, mounted 18s: seven states read as one event. 'Night and Day' is a shot film, nothing survives state change. Winner absorbed the unfixed 0.42 hold and the daylight-tool luminance rule."
+}

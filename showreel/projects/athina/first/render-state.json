@@ -1,0 +1,134 @@
+{
+  "composition": "Athina-OneRunObserved",
+  "from": {
+    "brandBrief": 1,
+    "direction": 1,
+    "storyboard": 1,
+    "score": 3,
+    "assets": 1
+  },
+  "renderPath": "showreel/out/athina/one-run-observed.mp4",
+  "qaFrames": [
+    {
+      "stateId": "claim",
+      "frame": 30,
+      "path": "out/athina/frames/f30.png"
+    },
+    {
+      "stateId": "eclipse",
+      "frame": 70,
+      "path": "out/athina/frames/f70.png"
+    },
+    {
+      "stateId": "rules",
+      "frame": 110,
+      "path": "out/athina/frames/f110.png"
+    },
+    {
+      "stateId": "score",
+      "frame": 240,
+      "path": "out/athina/frames/f240.png"
+    },
+    {
+      "stateId": "query",
+      "frame": 320,
+      "path": "out/athina/frames/f320.png"
+    },
+    {
+      "stateId": "observe",
+      "frame": 430,
+      "path": "out/athina/frames/f430.png"
+    },
+    {
+      "stateId": "observe",
+      "frame": 470,
+      "path": "out/athina/frames/f470.png"
+    },
+    {
+      "stateId": "glyph",
+      "frame": 535,
+      "path": "out/athina/frames/f535.png"
+    }
+  ],
+  "critique": {
+    "status": "passed",
+    "findings": [
+      {
+        "id": "F1",
+        "stateId": "rules",
+        "violates": "direction.continuityRules[5] + forbiddenBehaviours[11] (c1)",
+        "problem": "Spheres never fall to black. A fully lit grey sphere sits over the headline in rules, score, query and observe \u2014 brighter than the peach dot in every one of those frames. Two lit objects per frame, and the dot is no longer the lit unit. It also occludes 'score,' and panel rows.",
+        "fix": "Drive sphere luminance to 0 by end of 'eclipse' and keep it at 0 for all later states. No sphere pixel visible from 'rules' onward. Remove nothing else; only the luminance ramp changes.",
+        "applied": true
+      },
+      {
+        "id": "F2",
+        "stateId": "observe",
+        "violates": "direction.forbiddenBehaviours[0] + [13] (v4)",
+        "problem": "The rainbow wash is not contained behind the panel glass \u2014 green and red saturated fields spill across the black editorial frame left and right of the panel, and tint the rules. Reads as an AI gradient background.",
+        "fix": "Clip the gradient to the monitoring panel's rounded rect. Zero saturated colour outside panel bounds; black frame and rules stay neutral.",
+        "applied": true
+      },
+      {
+        "id": "F3",
+        "stateId": "score",
+        "violates": "direction.spatialLogic (headline large-left ~1/3 width)",
+        "problem": "Headline runs to ~half frame width and collides with the inset panel: 'one score,' and the tan 'evidence' sit on top of white panel glass at score, query and observe. Headline/panel occupy the same pixels, so neither reads and the 'big empty middle' is gone.",
+        "fix": "Reduce headline block to ~1/3 frame width (wrap tighter / smaller size) so its right edge clears the panel's left edge in all panel states. Do not add scrim.",
+        "applied": true
+      },
+      {
+        "id": "F4",
+        "stateId": "score",
+        "violates": "direction.spatialLogic (evidence under layout pressure)",
+        "problem": "Right 13px body line overlaps the panel's SCORE column: 'One score is not a verdict.' sits on the SCORE header and 0.87 tint; at query 'Query the runs, not the vibes.' does the same. The numeric evidence is covered at the exact beat it is claimed.",
+        "fix": "Move the right body column left of the panel edge or drop it while panels are on screen. The score column must be unobstructed during score/query/observe.",
+        "applied": true
+      },
+      {
+        "id": "F5",
+        "stateId": "score",
+        "violates": "direction.spatialLogic (inset panel, true density, bottom crop only)",
+        "problem": "Eval panel is ~640px tall with four rows in its top 15%; the rest is empty white and its bottom rounded corners are visible inside frame. Not bottom-cropped, not at true density \u2014 the largest, brightest object in frame is mostly blank.",
+        "fix": "Shrink panel height to the grid content plus header, and extend it past the bottom frame edge so only the bottom crop shows. Remove the empty white area.",
+        "applied": true
+      },
+      {
+        "id": "F6",
+        "stateId": "rules",
+        "violates": "direction.spatialLogic (1px runs, even gaps, full bleed)",
+        "problem": "Rules render as ragged unequal-length segments at varying brightness, several stopping mid-frame with no text to knock out. Reads as random texture rather than a registered grid.",
+        "fix": "Make every rule full bleed at one uniform value, knocked out only where the headline/body/panel actually sit. Remove the arbitrary length variation.",
+        "applied": true
+      },
+      {
+        "id": "F7",
+        "stateId": "glyph",
+        "violates": "taste",
+        "problem": "The Score's worldScale of 0.42 could not make full-bleed rules read as a mark: scaled, 22 rules became a hatch block rather than the glyph.",
+        "fix": "The pull-back is expressed as the rule field contracting to the glyph's own width while every rule the dot did not travel falls dark. Same drawing, reached by framing, never assembled \u2014 but it is a contraction rather than a camera scale, and the Score's worldScale is now 1.",
+        "applied": true
+      }
+    ]
+  },
+  "limits": [
+    "Type substitution: the site sets a geometric grotesque this repo does not license. Geist is used instead.",
+    "No sound.",
+    "The implement stage was executed in the parent agent session rather than through the RoleRunner, so its token usage is not recorded in runs/.",
+    "The ending is a contraction of the rule field rather than a camera pull-back; see finding F7."
+  ],
+  "kind": "render-state",
+  "id": "athina/first",
+  "provenance": {
+    "version": 2,
+    "producedBy": "critic",
+    "producedAt": "2026-09-04",
+    "inputHash": "b9520876",
+    "derivedFrom": [
+      "creative-direction@1",
+      "storyboard@1",
+      "render-state@1"
+    ]
+  },
+  "contactSheet": "out/athina/contact-sheet.png"
+}

@@ -1,0 +1,127 @@
+{
+  "kind": "creative-direction",
+  "id": "hookflo/missing-dot",
+  "provenance": {
+    "version": 1,
+    "producedBy": "creativeDirector",
+    "producedAt": "2026-09-04",
+    "inputHash": "facf4e96",
+    "derivedFrom": [
+      "brand-brief@1",
+      "assets@1"
+    ]
+  },
+  "brand": "hookflo",
+  "title": "The Missing Dot",
+  "concept": "The Hookflo mark is a 3x3 dot field with one position empty and one dot white. Read it as a stream of deliveries in which one is missing and one is caught. The film is a single continuous transform between that mark and a live event log: the mark opens into the log, a delivery goes missing inside it without being marked, Hookflo finds it and routes it to Slack, and the log collapses back into the mark.",
+  "productTruth": "The event that does not arrive is the one that matters. Webhook failures are silent; Hookflo makes the absence visible and puts it where a human is already looking.",
+  "motionThesis": "One geometry, eight states. Nothing is created or destroyed on screen — dots become rows, a row becomes a gap, a gap becomes a red dot, the dot routes into an alert, the alert resolves back into the row, the rows collapse back into the mark. The film is a single object being re-read.",
+  "heroMotif": "The dot. Its position in the frame is the through-line and the hole in the mark is the story.",
+  "spatialLogic": "One centred panel that changes width and role: mark (small, centre) -> log panel (wide, centre) -> log column (narrow, left) plus alert card (right) -> log panel -> mark. Camera static for the entire film. Nothing crosses the frame edge, ever. The lavender bloom sits above the top edge and never moves.",
+  "transitionLogic": "There are no transitions. Every apparent cut is a state change of persistent geometry: the panel resizes, brightness redistributes, one object travels. The hardest moment in the film is a full stop of motion, not a cut.",
+  "typographyRole": "Almost silent. Two moments of display type — a mono label at the open and the site's own headline at the close. Everything between is UI type doing a UI job: mono timestamps, source names, status chips. Type reports; it never narrates.",
+  "imageryRole": "No photography and no screenshots. The log is the film, rebuilt at frame scale, so its atom is the site's own row — dot, source tile, event name, timestamp, status chip — and what the viewer learns about the interface is true.",
+  "pacingArc": [
+    {
+      "state": "idle",
+      "note": "Still, one small object, held long enough that the viewer starts reading it."
+    },
+    {
+      "state": "arrive",
+      "note": "Cadence builds, density climbs, everything is green."
+    },
+    {
+      "state": "drop",
+      "note": "The failure happens unmarked, mid-cadence, and the film does not react."
+    },
+    {
+      "state": "scan",
+      "note": "Hard stop; everything dims; one constant-speed head begins reading."
+    },
+    {
+      "state": "detect",
+      "note": "Hookflo writes a marker into the empty slot, then 34 frames of nothing."
+    },
+    {
+      "state": "route",
+      "note": "A single mechanical move — the only travel in the film."
+    },
+    {
+      "state": "resolve",
+      "note": "Full brightness returns, the chip flips to alerted, then stillness."
+    },
+    {
+      "state": "mark",
+      "note": "The rows give up their content and collapse back into the mark."
+    }
+  ],
+  "densityArc": [
+    {
+      "state": "idle",
+      "density": 0.08
+    },
+    {
+      "state": "arrive",
+      "density": 0.55
+    },
+    {
+      "state": "drop",
+      "density": 0.72
+    },
+    {
+      "state": "scan",
+      "density": 0.28
+    },
+    {
+      "state": "detect",
+      "density": 0.28
+    },
+    {
+      "state": "route",
+      "density": 0.5
+    },
+    {
+      "state": "resolve",
+      "density": 0.45
+    },
+    {
+      "state": "mark",
+      "density": 0.12
+    }
+  ],
+  "continuityRules": [
+    "The dot at the centre of the mark and the dot in the failing row are the same object; its screen position is interpolated, never cut.",
+    "The log panel is mounted once for the whole film. Its width, x-position and row brightness animate; it is never unmounted and re-created.",
+    "Row order is append-only. A row that has arrived never disappears, only dims.",
+    "The failing row keeps its y-position from the moment it arrives until the end of RESOLVE. Everything else moves around it.",
+    "The alert card writes itself out of the routed dot; the dot becomes the card's leading status dot and stays visible inside it.",
+    "The mono clock in the corner runs from frame 0 to the last frame and never resets. It is the proof that the world did not stop between states.",
+    "Brightness only ever increases within a state and only ever decreases at a state boundary. Nothing fades in."
+  ],
+  "permittedMotionVerbs": [
+    "arrive",
+    "verify",
+    "drop",
+    "scan",
+    "detect",
+    "route",
+    "write",
+    "flip",
+    "resolve",
+    "collapse",
+    "hold"
+  ],
+  "forbiddenBehaviours": [
+    "Any camera movement, push, parallax or depth.",
+    "Any element entering from outside the frame.",
+    "Fade as an entrance for anything.",
+    "Springs, overshoot, bounce, elastic.",
+    "Type that scales, rotates, tracks out or lands word by word.",
+    "Dramatising the failure at the instant it occurs — no red flash, no shake, no zoom. The failure is unmarked by design.",
+    "Particles, node graphs, glowing connection lines, orbiting logos.",
+    "Glow around objects; the only light is the fixed overhead bloom.",
+    "Lavender as a field on the dark ground, or a second serif anywhere.",
+    "Any beat in which more than one thing is asking for attention.",
+    "A sentence that is a claim rather than evidence."
+  ]
+}

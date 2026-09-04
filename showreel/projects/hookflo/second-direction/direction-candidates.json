@@ -1,0 +1,65 @@
+{
+  "note": "Written once, at selection time. Nothing downstream reads this file.",
+  "candidates": [
+    {
+      "id": "last-seen",
+      "title": "Last Seen",
+      "pitch": "An event feed running on machine cadence. Every timestamp resets to 2M AGO on the beat — except one row, which stops being rewritten and climbs alone: 9M, 41M, 3H. Nothing goes red. The failure is a number that will not reset. When silence crosses threshold it is delivered as a notification card, then the dots settle into the mark.",
+      "scores": {
+        "brandSpecificity": 5,
+        "productTruth": 5,
+        "continuity": 5,
+        "legibility": 5,
+        "restraint": 5,
+        "typeRole": 5,
+        "pacing": 4,
+        "endability": 5,
+        "buildability": 4,
+        "memorability": 4
+      },
+      "total": 47,
+      "selected": true
+    },
+    {
+      "id": "greenroom",
+      "title": "All Green",
+      "pitch": "A wall of status chips, all green, all connected, all correct. A linear reading head crosses them left to right at constant speed. Behind the head nothing changes — the surface stays perfect. Only the count above it, EVENTS EXPECTED vs EVENTS RECEIVED, drifts apart. The screenshot lies; the arithmetic doesn't.",
+      "scores": {
+        "brandSpecificity": 4,
+        "productTruth": 4,
+        "continuity": 3,
+        "legibility": 4,
+        "restraint": 4,
+        "typeRole": 4,
+        "pacing": 3,
+        "endability": 3,
+        "buildability": 4,
+        "memorability": 3
+      },
+      "total": 36,
+      "selected": false,
+      "salvaged": "Winner takes the linear reading head as the brightness edit across feed rows, and the premise that everything on screen stays green while the failure happens."
+    },
+    {
+      "id": "handoff",
+      "title": "Where You Already Look",
+      "pitch": "Two containers, one panel. The dashboard nobody is watching clips shut; the channel everybody is watching clips open in the same rect, carrying the same source monogram. The film is one object changing surface: the absence relocated from a page you would have to open to a card you would have already read.",
+      "scores": {
+        "brandSpecificity": 4,
+        "productTruth": 5,
+        "continuity": 4,
+        "legibility": 4,
+        "restraint": 4,
+        "typeRole": 3,
+        "pacing": 3,
+        "endability": 3,
+        "buildability": 3,
+        "memorability": 3
+      },
+      "total": 36,
+      "selected": false,
+      "salvaged": "Winner takes the alert state wholesale: feed clips shut and the lavender notification card clips open in the identical panel rect carrying the same source monogram — the delivery half of the product truth."
+    }
+  ],
+  "decidedBy": "Brand specificity, then continuity. Last Seen dramatises elapsed silence per source — only a monitoring product owns that — using a value already on the site (mono 2m ago). It obeys M5 free: nothing announces the failure, a number stops moving. One panel, one row mounted throughout, so states are property changes. All Green taught less; Handoff was an ending without a first act. Both folded in."
+}

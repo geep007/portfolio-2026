@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hookflo — source study</title>
+<style>
+  :root{
+    --bg:#17171C; --panel:rgba(24,24,27,.6); --panel-solid:#1C1C21; --chrome:#101014;
+    --fg:#FAFAFA; --muted:#9CA3AF; --rule:#27272A;
+    --lav:#C4B5FD; --lav-mid:#A692E5; --lav-deep:#6C5DD3; --code:#A78BFA;
+    --ok:#4ADE80; --fail:#F94D4D;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+    --sans:"Geist",Inter,system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);
+       -webkit-font-smoothing:antialiased;}
+  /* the site's one light source, repeated at the top of each section */
+  .bloom{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(60% 300px at 50% -60px, rgba(166,146,229,.22), transparent 70%);}
+  header{position:relative;padding:120px 0 90px;border-bottom:1px solid var(--rule);overflow:hidden}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px;position:relative}
+  .label{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  h1{font-size:64px;font-weight:400;letter-spacing:-.045em;line-height:.94;margin:22px 0 0}
+  h1 em{font-style:normal;color:var(--lav)}
+  .lede{max-width:660px;color:var(--muted);font-size:17px;line-height:1.6;margin-top:22px}
+  section{position:relative;padding:88px 0;border-bottom:1px solid var(--rule);overflow:hidden}
+  h2{font-size:34px;font-weight:400;letter-spacing:-.035em;margin:18px 0 6px}
+  h3{font-size:19px;font-weight:500;letter-spacing:-.02em;margin:0 0 10px}
+  p{color:var(--muted);font-size:15px;line-height:1.65}
+  .n{font-family:var(--mono);font-size:11px;color:var(--lav);letter-spacing:.14em}
+
+  /* --- composition cards --- */
+  .comp{display:grid;grid-template-columns:1.15fr 1fr;gap:0;border:1px solid var(--rule);
+        border-radius:12px;overflow:hidden;background:var(--panel);margin-top:26px}
+  .comp .shot{position:relative;background:#0e0e12;border-right:1px solid var(--rule);overflow:hidden}
+  .comp .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+  .comp .read{padding:26px 28px}
+  .comp .read p{margin:0 0 12px}
+  .comp .read p:last-child{margin-bottom:0}
+  .comp .read .why{color:#D4D4D8}
+  .comp .read .move{color:var(--lav);border-top:1px solid var(--rule);padding-top:12px;margin-top:14px;
+                    font-family:var(--mono);font-size:12px;line-height:1.6;letter-spacing:.01em}
+  /* annotation overlay drawn on top of the screenshot */
+  .anno{position:absolute;inset:0}
+  .box{position:absolute;border:1px solid var(--lav);border-radius:4px;
+       box-shadow:0 0 0 1px rgba(23,23,28,.7)}
+  .box::after{content:attr(data-l);position:absolute;top:-9px;left:6px;
+       font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+       background:var(--lav);color:#17171C;padding:1px 5px;border-radius:3px;white-space:nowrap}
+  .vline{position:absolute;width:1px;background:rgba(196,181,253,.45)}
+  .hline{position:absolute;height:1px;background:rgba(196,181,253,.45)}
+
+  /* --- rules --- */
+  .rules{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:26px}
+  .rule{border:1px solid var(--rule);border-radius:12px;background:var(--panel);padding:20px 22px}
+  .rule .n{display:block;margin-bottom:8px}
+  .rule p{margin:0;font-size:14px}
+
+  /* --- ruin --- */
+  .ruin{border:1px solid rgba(249,77,77,.35);border-radius:12px;background:rgba(127,29,29,.12);padding:28px 30px;margin-top:26px}
+  .ruin ul{margin:0;padding:0;list-style:none;columns:2;column-gap:34px}
+  .ruin li{color:#E4E4E7;font-size:14px;line-height:1.55;margin:0 0 12px;padding-left:20px;position:relative;break-inside:avoid}
+  .ruin li::before{content:"×";position:absolute;left:0;top:-1px;color:var(--fail);font-size:15px}
+  .ruin li b{color:#fff;font-weight:500}
+
+  /* --- tokens --- */
+  .swatches{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .sw{border:1px solid var(--rule);border-radius:12px;overflow:hidden;width:150px;background:var(--panel-solid)}
+  .sw .chip{height:56px}
+  .sw .meta{padding:9px 11px;font-family:var(--mono);font-size:10px;line-height:1.5;color:var(--muted)}
+  .sw .meta b{display:block;color:var(--fg);font-weight:400;letter-spacing:.04em}
+
+  /* --- the mark --- */
+  .markrow{display:flex;gap:40px;align-items:center;margin-top:26px;flex-wrap:wrap}
+  .markcard{border:1px solid var(--rule);border-radius:12px;background:var(--panel);padding:28px 34px;text-align:center}
+  .markcard svg{display:block;margin:0 auto 14px}
+  .markcard .cap{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .marknote{flex:1;min-width:300px}
+  .marknote p{font-size:16px;line-height:1.7;color:#D4D4D8}
+  .marknote p b{color:var(--lav);font-weight:400}
+  footer{padding:70px 0 110px}
+  .verbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .verb{border:1px solid var(--rule);border-radius:999px;padding:7px 15px;
+        font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#D4D4D8;
+        background:var(--panel)}
+  .verb b{color:var(--lav);font-weight:400}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bloom"></div>
+  <div class="wrap">
+    <span class="label">Brand motion system · visual archaeology</span>
+    <h1>Hookflo.<br><em>What the website already knows.</em></h1>
+    <p class="lede">
+      A read of hookflo.com before any motion was designed: eleven signature compositions,
+      the design logic underneath them, nine rules extracted from that logic, and an explicit
+      list of the ways this particular brand would be ruined. Screenshots are captures of the
+      live site at 1730px; annotations are drawn over them.
+    </p>
+  </div>
+</header>
+
+<!-- =============================== PRODUCT =============================== -->
+<section>
+  <div class="wrap">
+    <span class="label">01 · What the product is</span>
+    <h2>A webhook that fails does so silently.</h2>
+    <p style="max-width:760px">
+      A modern SaaS runs on other people's events: Stripe says a payment failed, Clerk says a
+      user signed up, Supabase says a row changed, GitHub says an issue opened. Each arrives as
+      an HTTP POST to an endpoint you wrote once and never look at. When one of them stops
+      arriving — a rotated secret, a bad signature, a 500 on your side — nothing happens. No
+      error surfaces anywhere a human is looking. You find out from a customer.
+    </p>
+    <p style="max-width:760px">
+      Hookflo is the endpoint you point those events at instead. It verifies the signature,
+      logs the payload, and pushes an alert into Slack or email the moment a delivery fails —
+      no library to install, no code to deploy. Its own eyebrow says it plainly:
+      <span style="color:var(--lav);font-family:var(--mono);font-size:13px;letter-spacing:.14em">FAILURE-FIRST WEBHOOK OBSERVABILITY</span>.
+    </p>
+    <div class="rules" style="grid-template-columns:repeat(4,1fr)">
+      <div class="rule"><span class="n">WHO</span><p>Small SaaS teams — one to ten engineers — already wired into Stripe, Clerk, Supabase, GitHub.</p></div>
+      <div class="rule"><span class="n">PROBLEM</span><p>Webhook failures are invisible until a user complains.</p></div>
+      <div class="rule"><span class="n">MECHANISM</span><p>A verified endpoint that logs every delivery and routes failures to a channel a human reads.</p></div>
+      <div class="rule"><span class="n">THE ONE IDEA A FILM MUST LAND</span><p>The event that <i>doesn't</i> arrive is the one that matters. Hookflo makes the absence visible.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== THE MARK =============================== -->
+<section>
+  <div class="wrap">
+    <span class="label">02 · The mark, read properly</span>
+    <h2>The identity is a data grid with a hole in it.</h2>
+    <div class="markrow">
+      <div class="markcard">
+        <svg width="120" height="160" viewBox="0 0 300 400" fill="#A692E5" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="75" cy="75" r="30"/><circle cx="75" cy="175" r="30"/><circle cx="75" cy="275" r="30"/>
+          <circle cx="150" cy="75" r="30"/><circle cx="150" cy="175" r="30"/><circle cx="150" cy="275" r="30" fill="#fff"/>
+          <circle cx="225" cy="175" r="30"/><circle cx="225" cy="275" r="30"/>
+          <circle cx="225" cy="75" r="30" fill="none" stroke="#F94D4D" stroke-width="4" stroke-dasharray="7 7"/>
+        </svg>
+        <span class="cap">8 dots in a 3×3 field</span>
+      </div>
+      <div class="marknote">
+        <p>
+          Pulled straight from the nav SVG. Nine positions on a 3×3 grid;
+          <b>the top-right position is empty</b> and <b>the bottom-centre dot is white</b> while
+          the other seven are lavender. Everything else about this brand can be argued;
+          this cannot. The logo is a field of deliveries in which one is <i>missing</i>
+          and one is <i>caught</i>.
+        </p>
+        <p>
+          That is the entire product in eight circles, and it is the reason this film does not
+          need a metaphor invented for it. The metaphor is already the logo — the work is to
+          give it time.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== COMPOSITIONS =============================== -->
+<section>
+  <div class="wrap">
+    <span class="label">03 · Signature compositions</span>
+    <h2>Eleven moments, and why each one feels the way it does.</h2>
+
+    <!-- 1 -->
+    <div class="comp">
+      <div class="shot" style="min-height:300px">
+        <img src="source/01-hero.jpg" alt="Hookflo hero">
+        <div class="anno">
+          <div class="box" data-l="headline · left 34%" style="left:14%;top:36%;width:26%;height:22%"></div>
+          <div class="box" data-l="live instrument" style="left:51%;top:30%;width:32%;height:35%"></div>
+          <div class="vline" style="left:50%;top:0;bottom:0"></div>
+        </div>
+      </div>
+      <div class="read">
+        <h3>01 · Hero: a claim beside a running machine</h3>
+        <p>Headline occupies the left column of a centred 1180px container — but note what it is
+          <i>beside</i>: not a product screenshot, a terminal that is <b>typing while you read</b>,
+          with a caret still blinking and a status strip at the bottom reading “Monitoring for
+          failures…”. Both halves stop well short of the frame edge.</p>
+        <p class="why">Distinctive because most SaaS heroes put a static dashboard on the right and
+          let it bleed off-screen to imply scale. Hookflo does the opposite: the object is small,
+          fully contained, and <i>alive</i>. Scale is not the promise. Vigilance is.</p>
+        <p class="move">→ the frame never moves; the thing inside it does.</p>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="comp">
+      <div class="shot"><img src="source/01-hero.jpg" alt="hero type" style="object-position:14% 42%;transform:scale(1.9);transform-origin:22% 44%"></div>
+      <div class="read">
+        <h3>02 · The two-line headline, second line in lavender</h3>
+        <p>Geist 400 at 60px, tracking −0.045em, leading 0.94 — set so tight the two lines almost
+          touch. Line one is white; line two, <em style="color:var(--lav);font-style:normal">“webhook event.”</em>,
+          is #C4B5FD. Weight never changes. Hierarchy is size and colour only.</p>
+        <p class="why">The full stop is doing real work: the sentence closes. This brand states
+          rather than sells, and the type is set like a caption in a technical document that
+          happens to be 60px tall.</p>
+        <p class="move">→ lines rise inside their own boxes; the accent line arrives last and stays lit.</p>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="comp">
+      <div class="shot"><img src="source/02-dashboard.jpg" alt="dashboard">
+        <div class="anno">
+          <div class="box" data-l="one light, overhead, centred" style="left:22%;top:5%;width:56%;height:14%"></div>
+          <div class="box" data-l="cropped by the next section" style="left:14%;top:70%;width:72%;height:28%"></div>
+        </div>
+      </div>
+      <div class="read">
+        <h3>03 · The console, lit from above</h3>
+        <p>The dashboard sits in browser chrome — traffic lights, a real <code style="font-family:var(--mono);color:var(--code)">hookflo.com/dashboard</code>
+          URL pill — and is lit by a single lavender bloom that originates <i>above the top edge</i>
+          of the section. There is no glow around the window itself, no rim light, no shadow spill.</p>
+        <p class="why">One light source, always overhead, always centred, repeated at the top of
+          every dark section. It reads like a screen in a dark room rather than like a
+          rendered object, which is why the site feels nocturnal instead of futuristic.</p>
+        <p class="move">→ light is a fixed fact of the world, not an animated effect.</p>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="comp">
+      <div class="shot"><img src="source/03-scrolltext.jpg" alt="scroll illumination"></div>
+      <div class="read">
+        <h3>04 · The paragraph that brightens as you read it</h3>
+        <p>36px light type, centred, in which each word starts at ~35% grey and is lifted to full
+          white as the scroll position passes it. In the capture you can see the reading head
+          mid-sentence: white behind, grey ahead.</p>
+        <p class="why">This is the single most transferable idea on the site. <b>Brightness is a
+          hierarchy channel here, not a fade.</b> Nothing appears or disappears — it is either
+          being attended to or it is not. That is exactly how a log behaves.</p>
+        <p class="move">→ a constant-speed scan head; everything it passes stays lit.</p>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="comp">
+      <div class="shot"><img src="source/04-features.jpg" alt="bento">
+        <div class="anno">
+          <div class="box" data-l="live fragment" style="left:19%;top:4%;width:14%;height:22%"></div>
+          <div class="box" data-l="text below, always" style="left:19%;top:29%;width:19%;height:14%"></div>
+        </div>
+      </div>
+      <div class="read">
+        <h3>05 · Bento cards, each with a working fragment on top</h3>
+        <p>Three cards: fill #18181B at 60%, 1px #27272A hairline, 12px radius. Each holds a
+          <i>miniature working interface</i> in its upper half — a bar chart, a notification row
+          with a NEW badge and a timestamp, a digest counter grid — and its prose underneath.</p>
+        <p class="why">The proportions are deliberate: the evidence is larger than the claim.
+          Copy is visually secondary in every card, set in #9CA3AF at 15px against a 19px white
+          title. The brand argues by showing state.</p>
+        <p class="move">→ cards clip open in place on a metronome; they never float or fade up.</p>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="comp">
+      <div class="shot"><img src="source/04-features.jpg" alt="chips" style="object-position:50% 62%"></div>
+      <div class="read">
+        <h3>06 · The chip row</h3>
+        <p>Seven capability pills, centred, wrapping onto two ragged lines — 4 then 3 — with a
+          tiny lavender glyph in each. The rag is not corrected.</p>
+        <p class="why">The only place the site is loose. It works because everything above and
+          below is on a strict grid: an uncorrected rag reads as an index, not as sloppiness.</p>
+        <p class="move">→ if used at all, they arrive as a set, not as seven staggered items.</p>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="comp">
+      <div class="shot"><img src="source/05-usecases.jpg" alt="use cases">
+        <div class="anno">
+          <div class="box" data-l="double-width card" style="left:39%;top:43%;width:42%;height:20%"></div>
+        </div>
+      </div>
+      <div class="read">
+        <h3>07 · Asymmetric bento: three, then one wide</h3>
+        <p>Three equal cards on the first row, then a single double-width card offset to the
+          right, leaving a deliberate void under the first column. Titles carry a small
+          semantic icon; bullets are 3px dots in muted grey.</p>
+        <p class="why">The void is the composition. Left as a full-width fourth card the section
+          would read as a table; broken this way it reads as a set of examples that happens to
+          have run out. Asymmetry only ever occurs <i>inside</i> a container here — never against
+          the page.</p>
+        <p class="move">→ negative space is placed, so nothing may drift into it later.</p>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="comp">
+      <div class="shot"><img src="source/05-usecases.jpg" alt="event feed" style="object-position:26% 45%;transform:scale(1.7);transform-origin:26% 45%"></div>
+      <div class="read">
+        <h3>08 · The event feed inside a card</h3>
+        <p>A vertical rail with dots along it: <code style="font-family:var(--mono);color:var(--code)">New Auth event · 2m ago</code>,
+          <code style="font-family:var(--mono);color:var(--code)">GitHub issue opened · 10m ago</code>,
+          <code style="font-family:var(--mono);color:var(--code)">User signed up · 10m ago</code>. Source name under each.
+          Dot, label, relative time, source. Always that order.</p>
+        <p class="why">This is the atom of the entire product, and the site repeats it at three
+          different scales — feed rail, notification card, dashboard row. It is the one element
+          a film can legitimately build a whole world out of.</p>
+        <p class="move">→ rows arrive from below on a machine cadence; the newest is at the top.</p>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="comp">
+      <div class="shot"><img src="source/02-dashboard.jpg" alt="table" style="object-position:50% 78%;transform:scale(1.45);transform-origin:50% 78%"></div>
+      <div class="read">
+        <h3>09 · The table: toggles on, status chips green</h3>
+        <p>Name · Status · Notifications · Actions. Every toggle is <i>on</i>. Every row is
+          Active. The green <code style="font-family:var(--mono);color:var(--ok)">Connect</code>
+          buttons are the only saturated colour in a 600px-tall composition, and they are ~70px wide.</p>
+        <p class="why">Semantic colour exists but is rationed to chip scale. Green and red are
+          never fields, gradients or glows — they are 8px dots and small tinted plates. That
+          rationing is what keeps a near-black UI from reading as a gaming product.</p>
+        <p class="move">→ a status change is a colour change on one small object. Nothing else moves.</p>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="comp">
+      <div class="shot"><img src="source/06-cta.jpg" alt="cta slab"></div>
+      <div class="read">
+        <h3>10 · The lavender slab — the one inverted surface</h3>
+        <p>A single #A692E5 panel with visible grain, a <b>serif</b> headline (the only serif on
+          the site), and a black pill button with a circular arrow. Full width of the container,
+          20px radius, nothing bleeding.</p>
+        <p class="why">Used exactly once. Because the entire site is a dark instrument, one
+          bright panel at the end functions as a full stop — and the serif, appearing for the
+          first and last time, signals that this line is being said in a different voice.</p>
+        <p class="move">→ it may appear once and it must be last.</p>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="comp">
+      <div class="shot"><img src="source/06-cta.jpg" alt="footer" style="object-position:50% 100%"></div>
+      <div class="read">
+        <h3>11 · The footer wordmark, half-swallowed</h3>
+        <p>“Hookflo” set enormous in serif at roughly 6% opacity, cropped by the bottom of the
+          document. The nav pill at the top, the giant name at the bottom.</p>
+        <p class="why">The only element on the site allowed to leave the frame — and it leaves
+          downward, quietly, at almost no contrast. Even the exception is polite.</p>
+        <p class="move">→ if the film ends on the name, it ends dim and low, not big and bright.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== TOKENS =============================== -->
+<section>
+  <div class="wrap">
+    <span class="label">04 · Evidence (useful, but not the brand)</span>
+    <h2>Sampled values.</h2>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#17171C;border-bottom:1px solid var(--rule)"></div><div class="meta"><b>#17171C</b>ground · 240 6% 10%</div></div>
+      <div class="sw"><div class="chip" style="background:#18181B"></div><div class="meta"><b>#18181B / 60%</b>panel fill</div></div>
+      <div class="sw"><div class="chip" style="background:#27272A"></div><div class="meta"><b>#27272A</b>hairline</div></div>
+      <div class="sw"><div class="chip" style="background:#9CA3AF"></div><div class="meta"><b>#9CA3AF</b>muted copy</div></div>
+      <div class="sw"><div class="chip" style="background:#C4B5FD"></div><div class="meta"><b>#C4B5FD</b>accent line</div></div>
+      <div class="sw"><div class="chip" style="background:linear-gradient(to bottom right,#A692E5,#6C5DD3)"></div><div class="meta"><b>#A692E5→#6C5DD3</b>button / slab</div></div>
+      <div class="sw"><div class="chip" style="background:#A78BFA"></div><div class="meta"><b>#A78BFA</b>code violet</div></div>
+      <div class="sw"><div class="chip" style="background:#4ADE80"></div><div class="meta"><b>#4ADE80</b>ok · chip only</div></div>
+      <div class="sw"><div class="chip" style="background:#F94D4D"></div><div class="meta"><b>#F94D4D</b>fail · chip only</div></div>
+    </div>
+    <p style="margin-top:20px;max-width:760px">
+      Geist 400 everywhere; display at −0.045em / 0.94, muted body at −0.01em / 1.5, labels in
+      mono uppercase at +0.18em. Radius 12px on cards and buttons, 20px on the slab, nothing
+      rounder. One border colour. No blur, no glass, one gradient used twice.
+      <b style="color:var(--fg);font-weight:400">None of this is the brand.</b> The brand is what
+      the compositions above <i>do</i> with it.
+    </p>
+  </div>
+</section>
+
+<!-- =============================== RULES =============================== -->
+<section>
+  <div class="wrap">
+    <span class="label">05 · Extracted design logic</span>
+    <h2>Nine rules, from this site only.</h2>
+    <div class="rules">
+      <div class="rule"><span class="n">R1 · CONTAIN</span><p>Everything lives inside a hairline panel with a 12px radius, and every panel stops short of the frame edge. Nothing bleeds. The only exception is the footer wordmark, and it leaves downward at 6% opacity.</p></div>
+      <div class="rule"><span class="n">R2 · SHOW IT RUNNING</span><p>Product UI is a live instrument, not a screenshot: a caret blinks, a status strip reads, toggles are on, timestamps say 2m ago. The frame stays still; the interface inside it moves.</p></div>
+      <div class="rule"><span class="n">R3 · ONE LIGHT, OVERHEAD</span><p>A single lavender bloom above the top edge of a section, centred. Never a glow around an object, never a side light, never two.</p></div>
+      <div class="rule"><span class="n">R4 · ONE ACCENT PER VIEW</span><p>Lavender marks exactly one thing in any composition — the second headline line, or the active control, or the CTA. Never two at once.</p></div>
+      <div class="rule"><span class="n">R5 · SEMANTIC COLOUR IS RATIONED</span><p>Green means connected, red means failed, and both exist only at chip and dot scale. Never a field, never a gradient, never a glow.</p></div>
+      <div class="rule"><span class="n">R6 · BRIGHTNESS IS HIERARCHY</span><p>One family, one weight. Levels are made by size and by grey value, and #9CA3AF is a full member of the hierarchy — not a de-emphasised leftover. Attention is modelled as illumination.</p></div>
+      <div class="rule"><span class="n">R7 · LABELS ABOVE, IN MONO</span><p>Uppercase mono at wide tracking, always sitting above the thing it names, never beside it. It is a channel marker, not a caption.</p></div>
+      <div class="rule"><span class="n">R8 · ASYMMETRY LIVES INSIDE CONTAINERS</span><p>The page is a stack of centred max-width containers. Imbalance is allowed within one — hero split, double-width card, deliberate void — never against the page itself.</p></div>
+      <div class="rule"><span class="n">R9 · THE MARK IS A GRID WITH A HOLE</span><p>3×3, one position empty, one dot white. Any Hookflo geometry can be derived from that field, and returning to it is how a piece ends.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== RUIN =============================== -->
+<section>
+  <div class="wrap">
+    <span class="label">06 · How to ruin this brand</span>
+    <h2>The specific ways a Hookflo film goes generic.</h2>
+    <p style="max-width:760px">Not a general list of motion sins — these are the failure modes this
+      particular site invites, because it is dark, purple, developer-facing and full of cards.</p>
+    <div class="ruin">
+      <ul>
+        <li><b>Floating dashboard cards in 3D space.</b> The site never breaks the picture plane. One tumbling card and it becomes every Framer template of 2024.</li>
+        <li><b>Glow on everything.</b> There is one light and it is above the section. Rim-lighting the panels turns an instrument into a poster.</li>
+        <li><b>Purple as a theme.</b> Lavender is an accent on near-black plus one slab. Fields of purple, purple text everywhere, purple gradients behind the type — all off-brand.</li>
+        <li><b>Springs and overshoot.</b> Toggles that boing, cards that bounce past their mark. This is a monitoring console; overshoot reads as a toy.</li>
+        <li><b>Particles, nodes and glowing connection lines.</b> The default visual cliché for “webhooks”, and nowhere on the site.</li>
+        <li><b>Flying the camera into the dashboard.</b> The frame is static on this site, every time. A push-in is somebody else's brand.</li>
+        <li><b>Kinetic typography.</b> Type here changes brightness and position. It does not scale, rotate, track out, or land word by word with a whoosh.</li>
+        <li><b>Everything entering on its own fade-up stagger.</b> The universal SaaS tell. Hookflo's elements arrive on a machine cadence or clip open in place.</li>
+        <li><b>Glassmorphism.</b> Surfaces here are opaque, matte and slightly grainy. Frosted panels would be an import.</li>
+        <li><b>Radii over 20px, or soft edges.</b> This brand cuts at a hairline. A feathered mask is the wrong hand.</li>
+        <li><b>A montage of screenshots.</b> Product shots strung together with wipes explains nothing and demonstrates nothing.</li>
+        <li><b>Only showing success.</b> The eyebrow says FAILURE-FIRST. A film in which nothing goes wrong has misread the product entirely.</li>
+        <li><b>Logos exploding out of the mark.</b> Stripe/Clerk/Supabase marks are used at low contrast on one line. Making them the hero borrows other people's brands.</li>
+        <li><b>A second serif.</b> The serif appears once, on the slab, at the end. Anywhere else it is a mistake.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- =============================== VERBS =============================== -->
+<footer>
+  <div class="wrap">
+    <span class="label">07 · Motion verbs derived from the above</span>
+    <h2>What this world does through time.</h2>
+    <div class="verbs">
+      <span class="verb"><b>arrive</b> · a delivery enters the log from below, on a metronome</span>
+      <span class="verb"><b>verify</b> · a signature check resolves into a status chip</span>
+      <span class="verb"><b>drop</b> · a row arrives with nothing in it and is not marked</span>
+      <span class="verb"><b>scan</b> · a constant-speed head passes down, lifting what it touches</span>
+      <span class="verb"><b>detect</b> · one object changes colour; nothing else moves</span>
+      <span class="verb"><b>route</b> · an object travels an orthogonal path to another panel</span>
+      <span class="verb"><b>write</b> · a card composes itself line by line rather than appearing</span>
+      <span class="verb"><b>resolve</b> · a red state becomes a lavender one in place</span>
+      <span class="verb"><b>collapse</b> · rows compress back into the 3×3 field</span>
+      <span class="verb"><b>hold</b> · nothing moves, for long enough to read twice</span>
+    </div>
+    <p style="margin-top:26px;max-width:760px">
+      Full derivation in <code style="font-family:var(--mono);color:var(--code)">motion-analysis.md</code>;
+      the film built from them is <code style="font-family:var(--mono);color:var(--code)">Hookflo-MissingDot</code>.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+{
+  "brand": "hookflo",
+  "title": "Last Seen",
+  "concept": "A film about time, not colour. One event feed runs inside one hairline panel on a machine cadence: dot, source monogram, event name, timestamp. Every row reads 2m ago. Rows keep arriving. One row — Stripe, invoice.payment_succeeded — stops being rewritten. Its neighbours stay current; its timestamp climbs alone: 2M AGO, 9M AGO, 41M AGO, 3H AGO. Nothing turns red, nothing pulses, nothing announces it. The feed is the disguise: everything is green and the failure is only visible as a number that will not reset. When the clock passes threshold, the panel clips shut to a notification card carrying the same source monogram and the same row — the absence delivered where a human already looks. Card clips away, remaining dots settle into the 3x3 field. Absence measured in elapsed time is the one thing a monitoring product can dramatise that an ad cannot.",
+  "productTruth": "Webhook failure has no event to render. The only evidence is a timestamp that stops advancing while every neighbouring row stays current. Hookflo watches elapsed silence per source and delivers that silence into a channel the developer already reads.",
+  "motionThesis": "Time is the only animated quantity. Rows arrive on a fixed interval like emissions, not a stagger; brightness carries attention; the single stale timestamp counts up in linear mono steps. No easing anywhere except container clips. The frame never moves; only values inside it change.",
+  "heroMotif": "One feed row whose timestamp keeps climbing while every row around it resets to 2M AGO.",
+  "spatialLogic": "One centred hairline panel, 12px radius, stopping short of frame edge, single lavender bloom above its top edge. Feed rows stack top-to-bottom on a fixed pitch; mono channel label above the panel (EVENT FEED / LAST SEEN). The stale row sits third from top and never moves position, never reorders, never leaves. The notification card occupies the same panel rect the feed occupied — same width, same centre, same radius. Final mark occupies the panel centre at small scale. Nothing exists outside the panel except the label and the bloom.",
+  "transitionLogic": "Surfaces clip from their own edges: feed clips shut top-to-bottom, card clips open in the same rect. Within a state, only brightness rises. Brightness steps down only at a state boundary. No cross-fades, no dissolves, no motion between states other than orthogonal clip.",
+  "typographyRole": "Geist Mono uppercase for channel label, source names and every timestamp; Geist 400 at -0.045em for the single event-name column and the card's one line. Type never scales, rotates or tracks. Timestamps change by text substitution on a linear beat and by grey value only: neighbours sit at #9CA3AF, the stale row's clock is the one thing that climbs toward white.",
+  "imageryRole": "Product UI only, running: live feed rows, green status chips at chip scale, source monograms at low saturation (Stripe, Resend, Clerk, Supabase). No illustration, no abstraction, no background texture. The lavender slab appears once, as the notification card surface, and is the film's only inverted frame.",
+  "pacingArc": [
+    {
+      "state": "feed",
+      "note": "Panel already open, rows already present. Hold 30f. Reading establishes columns before anything changes."
+    },
+    {
+      "state": "cadence",
+      "note": "Rows emit on a fixed 14f interval; every timestamp rewrites to 2M AGO on the same beat. Densest, most mechanical passage."
+    },
+    {
+      "state": "skip",
+      "note": "One beat passes and row three is not rewritten. Unmarked, no reaction. Cadence continues around it. Hold 24f."
+    },
+    {
+      "state": "age",
+      "note": "Stale timestamp steps 9M, 41M, 3H on a linear count while neighbours reset. Its grey value climbs toward white. Everything else dims one step."
+    },
+    {
+      "state": "silence",
+      "note": "Cadence stops. Only the stale clock moves. Emptiest frame of the film. Hold 34f."
+    },
+    {
+      "state": "alert",
+      "note": "Feed clips shut, lavender card clips open in the same rect: source monogram, row identity, elapsed silence. One accent, one line. Hold 30f."
+    },
+    {
+      "state": "mark",
+      "note": "Card clips away, surviving dots settle to the 3x3 field. Hold 26f. End on stillness."
+    }
+  ],
+  "densityArc": [
+    {
+      "state": "feed",
+      "density": 0.55
+    },
+    {
+      "state": "cadence",
+      "density": 0.85
+    },
+    {
+      "state": "skip",
+      "density": 0.8
+    },
+    {
+      "state": "age",
+      "density": 0.6
+    },
+    {
+      "state": "silence",
+      "density": 0.22
+    },
+    {
+      "state": "alert",
+      "density": 0.35
+    },
+    {
+      "state": "mark",
+      "density": 0.12
+    }
+  ],
+  "continuityRules": [
+    "The panel is mounted once at frame 0 and never unmounts; feed, card and mark are contents of that same rect.",
+    "The stale row is one node from birth to alert: its identity, source monogram and horizontal position are constant across skip, age, silence and alert.",
+    "Its timestamp is one text node — value and grey change, the node never remounts, never fades.",
+    "Rows never reorder, never scroll away, never change pitch once placed.",
+    "The lavender bloom above the panel is continuous across every state; its intensity is fixed.",
+    "Final 3x3 field derives from surviving row dots already on screen — dot positions animate to grid, they are not new dots.",
+    "Green chips on healthy rows stay green for the whole film and never change."
+  ],
+  "permittedMotionVerbs": [
+    "clip",
+    "step",
+    "tick",
+    "count",
+    "brighten",
+    "dim",
+    "hold",
+    "emit",
+    "settle",
+    "substitute",
+    "advance"
+  ],
+  "forbiddenBehaviours": [
+    "No red at the failure — no red row, red field, red flash, red screen; semantic colour stays at chip and dot scale.",
+    "No reaction at the instant of the skip: no shake, pulse, blink, icon, badge or beat marking the missed row.",
+    "No fade-in or fade-up stagger; rows arrive on a fixed interval or clip open in place.",
+    "No spring, overshoot, bounce or elastic easing anywhere.",
+    "No camera move, push-in, parallax or bleed off frame edge; frame is static and the panel stops short of the edges.",
+    "No 3D tilt, tumbling cards, drop shadows implying depth, or breaking the picture plane.",
+    "No glow or rim light around objects; one lavender bloom above the panel only, never two lights.",
+    "No purple field, purple gradient, purple type or purple background beyond the single notification slab.",
+    "No particles, nodes, connection lines or packets travelling between elements.",
+    "No kinetic typography: type never scales, rotates, tracks out, or lands word by word.",
+    "No odometer roll, digit flip, or animated counting-up of the stale timestamp — values substitute on a beat.",
+    "No countdown ring, progress bar, spinner, clock icon or gauge visualising elapsed time.",
+    "No line, arrow or trail connecting the stale row to the notification card.",
+    "No dead air inside the panel; empty space belongs outside containers."
+  ],
+  "kind": "creative-direction",
+  "id": "hookflo/second-direction",
+  "provenance": {
+    "version": 1,
+    "producedBy": "creativeDirector",
+    "producedAt": "2026-09-04",
+    "inputHash": "8ea78603",
+    "derivedFrom": [
+      "brand-brief@1",
+      "assets@1"
+    ]
+  }
+}
